@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marco Económico para la Gestión: encuentros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8FAFC; --surface:#FFFFFF; --soft:#F1F5F9;
+  --ink:#0F172A; --text:#334155; --muted:#64748B;
+  --line:#E2E8F0; --track:#E2E8F0;
+  --accent:#4F46E5; --sky:#F59E0B;
+  --ok:#047857; --ok-bg:#ECFDF5; --warn:#B45309; --warn-bg:#FFFBEB; --bad:#DC2626; --bad-bg:#FEF2F2;
+  --head-bg:#0F172A; --head-ink:#FFFFFF; --head-muted:#94A3B8;
+  --marta-bg:#FFFBEB;
+  --sans:"Lato",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1120; --surface:#111827; --soft:#1E293B;
+    --ink:#F1F5F9; --text:#CBD5E1; --muted:#94A3B8;
+    --line:#1E293B; --track:#334155;
+    --accent:#818CF8; --sky:#FBBF24;
+    --ok:#34D399; --ok-bg:rgba(52,211,153,.12); --warn:#FBBF24; --warn-bg:rgba(251,191,36,.12); --bad:#F87171; --bad-bg:rgba(248,113,113,.12);
+    --head-bg:#020617; --head-ink:#FFFFFF; --head-muted:#94A3B8;
+    --marta-bg:rgba(251,191,36,.08);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1120; --surface:#111827; --soft:#1E293B;
+  --ink:#F1F5F9; --text:#CBD5E1; --muted:#94A3B8;
+  --line:#1E293B; --track:#334155;
+  --accent:#818CF8; --sky:#FBBF24;
+  --ok:#34D399; --ok-bg:rgba(52,211,153,.12); --warn:#FBBF24; --warn-bg:rgba(251,191,36,.12); --bad:#F87171; --bad-bg:rgba(248,113,113,.12);
+  --head-bg:#020617; --head-ink:#FFFFFF; --head-muted:#94A3B8;
+  --marta-bg:rgba(251,191,36,.08);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:var(--sans);color:var(--ink);line-height:1.2;margin:0}
+p{margin:0}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+
+/* Encabezado y pestañas */
+header.top{background:var(--surface);border-bottom:1px solid var(--line);padding:44px 0 36px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 40px;flex-wrap:wrap}
+.course h1{color:var(--ink);font-weight:900;font-size:clamp(1.9rem,4.2vw,3rem);letter-spacing:-.025em;line-height:1.1}
+.course .inst{color:var(--muted);margin-top:8px;font-size:.95rem}
+.course .pitch{color:var(--text);margin-top:14px;font-size:1.05rem;max-width:56ch}
+.hero-stats{display:flex;gap:28px}
+.hero-stats div{border-left:3px solid var(--accent);padding-left:12px}
+.hero-stats b{display:block;font-size:1.9rem;font-weight:900;color:var(--ink);line-height:1}
+.hero-stats span{font-size:.82rem;color:var(--muted)}
+/* Panel lateral */
+.app{display:grid;grid-template-columns:276px minmax(0,1fr);min-height:100vh;min-height:100dvh}
+.side-nav{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+  overflow-y:auto;background:var(--surface);border-right:1px solid var(--line);padding:28px 14px 20px;display:flex;flex-direction:column;gap:18px}
+.side-brand{padding:0 10px}
+.side-brand b{display:block;color:var(--ink);font-weight:900;font-size:1.02rem;line-height:1.25}
+.side-brand span{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+.side-head{padding:0 10px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.tabs{display:flex;flex-direction:column;gap:4px}
+.tab{text-align:left;border:0;border-left:3px solid transparent;cursor:pointer;background:none;color:var(--muted);width:100%;
+  padding:10px 12px;display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;border-radius:0 10px 10px 0;transition:background .15s,border-color .15s}
+.tab:hover{background:var(--soft)}
+.tab .n{grid-row:span 2;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:.92rem;
+  border:1.5px solid var(--line);color:var(--muted);background:var(--surface)}
+.tab .t{font-weight:700;font-size:.9rem;color:var(--text)}
+.tab .s{font-size:.78rem;line-height:1.3}
+.tab[aria-selected="true"]{background:var(--soft);border-left-color:var(--accent)}
+.tab[aria-selected="true"] .t{color:var(--ink)}
+.tab[aria-selected="true"] .n{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.done:not([aria-selected="true"]) .n{border-color:var(--accent);color:var(--accent)}
+.side-foot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted);line-height:1.5}
+.side-foot i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--accent);vertical-align:-1px;margin-right:6px}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side-nav{height:auto;z-index:20;border-right:0;border-bottom:1px solid var(--line);padding:8px 10px;gap:0;overflow:visible}
+  .side-brand,.side-head,.side-foot{display:none}
+  .tabs{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:2px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;width:auto;border-left:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0;padding:8px 10px}
+  .tab .s{display:none}
+  .tab[aria-selected="true"]{border-bottom-color:var(--accent)}
+  .tab.tab-extra{margin-top:0}
+}
+
+main.wrap{padding-top:52px;padding-bottom:72px}
+.intro h2{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;letter-spacing:-.01em}
+.intro p{max-width:72ch;margin-top:10px;color:var(--muted)}
+
+.game{margin-top:36px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px}
+.game > h3{font-size:1.35rem;font-weight:800}
+.game > .lead{margin-top:8px;max-width:72ch;color:var(--muted)}
+
+/* Controles */
+.ctl{margin-bottom:18px}
+.ctl-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ctl label{font-weight:700;color:var(--ink);font-size:.92rem}
+.ctl output{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:.95rem;white-space:nowrap}
+.hint{font-size:.8rem;color:var(--muted);line-height:1.45;margin-top:2px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:12px 0 6px;cursor:pointer;
+  background:linear-gradient(to right,var(--accent) 0 var(--p,50%),var(--track) var(--p,50%) 100%)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);box-shadow:0 1px 3px rgba(15,23,42,.25)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid var(--accent)}
+input[type=range]:focus-visible{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(79,70,229,.35)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px rgba(79,70,229,.35)}
+
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px}
+.presets span{font-size:.82rem;color:var(--muted);align-self:center;margin-right:4px}
+.chip{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:600;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.g1-grid{display:grid;grid-template-columns:minmax(250px,330px) 1fr;gap:32px}
+.panel-controls{background:var(--soft);border-radius:14px;padding:20px 20px 4px}
+
+/* Resultados */
+.result-top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 28px}
+.big{font-weight:800;font-size:clamp(2rem,4.4vw,2.9rem);color:var(--ink);letter-spacing:-.02em;line-height:1}
+.big-lab{font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.delta{font-family:var(--mono);font-size:1rem;font-weight:500;padding:4px 10px;border-radius:8px;background:var(--soft);color:var(--ink)}
+.delta.up{background:var(--ok-bg);color:var(--ok)} .delta.down{background:var(--bad-bg);color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.stat{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{display:block;font-family:var(--mono);font-weight:500;font-size:1.15rem;color:var(--ink)}
+.stat span{font-size:.78rem;color:var(--muted)}
+.chart-title{font-weight:700;color:var(--ink);font-size:.95rem;margin:24px 0 4px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.78rem;color:var(--muted);margin-bottom:4px}
+.legend i{display:inline-block;width:18px;height:0;border-top:3px solid var(--accent);vertical-align:middle;margin-right:6px}
+.legend i.base{border-top:2px dashed var(--muted)} .legend i.ss{border-top:2px dotted var(--sky)} .legend i.tir{border-top:2px dashed var(--ok)}
+svg.chart{width:100%;display:block;overflow:visible}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .axis{stroke:var(--muted);stroke-width:1}
+svg .tk{fill:var(--muted);font-size:11.5px;font-family:var(--mono)}
+svg .main{fill:none;stroke:var(--accent);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+svg .base{fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:6 5}
+svg .ss{stroke:var(--sky);stroke-width:2;stroke-dasharray:2 4}
+svg .tir{stroke:var(--ok);stroke-width:2;stroke-dasharray:7 5}
+svg .tir-t{fill:var(--ok);font-size:12px;font-weight:700;font-family:var(--sans)}
+svg .zone{stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 4}
+svg .now{stroke:var(--accent);stroke-width:1;opacity:.5}
+svg .pt{fill:var(--surface);stroke:var(--accent);stroke-width:3}
+
+.decomp{margin-top:8px}
+.drow{display:grid;grid-template-columns:118px 1fr 64px;align-items:center;gap:10px;margin:8px 0;font-size:.85rem}
+.drow .lab{color:var(--ink);font-weight:600}
+.dtrack{position:relative;height:14px;background:var(--soft);border-radius:4px}
+.dtrack::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--muted)}
+.dbar{position:absolute;top:0;bottom:0;border-radius:3px;transition:all .12s}
+.dbar.pos{background:var(--accent)} .dbar.neg{background:var(--bad)}
+.drow .v{font-family:var(--mono);text-align:right;color:var(--ink)}
+.insight{margin-top:18px;border-left:3px solid var(--accent);padding:4px 0 4px 14px;color:var(--text);max-width:70ch}
+.insight p+p{margin-top:8px}
+
+.formula{margin-top:26px;background:var(--soft);border-radius:12px;padding:16px 18px;font-size:.84rem;color:var(--muted)}
+.formula code{font-family:var(--mono);color:var(--ink);font-size:.9rem;display:block;margin:4px 0;overflow-x:auto;white-space:nowrap}
+.formula p+p{margin-top:8px}
+
+.marta{margin-top:18px;background:var(--marta-bg);border:1px solid var(--sky);border-radius:12px;padding:16px 18px}
+.marta h4{font-size:.95rem;font-weight:800;margin-bottom:6px}
+details.q{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:0 18px}
+details.q summary{cursor:pointer;font-weight:700;color:var(--ink);padding:14px 0;list-style-position:inside}
+details.q ol{margin:0 0 16px;padding-left:20px}
+details.q li{margin:6px 0}
+
+/* Juego 2 */
+.rp-band{margin-top:22px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 26px;display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:start}
+.rp-band .ctl{margin-bottom:0}
+.rp-top{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;margin-top:6px}
+.rp-num{font-weight:900;font-size:clamp(2.6rem,6.5vw,4.2rem);letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.rp-num small{font-size:.32em;font-weight:700;color:var(--muted);letter-spacing:0;margin-left:6px}
+.rp-zone{font-size:.82rem;font-weight:700;padding:5px 12px;border-radius:999px}
+.rp-zone.ok{background:var(--ok-bg);color:var(--ok)} .rp-zone.warn{background:var(--warn-bg);color:var(--warn)} .rp-zone.bad{background:var(--bad-bg);color:var(--bad)}
+.rp-pp{font-size:.88rem;color:var(--muted);width:100%}
+.zones{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-top:2px}
+.zones span:nth-child(1){background:var(--ok);flex:0 0 10.714%}
+.zones span:nth-child(2){background:var(--warn);flex:0 0 17.857%}
+.zones span:nth-child(3){background:var(--bad);flex:1}
+.zones{opacity:.55}
+.zone-lab{display:flex;font-size:.72rem;color:var(--muted);margin-top:4px}
+.zone-lab span:nth-child(1){flex:0 0 10.714%} .zone-lab span:nth-child(2){flex:0 0 17.857%} .zone-lab span:nth-child(3){flex:1}
+.rp-side{border-left:1px solid var(--line);padding-left:28px}
+.rp-note{font-size:.78rem;color:var(--muted);margin-top:16px}
+
+.g2-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:26px}
+.side{border:1px solid var(--line);border-radius:16px;padding:22px}
+.side h4{font-size:1.08rem;font-weight:800}
+.side > .sub{color:var(--muted);font-size:.86rem;margin:4px 0 18px}
+.side .panel-controls{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
+.kv{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.kv div{border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.kv b{display:block;font-family:var(--mono);font-weight:500;color:var(--ink);font-size:1.02rem}
+.kv span{font-size:.76rem;color:var(--muted)}
+.compose{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:6px}
+.pill{display:inline-block;margin-top:14px;padding:8px 12px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.4}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill small{display:block;font-weight:500;opacity:.85}
+
+/* Encuentro 2 */
+svg .bend{fill:none;stroke:var(--sky);stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round}
+svg .ic{fill:none;stroke:var(--muted);stroke-width:1.5}
+svg .ic2{fill:none;stroke:var(--muted);stroke-width:1.5;opacity:.6}
+svg .bad{fill:none;stroke:var(--bad);stroke-width:2.5}
+svg .good{fill:none;stroke:var(--ok);stroke-width:2.5}
+svg .ptl{fill:var(--ink);font-size:13px;font-weight:800;font-family:var(--sans)}
+.legend i.bend{border-top:3px solid var(--sky)} .legend i.ic{border-top:1.5px solid var(--muted)}
+.legend i.bad{border-top:3px solid var(--bad)} .legend i.good{border-top:3px solid var(--ok)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.caption{font-size:.8rem;color:var(--muted);margin-top:6px;max-width:70ch}
+.tankbox{border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.tankbox svg{width:100%;max-width:340px;display:block;margin:0 auto}
+svg .tank{fill:var(--soft);stroke:var(--muted);stroke-width:1.5}
+svg .water{fill:var(--accent);opacity:.75}
+svg .flow-in{fill:var(--bad)} svg .flow-out{fill:var(--ok)}
+svg .tank-t{fill:var(--text);font-size:12px;font-family:var(--sans)}
+svg .tank-b{fill:var(--ink);font-size:13px;font-weight:800;font-family:var(--sans)}
+svg .tank-in{fill:var(--bad);font-size:12px;font-weight:700;font-family:var(--sans)}
+svg .tank-out{fill:var(--ok);font-size:12px;font-weight:700;font-family:var(--sans)}
+.tank-status{font-size:.86rem;margin-top:6px;text-align:center}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+
+.tbl{border-collapse:collapse;font-size:.88rem;min-width:420px;margin-top:6px}
+.tbl th,.tbl td{padding:8px 14px;text-align:right;border-bottom:1px solid var(--line)}
+.tbl th{color:var(--ink);font-weight:700;background:var(--soft)}
+.tbl td{font-family:var(--mono);color:var(--text)}
+.tbl td:first-child,.tbl th:first-child{text-align:left}
+.tbl tr.hit td{background:var(--bad-bg);color:var(--bad);font-weight:700}
+.tbl td.you,.tbl th.you{color:var(--accent)}
+
+.player{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin:0 0 24px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--soft)}
+.play-btn{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--accent);color:#fff;font-weight:700;font-size:.9rem;padding:9px 18px;border-radius:999px;cursor:pointer;min-width:132px;justify-content:center}
+.play-btn svg{width:13px;height:13px}
+.play-btn:disabled{opacity:.45;cursor:not-allowed}
+.ghost{border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:999px;cursor:pointer}
+.ghost:disabled{opacity:.45;cursor:not-allowed}
+.speed{display:flex;gap:4px}
+.speed .chip{padding:5px 10px;font-size:.78rem}
+.live-msg{font-size:.84rem;color:var(--muted);flex:1 1 240px;margin:0}
+.live-msg strong{color:var(--accent)}
+.ctl.locked{opacity:.5}
+input[type=range]:disabled{cursor:not-allowed}
+svg .mark{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:2 3;opacity:.8}
+svg .vl-t{fill:var(--accent);font-size:11px;font-weight:700;font-family:var(--sans)}
+
+.policy{margin-top:8px;padding-top:16px;border-top:1px solid var(--line)}
+.policy-h{font-weight:900;color:var(--ink);font-size:.95rem}
+.pol-btn{width:100%;border:1.5px solid var(--accent);background:var(--surface);color:var(--accent);font-weight:700;font-size:.88rem;padding:9px 12px;border-radius:10px;cursor:pointer;margin-top:4px}
+.pol-btn[aria-pressed="true"]{background:var(--accent);color:#fff}
+.pol-btn.imf{border-color:var(--sky);color:var(--ink)}
+.pol-btn.imf:not(:disabled):hover{background:var(--marta-bg)}
+.pol-btn:disabled{opacity:.45;cursor:not-allowed}
+.pol-status{font-size:.82rem;color:var(--text);margin:12px 0 16px;line-height:1.5}
+svg .pmark{stroke:var(--sky);stroke-width:2;stroke-dasharray:6 3}
+
+.stack{display:grid;gap:10px;margin-top:6px}
+.srow{display:grid;grid-template-columns:86px 1fr 52px;align-items:center;gap:10px;font-size:.84rem}
+.srow .sl{color:var(--ink);font-weight:700}
+.srow .sv{font-family:var(--mono);text-align:right;color:var(--ink)}
+.sbar{display:flex;height:26px;border-radius:6px;overflow:hidden;transition:width .15s}
+.sbar span{display:flex;align-items:center;padding:0 8px;font-size:.74rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;min-width:0}
+.s1{background:var(--sky)} .s2{background:var(--muted)} .s3{background:var(--accent)} .s4{background:var(--ok)}
+.sbar .s1{color:#1f2937}
+.slegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.76rem;color:var(--muted);margin-top:2px}
+.slegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.trio .stat{padding:14px 16px}
+.trio .stat span{display:block;font-size:.8rem;color:var(--muted)}
+.trio .stat b{font-size:1.9rem;font-family:var(--sans);font-weight:900;margin:4px 0 2px}
+.trio .stat small{font-size:.78rem;color:var(--muted)}
+.trio .stat.you{border-color:var(--accent);background:var(--soft)}
+.trio .stat.you b{color:var(--accent)}
+.basket{display:grid}
+.brow{display:grid;grid-template-columns:minmax(120px,1.2fr) 48px 1fr 1fr;gap:4px 12px;align-items:center;padding:4px 0;border-bottom:1px solid var(--line)}
+.brow.bhead{font-size:.74rem;color:var(--muted);font-weight:700;border-bottom:1px solid var(--muted)}
+.brow .nm{font-size:.8rem;font-weight:700;color:var(--ink);line-height:1.25}
+.brow .iw{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.brow .cell{display:grid;grid-template-columns:1fr 46px;align-items:center;gap:6px}
+.brow input[type=range]{margin:6px 0}
+.brow output{font-family:var(--mono);font-size:.78rem;color:var(--accent);text-align:right}
+@media (max-width:620px){
+  .trio{grid-template-columns:1fr}
+  .brow{grid-template-columns:1fr 1fr}
+  .brow .nm{grid-column:1/-1}
+  .brow .iw{display:none}
+  .brow.bhead span:nth-child(1),.brow.bhead span:nth-child(2){display:none}
+}
+
+.tab.tab-extra{margin-top:12px}
+.tab.tab-extra .n svg{width:15px;height:15px}
+.src-search{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.src-search label{display:block;font-weight:900;color:var(--ink);font-size:1.15rem;margin-bottom:10px}
+.src-search input{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--soft);border:1.5px solid var(--line);border-radius:12px;padding:13px 16px}
+.src-search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.18)}
+#src-res{margin-top:4px}
+.rblock{margin-top:18px;border-left:3px solid var(--accent);padding:2px 0 2px 16px}
+.rblock h4{font-size:.98rem;font-weight:900;margin-bottom:6px}
+.ritem{margin:8px 0}
+.ritem a{font-weight:700;color:var(--accent);text-decoration:none}
+.ritem a:hover{text-decoration:underline}
+.ritem p{font-size:.88rem;color:var(--text);max-width:75ch}
+.src-empty{margin-top:16px;color:var(--muted);font-size:.9rem}
+.src-gh{font-size:1.1rem;font-weight:900;margin:34px 0 12px}
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.src-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.src-card h4{font-size:1rem;font-weight:900}
+.src-card h4 a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.src-card h4 a:hover{color:var(--accent)}
+.src-card h4 svg{width:11px;height:11px;color:var(--accent)}
+.src-url{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin:2px 0 10px;word-break:break-all}
+.src-card p{font-size:.86rem;line-height:1.55}
+.src-card p+p{margin-top:8px}
+.src-card strong{color:var(--ink)}
+.guide{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.guide summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:.86rem}
+.guide ol{margin:10px 0 0;padding-left:20px}
+.guide li{font-size:.84rem;line-height:1.5;margin:5px 0}
+.guide-link{font-size:.78rem;font-weight:700;color:var(--muted)!important;margin-left:8px}
+.src-card.flash{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.2)}
+.src-card:target{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
+
+/* Encuentros 3 a 6 */
+.empty{margin-top:28px;background:var(--surface);border:1px dashed var(--muted);border-radius:18px;padding:40px 28px;text-align:center;color:var(--muted)}
+.empty strong{display:block;color:var(--ink);font-size:1.05rem;margin-bottom:6px}
+
+footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:.78rem;color:var(--muted)}
+
+@media (max-width:980px){
+  .g2-grid{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .g1-grid{grid-template-columns:1fr}
+  .rp-band{grid-template-columns:1fr}
+  .rp-side{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:20px}
+}
+@media (max-width:520px){
+  .game{padding:20px 16px}
+  .side{padding:18px 14px}
+  .side .panel-controls{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .stat b{font-size:1rem}
+  .drow{grid-template-columns:96px 1fr 56px}
+  .tab{flex-basis:132px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+<aside class="side-nav">
+  <div class="side-brand"><b>Marco Económico para la Gestión</b><span>MBA, FACE-UNT</span></div>
+  <p class="side-head">Encuentros</p>
+    <nav class="tabs" role="tablist" aria-orientation="vertical" aria-label="Encuentros del curso">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="n">1</span><span class="t">Encuentro 1</span><span class="s">Macro y crecimiento</span></button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><span class="n">2</span><span class="t">Encuentro 2</span><span class="s">Desempleo y ciclos</span></button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><span class="n">3</span><span class="t">Encuentro 3</span><span class="s">Sector público</span></button>
+      <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1"><span class="n">4</span><span class="t">Encuentro 4</span><span class="s">Sector externo</span></button>
+      <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1"><span class="n">5</span><span class="t">Encuentro 5</span><span class="s">Mercado monetario e inflación</span></button>
+      <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1"><span class="n">6</span><span class="t">Encuentro 6</span><span class="s">Déficit, inflación y crisis</span></button>
+      <button class="tab tab-extra" role="tab" id="t7" aria-controls="p7" aria-selected="false" tabindex="-1"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.2c1.8-.8 3.7-.8 5.5.4v9.6c-1.8-1.2-3.7-1.2-5.5-.4zM13.5 3.2c-1.8-.8-3.7-.8-5.5.4v9.6c1.8-1.2 3.7-1.2 5.5-.4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span><span class="t">Fuentes</span><span class="s">Datos, mercados y links</span></button>
+    </nav>
+  <p class="side-foot"><i></i>Encuentro con simuladores cargados</p>
+</aside>
+<div class="content">
+<header class="top">
+  <div class="wrap">
+    <div class="hero">
+      <div class="course">
+        <h1>Marco Económico para la Gestión</h1>
+        <p class="inst">MBA, Facultad de Ciencias Económicas, Universidad Nacional de Tucumán</p>
+        <p class="pitch">Simuladores para mover las variables de la economía y ver, en el momento, qué pasa con el producto, el empleo, las tasas y el valor de las empresas.</p>
+      </div>
+      <div class="hero-stats" aria-label="Contenido del curso">
+        <div><b>6</b><span>encuentros</span></div>
+        <div><b id="nSims">4</b><span>simuladores</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ ENCUENTRO 1 ============ -->
+<section id="p1" role="tabpanel" aria-labelledby="t1">
+  <div class="intro">
+    <h2>Encuentro 1: macro y crecimiento</h2>
+    <p>Dos simuladores para jugar en clase. En el primero, armás un país y ves qué determina cuánto produce. En el segundo, movés el riesgo país y ves cómo pega en el crédito de una empresa y en lo que vale.</p>
+  </div>
+
+  <!-- Juego 1 -->
+  <article class="game" id="g1">
+    <h3>¿De qué depende cuánto produce un país?</h3>
+    <p class="lead">Cuatro palancas, un resultado. Movelas y mirá cómo cambia el producto por trabajador, cuánto tarda en llegar el efecto y qué palanca explica la diferencia con el escenario base.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"I":5,"T":5,"S":10,"K":15}' aria-pressed="true">Base</button>
+      <button class="chip" data-p='{"I":2,"T":5,"S":10,"K":30}' aria-pressed="false">Invertir sin reglas claras</button>
+      <button class="chip" data-p='{"I":8.5,"T":5,"S":10,"K":15}' aria-pressed="false">Reforma institucional</button>
+      <button class="chip" data-p='{"I":5,"T":5,"S":14,"K":15}' aria-pressed="false">Salto educativo</button>
+      <button class="chip" data-p='{"I":2,"T":9,"S":10,"K":15}' aria-pressed="false">Tecnología sin instituciones</button>
+      <button class="chip" data-p='{"I":9,"T":9,"S":13,"K":24}' aria-pressed="false">País desarrollado</button>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="gI">Instituciones</label><output id="gI-o"></output></div>
+          <input type="range" id="gI" min="0" max="10" step="0.5" value="5">
+          <p class="hint">Reglas de juego: contratos que se cumplen, justicia que funciona, poca corrupción. Índice de 0 a 10.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="gT">Tecnología</label><output id="gT-o"></output></div>
+          <input type="range" id="gT" min="0" max="10" step="0.5" value="5">
+          <p class="hint">Qué tan cerca está el país de las mejores prácticas y máquinas del mundo. Índice de 0 a 10.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="gS">Capital humano</label><output id="gS-o"></output></div>
+          <input type="range" id="gS" min="2" max="14" step="0.5" value="10">
+          <p class="hint">Años promedio de escolaridad de la fuerza laboral. Cada año extra rinde un poco menos que el anterior.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="gK">Capital físico</label><output id="gK-o"></output></div>
+          <input type="range" id="gK" min="5" max="35" step="1" value="15">
+          <p class="hint">Inversión como % del PIB: qué parte de lo producido se destina a máquinas, rutas y fábricas.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab">Producto por trabajador de largo plazo (USD por año, ilustrativo)</p>
+            <p class="big" id="g1-big">USD 30.000</p>
+          </div>
+          <p class="delta" id="g1-delta">×1,00 vs. base</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="g1-y1">×1,00</b><span>Al año siguiente</span></div>
+          <div class="stat"><b id="g1-y10">×1,00</b><span>A los 10 años</span></div>
+          <div class="stat"><b id="g1-yss">×1,00</b><span>Largo plazo</span></div>
+        </div>
+
+        <p class="chart-title">Camino del producto por trabajador (escenario base = 100)</p>
+        <div class="legend"><span><i class="base"></i>Escenario base</span><span><i></i>Tu escenario</span><span><i class="ss"></i>Destino de largo plazo</span></div>
+        <svg class="chart" id="g1-chart" role="img" aria-label="Evolución del producto por trabajador a 40 años"></svg>
+
+        <p class="chart-title">¿Qué palanca explica la diferencia?</p>
+        <div class="decomp" id="g1-decomp"></div>
+
+        <div class="insight" id="g1-insight"></div>
+      </div>
+    </div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>Y/L = A · (K/L)^α · h^(1−α)      α = 1/3</code>
+      <code>K(t+1) = K(t)·(1 − δ) + η · s · Y(t)</code>
+      <p><strong>A</strong> (productividad) sube con tecnología e instituciones, y la tecnología rinde más cuanto mejores son las instituciones. <strong>h</strong> crece con los años de escuela (retornos decrecientes). <strong>s</strong> es la tasa de inversión y <strong>η</strong> la fracción que efectivamente se convierte en capital productivo, que también depende de las instituciones. El capital se acumula de a poco y la educación llega completa a la fuerza laboral en unos 20 años. Es un modelo didáctico calibrado a mano: sirve para ver direcciones y órdenes de magnitud, no para pronosticar.</p>
+    </div>
+
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>Un país es como un taller. Produce más si tiene más herramientas (capital físico), si la gente sabe usarlas (capital humano), si las herramientas son buenas (tecnología) y si nadie le cambia las reglas cada dos por tres (instituciones). Las herramientas se compran de a poco y la gente tarda años en formarse; las reglas son lo que hace que todo lo demás rinda.</p>
+    </div>
+
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>Llevá la inversión a 30% dejando todo lo demás igual. ¿El producto se duplica? ¿Por qué no?</li>
+        <li>Probá “Invertir sin reglas claras”. ¿Por qué el resultado decepciona aunque el país invierta el doble?</li>
+        <li>¿Qué palanca produce un efecto casi inmediato y cuál tarda una generación? ¿Qué implica eso para un gobierno con horizonte de cuatro años?</li>
+        <li>Comparen “Tecnología sin instituciones” con “Reforma institucional”. ¿Alcanza con importar tecnología?</li>
+      </ol>
+    </details>
+  </article>
+
+  <!-- Juego 2 -->
+  <article class="game" id="g2">
+    <h3>Riesgo país: de la tasa al valor de la empresa</h3>
+    <p class="lead">El riesgo país es la sobretasa que el mercado le exige a la deuda argentina por encima de lo que paga el Tesoro de Estados Unidos. Moverlo cambia dos cosas a la vez: cuánto le cuesta a una empresa endeudarse y cuánto vale.</p>
+
+    <div class="rp-band">
+      <div class="ctl">
+        <div class="ctl-head"><label for="rp">Riesgo país</label><output id="rp-o"></output></div>
+        <div class="rp-top">
+          <p class="rp-num" id="rp-num">800<small>puntos básicos</small></p>
+          <span class="rp-zone" id="rp-zone"></span>
+        </div>
+        <input type="range" id="rp" min="200" max="3000" step="25" value="800">
+        <div class="zones" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="zone-lab" aria-hidden="true"><span>abierto</span><span>selectivo</span><span>cerrado de hecho</span></div>
+        <p class="hint" style="margin-top:8px">100 puntos básicos equivalen a 1 punto porcentual de tasa. Las zonas son una regla práctica de acceso al mercado.</p>
+      </div>
+      <div class="rp-side">
+        <div class="ctl">
+          <div class="ctl-head"><label for="rf">Tasa del Tesoro de EE.UU. a 10 años</label><output id="rf-o"></output></div>
+          <input type="range" id="rf" min="2" max="6" step="0.1" value="4.2">
+          <p class="hint">La tasa “sin riesgo” de referencia en dólares. Los plazos más cortos pagan un poco menos.</p>
+        </div>
+        <p class="rp-note">Los valores iniciales son de ejemplo: ajustalos a los del día antes de la clase.</p>
+      </div>
+    </div>
+
+    <div class="g2-grid">
+      <!-- Financiamiento -->
+      <section class="side" aria-labelledby="fin-h">
+        <h4 id="fin-h">Financiamiento: la empresa sale a pedir plata</h4>
+        <p class="sub">Una empresa argentina emite deuda en dólares para financiar un proyecto.</p>
+        <div class="panel-controls">
+          <div class="ctl">
+            <div class="ctl-head"><label for="monto">Monto</label><output id="monto-o"></output></div>
+            <input type="range" id="monto" min="1" max="100" step="1" value="20">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="plazo">Plazo</label><output id="plazo-o"></output></div>
+            <input type="range" id="plazo" min="1" max="10" step="1" value="5">
+            <p class="hint">Cambia la tasa: prestar a más años suele costar más, salvo cuando el mercado teme un default cercano.</p>
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="spread">Riesgo propio de la empresa</label><output id="spread-o"></output></div>
+            <input type="range" id="spread" min="0" max="800" step="25" value="150">
+            <p class="hint">Lo que el mercado le suma por encima del riesgo país (referido a 5 años).</p>
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="tir">Rentabilidad del proyecto</label><output id="tir-o"></output></div>
+            <input type="range" id="tir" min="5" max="30" step="0.5" value="14">
+            <p class="hint">TIR en dólares del proyecto a financiar.</p>
+          </div>
+        </div>
+
+        <p class="big-lab" style="margin-top:14px">Tasa en dólares que paga la empresa</p>
+        <p class="big" id="f-rate">13,7%</p>
+        <p class="compose" id="f-compose"></p>
+        <div class="kv">
+          <div><b id="f-cuota"></b><span>Cuota anual (sistema francés)</span></div>
+          <div><b id="f-int"></b><span>Intereses totales</span></div>
+          <div><b id="f-extra"></b><span>De esos intereses, por riesgo país</span></div>
+          <div><b id="f-max"></b><span>Riesgo país máximo para que el proyecto cierre</span></div>
+        </div>
+        <p class="pill" id="f-market"></p>
+        <p class="pill" id="f-verdict"></p>
+
+        <p class="chart-title">La tasa según el plazo (curva de rendimientos)</p>
+        <div class="legend"><span><i></i>Tasa de la empresa</span><span><i class="base"></i>Tesoro de EE.UU.</span></div>
+        <svg class="chart" id="f-curve" role="img" aria-label="Tasa de la deuda según el plazo"></svg>
+        <p class="caption" id="f-curve-cap"></p>
+
+        <p class="chart-title">Tasa de financiamiento según el riesgo país</p>
+        <div class="legend"><span><i></i>Tasa de la deuda</span><span><i class="tir"></i>Rentabilidad del proyecto</span></div>
+        <svg class="chart" id="f-chart" role="img" aria-label="Tasa de financiamiento en función del riesgo país"></svg>
+      </section>
+
+      <!-- Valor -->
+      <section class="side" aria-labelledby="val-h">
+        <h4 id="val-h">Valor: cuánto vale la misma empresa</h4>
+        <p class="sub">Descontamos sus flujos futuros a una tasa que incluye el riesgo país.</p>
+        <div class="panel-controls">
+          <div class="ctl">
+            <div class="ctl-head"><label for="fcf">Flujo de fondos libre del próximo año</label><output id="fcf-o"></output></div>
+            <input type="range" id="fcf" min="10" max="200" step="5" value="50">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="g">Crecimiento a perpetuidad</label><output id="g-o"></output></div>
+            <input type="range" id="g" min="0" max="4" step="0.1" value="2.5">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="beta">Beta</label><output id="beta-o"></output></div>
+            <input type="range" id="beta" min="0.5" max="2" step="0.05" value="1.1">
+            <p class="hint">Qué tanto se mueve el negocio con el mercado.</p>
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="lam">Exposición al riesgo país (λ)</label><output id="lam-o"></output></div>
+            <input type="range" id="lam" min="0.2" max="1" step="0.05" value="1">
+            <p class="hint">1 = vende todo en el mercado local. Más bajo = exportadora con ingresos en dólares.</p>
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="dw">Deuda sobre financiamiento total</label><output id="dw-o"></output></div>
+            <input type="range" id="dw" min="0" max="60" step="5" value="30">
+          </div>
+        </div>
+
+        <p class="big-lab" style="margin-top:14px">Valor de la empresa (USD)</p>
+        <p class="big" id="v-ev"></p>
+        <div class="kv">
+          <div><b id="v-ke"></b><span>Costo del capital propio (ke)</span></div>
+          <div><b id="v-wacc"></b><span>Costo promedio del capital (WACC)</span></div>
+          <div><b id="v-eq"></b><span>Valor de las acciones</span></div>
+          <div><b id="v-100"></b><span>Lo que cuestan 100 pb más de riesgo país</span></div>
+          <div><b id="v-dn"></b><span id="v-dn-l">Si el riesgo país baja 300 pb</span></div>
+          <div><b id="v-up"></b><span id="v-up-l">Si el riesgo país sube 300 pb</span></div>
+        </div>
+
+        <p class="chart-title">Valor de la empresa según el riesgo país</p>
+        <div class="legend"><span><i></i>Valor de la empresa</span></div>
+        <svg class="chart" id="v-chart" role="img" aria-label="Valor de la empresa en función del riesgo país"></svg>
+      </section>
+    </div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>kd(n) = rf(n) + RP(n) + riesgo propio(n)        n = plazo en años</code>
+      <code>ke = rf + β · PRM + λ · RP        PRM = 5%</code>
+      <code>WACC = E/V · ke + D/V · kd · (1 − t)        t = 35%</code>
+      <code>Valor = FCF₁ / (WACC − g)</code>
+      <p>El plazo mueve la tasa: la curva del Tesoro es levemente positiva, el riesgo propio de la empresa crece con el plazo y el riesgo país tiene pendiente positiva cuando es bajo y se invierte cuando supera unos 1.200 pb (con miedo a un default cercano, el corto rinde más que el largo). Son pendientes ilustrativas. La deuda del panel de valor paga la tasa al plazo elegido. El semáforo de acceso al mercado es una regla práctica del mercado (por debajo de 500 pb suele haber ventana para emitir; por encima de 1.000 pb el mercado queda cerrado de hecho), no un umbral formal.</p>
+    </div>
+
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>Si a tu vecino nadie le cree que va a devolver la plata, le prestan caro o directamente no le prestan. Con los países pasa lo mismo, y las empresas de ese país cargan con la fama del vecino: pagan más para endeudarse. Y como quien compra una empresa exige ganar más por correr ese riesgo, ofrece pagar menos por ella. Riesgo país alto es crédito caro y empresas baratas.</p>
+    </div>
+
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>¿A partir de qué riesgo país deja de cerrar el proyecto? ¿Qué le pasa a la inversión de todo el país cuando muchos proyectos cruzan esa línea?</li>
+        <li>Compará una empresa con λ = 1 y otra con λ = 0,4. ¿Cuál gana más valor si baja el riesgo país? ¿Qué tipo de empresas son en la realidad?</li>
+        <li>¿Por qué la curva de valor es más empinada cuando el riesgo país es bajo?</li>
+        <li>¿Cómo se conecta el riesgo país con la palanca “instituciones” del primer juego?</li>
+      </ol>
+    </details>
+  </article>
+</section>
+
+<!-- ============ ENCUENTROS 2 a 6 ============ -->
+<section id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <div class="intro">
+    <h2>Encuentro 2: desempleo y ciclos</h2>
+    <p>Dos simuladores. En el primero, una persona decide cuántas horas trabajar y vemos por qué, a partir de cierto ingreso, una suba de sueldo la lleva a trabajar menos. En el segundo, el mercado laboral funciona como una bañera: gente que entra y sale del desempleo hasta que la tasa se estabiliza.</p>
+  </div>
+
+  <!-- Juego 3: oferta de trabajo -->
+  <article class="game" id="g3">
+    <h3>¿Trabajarías más si te pagaran más?</h3>
+    <p class="lead">Cuando te suben el sueldo pasan dos cosas a la vez. Cada hora de ocio se vuelve más cara, así que conviene trabajar más: es el efecto sustitución. Pero además ya sos más rico y podés darte el lujo de trabajar menos: es el efecto ingreso. Con salarios bajos gana el primero; a medida que el ingreso crece, gana el segundo y la curva de oferta se da vuelta.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"w":4,"P":0}' aria-pressed="false">Salario bajo</button>
+      <button class="chip" data-p='{"w":15,"P":0}' aria-pressed="false">Clase media</button>
+      <button class="chip" data-p='{"w":120,"P":0}' aria-pressed="false">Profesional top</button>
+      <button class="chip" data-p='{"w":15,"P":1000000}' aria-pressed="false">Heredó USD 1 M</button>
+      <button class="chip" data-p='{"w":15,"P":8000000}' aria-pressed="false">Ganó la lotería</button>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="lsW">Salario por hora</label><output id="lsW-o"></output></div>
+          <input type="range" id="lsW" min="0" max="1000" step="1" value="377">
+          <p class="hint">Escala logarítmica: cada tramo del control multiplica el salario.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="lsP">Patrimonio</label><output id="lsP-o"></output></div>
+          <input type="range" id="lsP" min="0" max="1000" step="1" value="0">
+          <p class="hint">Rinde 4% anual: una renta que cobrás trabajes o no. Es ingreso puro, sin efecto sustitución.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="lsR">Aumento de salario a analizar</label><output id="lsR-o"></output></div>
+          <input type="range" id="lsR" min="10" max="100" step="5" value="30">
+          <p class="hint">La suba que descomponemos en efecto sustitución y efecto ingreso.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="lsC">Consumo “cómodo”</label><output id="lsC-o"></output></div>
+          <input type="range" id="lsC" min="500" max="2500" step="50" value="1000">
+          <p class="hint">Gasto semanal a partir del cual un dólar extra te cambia cada vez menos la vida. Mueve el salario en el que la curva se da vuelta.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab">Horas que elige trabajar por semana</p>
+            <p class="big" id="ls-big">45</p>
+          </div>
+          <p class="delta" id="ls-phase"></p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="ls-lab"></b><span>Ingreso laboral semanal</span></div>
+          <div class="stat"><b id="ls-rent"></b><span>Renta semanal del patrimonio</span></div>
+          <div class="stat"><b id="ls-peak"></b><span id="ls-peak-l">Salario donde la curva se da vuelta</span></div>
+        </div>
+
+        <p class="chart-title">Curva de oferta de trabajo</p>
+        <div class="legend"><span><i></i>Domina la sustitución: más salario, más horas</span><span><i class="bend"></i>Domina el ingreso: más salario, menos horas</span><span id="ls-ghost-leg"><i class="base"></i>Misma persona sin patrimonio</span></div>
+        <svg class="chart" id="ls-supply" role="img" aria-label="Curva de oferta de trabajo: horas según el salario"></svg>
+
+        <p class="chart-title" id="ls-dec-t">Si te suben el sueldo un 30%, ¿qué pasa con tus horas?</p>
+        <div class="decomp" id="ls-decomp"></div>
+
+        <div class="insight" id="ls-insight"></div>
+      </div>
+    </div>
+
+    <p class="chart-title">La misma decisión en el gráfico de consumo y ocio</p>
+    <div class="legend"><span><i class="base"></i>Restricción con el salario actual</span><span><i></i>Con el aumento</span><span><i class="ss"></i>Con el aumento, pero sin ganar bienestar</span><span><i class="ic"></i>Curvas de indiferencia</span></div>
+    <svg class="chart" id="ls-budget" role="img" aria-label="Elección entre consumo y ocio con descomposición de Slutsky"></svg>
+    <p class="caption"><strong>A</strong> es la elección con el salario actual. <strong>B</strong> es lo que elegiría con el nuevo salario si le sacáramos la ganancia de bienestar: solo cambia el precio del ocio. <strong>C</strong> es la elección final. De A a B es el efecto sustitución (siempre hacia menos ocio); de B a C, el efecto ingreso (hacia más ocio).</p>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>Utilidad = u(consumo) − φ · H^(1+1/ε) / (1+1/ε)</code>
+      <code>u(c) = c̃ · (1 − e^(−c/c̃))        c = w · H + renta</code>
+      <code>Óptimo:  w · u'(c) = φ · H^(1/ε)        ε = 0,6    H máx. = 80 h</code>
+      <code>Δ horas total = Δ sustitución (misma utilidad) + Δ ingreso</code>
+      <p><strong>c̃</strong> es el consumo “cómodo”: por debajo, cada dólar extra vale mucho; por encima, cada vez menos. Por eso con salarios bajos domina la sustitución y con salarios altos domina el ingreso. La descomposición es la de Slutsky: el punto B mantiene la utilidad inicial con los precios nuevos. Modelo didáctico con parámetros ilustrativos.</p>
+    </div>
+
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>Si ganás poco, que te paguen más la hora es una tentación: cada hora extra te compra algo que te falta, así que trabajás más. Si ya ganás mucho, una suba te hace pensar “con lo que tengo me alcanza, prefiero el sábado libre”. Y si te ganás la lotería, ni siquiera hay tentación: solo tenés más plata, así que trabajás menos o dejás de trabajar.</p>
+    </div>
+
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>¿A partir de qué salario una suba lleva a trabajar menos? Mové el consumo “cómodo” y fijate cómo se corre ese punto.</li>
+        <li>Probá “Ganó la lotería”. ¿Por qué en ese caso no hay efecto sustitución que compense al efecto ingreso?</li>
+        <li>¿Qué implica esta curva para un aumento del impuesto a los altos ingresos? ¿Y para un subsidio que se pierde si la persona consigue trabajo?</li>
+        <li>En los países que se enriquecieron, la jornada laboral promedio fue bajando durante el siglo XX. ¿Qué tramo de la curva cuenta esa historia?</li>
+      </ol>
+    </details>
+  </article>
+
+  <!-- Juego 4: desempleo estacionario -->
+  <article class="game" id="g4">
+    <h3>Desempleo estacionario: la bañera del mercado laboral</h3>
+    <p class="lead">Todos los períodos una parte de los ocupados pierde el empleo (tasa de separación) y una parte de los desocupados consigue uno (tasa de contratación). El desempleo sube si entran más de los que salen, y baja en el caso contrario, hasta que los dos flujos se igualan. Ese nivel es el desempleo estacionario, y depende solo de esas dos tasas.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"s":10,"h":20,"g":5,"u0":50}' aria-pressed="true">Planilla de clase</button>
+      <button class="chip" data-p='{"s":1,"h":20,"g":0,"u0":10}' aria-pressed="false">Mensual típico</button>
+      <button class="chip" data-p='{"s":1,"h":5,"g":0,"u0":5}' aria-pressed="false">Mercado rígido</button>
+      <button class="chip" data-p='{"s":3,"h":20,"g":0,"u0":5}' aria-pressed="false">Ola de despidos</button>
+      <button class="chip" data-p='{"s":4,"h":60,"g":0,"u0":15}' aria-pressed="false">Mercado muy dinámico</button>
+    </div>
+
+    <div class="player" id="u-player">
+      <button class="play-btn" id="u-play" type="button"></button>
+      <button class="ghost" id="u-reset" type="button">Reiniciar</button>
+      <div class="speed" id="u-speed" role="group" aria-label="Velocidad">
+        <button type="button" class="chip" data-s="0.5" aria-pressed="false">0,5×</button>
+        <button type="button" class="chip" data-s="1" aria-pressed="true">1×</button>
+        <button type="button" class="chip" data-s="2" aria-pressed="false">2×</button>
+        <button type="button" class="chip" data-s="4" aria-pressed="false">4×</button>
+      </div>
+      <p class="live-msg" id="u-live"></p>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="uS">Tasa de separación (s)</label><output id="uS-o"></output></div>
+          <input type="range" id="uS" min="0.5" max="30" step="0.5" value="10">
+          <p class="hint">Qué porcentaje de los ocupados pierde el empleo en cada período.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="uH">Tasa de contratación (h)</label><output id="uH-o"></output></div>
+          <input type="range" id="uH" min="1" max="80" step="1" value="20">
+          <p class="hint">Qué porcentaje de los desocupados consigue empleo en cada período.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="uG">Crecimiento de la población activa</label><output id="uG-o"></output></div>
+          <input type="range" id="uG" min="0" max="10" step="0.5" value="5">
+          <p class="hint">Por período. Los que se suman se reparten igual que el resto.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="uU0">Desempleo inicial</label><output id="uU0-o"></output></div>
+          <input type="range" id="uU0" min="0" max="90" step="1" value="50">
+          <p class="hint">De dónde arranca la economía: cambia el camino, no el destino.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab">Tasa de desempleo estacionaria u* = s / (s + h)</p>
+            <p class="big" id="u-big">33,3%</p>
+          </div>
+          <p class="delta" id="u-now"></p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="u-dU"></b><span>Duración media del desempleo</span></div>
+          <div class="stat"><b id="u-dE"></b><span>Duración media de un empleo</span></div>
+          <div class="stat"><b id="u-half"></b><span>Tiempo para cerrar la mitad de la brecha</span></div>
+        </div>
+
+        <div class="two" style="margin-top:22px">
+          <div class="tankbox">
+            <div class="ctl" style="margin-bottom:6px">
+              <div class="ctl-head"><label for="uT">Mirar el período</label><output id="uT-o"></output></div>
+              <input type="range" id="uT" min="0" max="60" step="1" value="0">
+            </div>
+            <svg id="u-tank" viewBox="0 0 300 250" role="img" aria-label="Bañera del desempleo"></svg>
+            <p class="tank-status" id="u-status"></p>
+          </div>
+          <div>
+            <p class="chart-title" style="margin-top:0">Tasa de desempleo período a período</p>
+            <div class="legend"><span><i></i>Tasa de desempleo</span><span><i class="ss"></i>Tasa estacionaria</span><span id="u-proj-leg"><i class="base"></i>Hacia dónde va si no tocás nada</span></div>
+            <svg class="chart" id="u-chart" role="img" aria-label="Evolución de la tasa de desempleo"></svg>
+          </div>
+        </div>
+
+        <div class="insight" id="u-insight"></div>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:8px">
+      <div>
+        <p class="chart-title">Flujos: quiénes entran y quiénes salen del desempleo</p>
+        <div class="legend"><span><i class="bad"></i>Pierden el empleo (s · E)</span><span><i class="good"></i>Consiguen empleo (h · U)</span></div>
+        <svg class="chart" id="u-flows" role="img" aria-label="Flujos de entrada y salida del desempleo"></svg>
+        <p class="caption">En % de la población activa. El desempleo deja de moverse cuando las dos líneas se juntan: s · E = h · U.</p>
+      </div>
+      <div>
+        <p class="chart-title">Mirado desde una persona</p>
+        <div class="legend"><span><i></i>Hoy tiene empleo</span><span><i class="bend"></i>Hoy está desempleada</span><span><i class="ss"></i>u*</span></div>
+        <svg class="chart" id="u-person" role="img" aria-label="Probabilidad individual de estar desempleado"></svg>
+        <p class="caption">Probabilidad de estar desempleada en cada período. Con el tiempo, da lo mismo cómo arrancó: las dos curvas terminan en u*, que también es la fracción de su vida laboral que pasa sin trabajo.</p>
+      </div>
+    </div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo (el mismo de la planilla):</p>
+      <code>E(t+1) = [E(t) · (1 − s) + U(t) · h] · (1 + g)</code>
+      <code>U(t+1) = [U(t) · (1 − h) + E(t) · s] · (1 + g)</code>
+      <code>Estado estacionario:  s · E = h · U   ⇒   u* = s / (s + h)</code>
+      <p>La brecha entre el desempleo y u* se achica cada período en un factor (1 − s − h). Por eso, cuanto más dinámico es el mercado, más rápido se llega al destino. La curva individual usa las mismas tasas: p(t+1) = p(t) · (1 − h) + [1 − p(t)] · s.</p>
+    </div>
+
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>Pensá el desempleo como una bañera con la canilla abierta y el tapón sacado. La canilla son los despidos; el desagote, la gente que consigue trabajo. Si entra más agua de la que sale, el nivel sube; si sale más, baja. En algún momento lo que entra y lo que sale se empatan y el nivel se queda quieto. Para bajarlo hay dos caminos: cerrar un poco la canilla (que se despida menos) o agrandar el desagote (que se contrate más rápido).</p>
+    </div>
+
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>Con datos mensuales típicos (s = 1%, h = 20%) el desempleo estacionario da 4,8%. ¿Qué políticas bajan s y cuáles suben h? ¿Cuáles cuestan más?</li>
+        <li>¿Por qué el desempleo nunca llega a cero aunque haya vacantes? ¿Qué parte de ese desempleo es “sana”?</li>
+        <li>Dos países con el mismo 8% de desempleo: uno con s y h altos, otro con s y h bajos. ¿En cuál preferirías perder el empleo? ¿Y en cuál tenerlo?</li>
+        <li>Subí el crecimiento de la población activa. ¿Por qué la tasa estacionaria no cambia aunque haya cada vez más gente buscando trabajo?</li>
+      </ol>
+    </details>
+  </article>
+</section>
+<section id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <div class="intro">
+    <h2>Encuentro 3: sector público</h2>
+    <p>Un simulador de sostenibilidad de la deuda pública. El déficit de hoy es la deuda de mañana, y lo que importa no es cuánto se debe sino cómo se mueve la deuda en relación con el tamaño de la economía.</p>
+  </div>
+
+  <article class="game" id="g6">
+    <h3>¿Se sostiene la deuda?</h3>
+    <p class="lead">La relación deuda/PBI sube por los intereses, baja porque la economía crece y baja (o sube) según haya superávit (o déficit) primario. Si la tasa de interés le gana al crecimiento, hace falta superávit solo para que la deuda no crezca; si el crecimiento le gana a la tasa, se tolera algo de déficit.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"d":60,"r":6,"g":2,"sp":0}' aria-pressed="true">Clase: r &gt; g</button>
+      <button class="chip" data-p='{"d":60,"r":2,"g":4,"sp":0}' aria-pressed="false">Clase: r &lt; g</button>
+      <button class="chip" data-p='{"d":60,"r":6,"g":2,"sp":2.4}' aria-pressed="false">Estabilizada con superávit</button>
+      <button class="chip" data-p='{"d":90,"r":8,"g":0,"sp":-2}' aria-pressed="false">Bola de nieve</button>
+      <button class="chip" data-p='{"d":100,"r":2,"g":5,"sp":-1}' aria-pressed="false">El crecimiento la licúa</button>
+    </div>
+
+    <div class="player" id="d-player">
+      <button class="play-btn" id="d-play" type="button"></button>
+      <button class="ghost" id="d-reset" type="button">Reiniciar</button>
+      <div class="speed" id="d-speed" role="group" aria-label="Velocidad">
+        <button type="button" class="chip" data-s="0.5" aria-pressed="false">0,5×</button>
+        <button type="button" class="chip" data-s="1" aria-pressed="true">1×</button>
+        <button type="button" class="chip" data-s="2" aria-pressed="false">2×</button>
+        <button type="button" class="chip" data-s="4" aria-pressed="false">4×</button>
+      </div>
+      <p class="live-msg" id="d-live"></p>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="dD0">Deuda inicial</label><output id="dD0-o"></output></div>
+          <input type="range" id="dD0" min="0" max="150" step="5" value="60">
+          <p class="hint">Deuda pública como % del PBI (d = D/Q).</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="dR">Tasa de interés real (r)</label><output id="dR-o"></output></div>
+          <input type="range" id="dR" min="-2" max="12" step="0.5" value="6">
+          <p class="hint">Lo que paga la deuda por año, descontada la inflación.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="dG">Crecimiento real del PBI (g)</label><output id="dG-o"></output></div>
+          <input type="range" id="dG" min="-4" max="8" step="0.5" value="2">
+          <p class="hint">Cuánto crece la economía por año. Agranda el denominador y licúa la deuda.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="dSP">Resultado primario (SP/Q)</label><output id="dSP-o"></output></div>
+          <input type="range" id="dSP" min="-6" max="6" step="0.1" value="0">
+          <p class="hint">% del PBI, antes de pagar intereses. Positivo es superávit; negativo, déficit.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab" id="d-big-l">Superávit primario necesario para que la deuda/PBI no se mueva</p>
+            <p class="big" id="d-big">2,4% del PBI</p>
+          </div>
+          <p class="delta" id="d-chip"></p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="d-fin"></b><span>Déficit a financiar este año (liquidez)</span></div>
+          <div class="stat"><b id="d-10"></b><span id="d-10-l">Deuda/PBI en 10 años</span></div>
+          <div class="stat"><b id="d-30"></b><span id="d-30-l">Deuda/PBI en 30 años</span></div>
+        </div>
+        <p class="pill" id="d-solv"></p>
+        <p class="pill" id="d-sost"></p>
+
+        <p class="chart-title">Deuda/PBI a lo largo de los años</p>
+        <div class="legend"><span><i></i>Deuda/PBI</span><span><i class="ss"></i>Con el superávit justo para estabilizar</span><span id="d-proj-leg"><i class="base"></i>Hacia dónde va si no tocás nada</span></div>
+        <svg class="chart" id="d-chart" role="img" aria-label="Trayectoria de la deuda sobre PBI"></svg>
+
+        <p class="chart-title" id="d-dec-t">¿Qué mueve la deuda este año?</p>
+        <div class="decomp" id="d-decomp"></div>
+
+        <div class="insight" id="d-insight"></div>
+      </div>
+    </div>
+
+    <p class="chart-title">¿Cuánto superávit hace falta según el nivel de deuda?</p>
+    <div class="legend"><span><i></i>Superávit que estabiliza: (r − g)·d</span><span><i class="ss"></i>Tu resultado primario</span></div>
+    <svg class="chart" id="d-need" role="img" aria-label="Superávit necesario según el nivel de deuda"></svg>
+    <p class="caption" id="d-need-cap"></p>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo (el de la clase):</p>
+      <code>ΔD = (G + Ig + Tr + r·D) − T = DEF</code>
+      <code>Δd = (r − g)·d − SP/Q        d = D/Q</code>
+      <code>Estable ⇔ Δd = 0 ⇔ SP/Q = (r − g)·d</code>
+      <code>No hay Ponzi si  D(t+n) / (1 + r)^n → 0</code>
+      <p>Cada año la deuda/PBI se actualiza con Δd = (r − g)·d − SP/Q, la aproximación de la clase. <strong>Liquidez</strong> es poder financiar el déficit de este año (intereses menos superávit primario). <strong>Solvencia</strong> es que no haya Ponzi: con superávit primario, parte de los intereses se paga con recursos propios y la deuda crece más despacio que r. <strong>Sostenibilidad</strong> es que la deuda/PBI no se dispare a largo plazo.</p>
+    </div>
+
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>La deuda es como el saldo de la tarjeta: sube por lo que gastás de más y por los intereses de lo que ya debías. Lo que importa es cuánto debés comparado con lo que ganás. Si tu sueldo crece más rápido que los intereses, podés seguir gastando un poco de más y el saldo igual pesa cada vez menos. Si los intereses le ganan a tu sueldo, tenés que gastar menos de lo que ganás solo para no hundirte.</p>
+    </div>
+
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>Con d = 60%, r = 6% y g = 2%, ¿cuánto superávit hace falta para que la deuda no crezca? ¿Y si la deuda fuera 120%?</li>
+        <li>Pasá de r &gt; g a r &lt; g sin tocar el déficit. ¿Qué cambia en la trayectoria y en el superávit necesario?</li>
+        <li>Reproducí la “Bola de nieve” y hacé el ajuste fiscal a los 5 años y después a los 15. ¿Cuánto más duro es el ajuste tardío?</li>
+        <li>Un país con r &lt; g y déficit primario, ¿está en un esquema Ponzi? ¿Por qué, aun así, su deuda/PBI puede ser sostenible?</li>
+      </ol>
+    </details>
+  </article>
+</section>
+<section id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <div class="intro"><h2>Encuentro 4: sector externo</h2></div>
+  <div class="empty"><strong>Las actividades de este encuentro todavía no están cargadas.</strong>Acá van a aparecer los simuladores y el material del encuentro.</div>
+</section>
+<section id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <div class="intro">
+    <h2>Encuentro 5: mercado monetario e inflación</h2>
+    <p>Tres simuladores: la teoría cuantitativa del dinero, el multiplicador que convierte la base monetaria en dinero, y la medición de la inflación con una canasta. En el último armás tu propia canasta y ves por qué tu inflación no coincide con la del INDEC.</p>
+  </div>
+
+  <!-- Juego 7: teoría cuantitativa -->
+  <article class="game" id="g7">
+    <h3>Teoría cuantitativa: M · V = P · Y</h3>
+    <p class="lead">La cantidad de dinero por las veces que circula es igual al valor de lo que se produce. Si la emisión crece más rápido que la economía, la diferencia se va a precios. Y si la gente se desprende de los pesos más rápido (sube la velocidad), la misma emisión genera más inflación.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"m":5,"v":0,"y":3}' aria-pressed="false">Estabilidad</button>
+      <button class="chip" data-p='{"m":60,"v":0,"y":1}' aria-pressed="true">Emisión para el déficit</button>
+      <button class="chip" data-p='{"m":60,"v":30,"y":-2}' aria-pressed="false">Huida del peso</button>
+      <button class="chip" data-p='{"m":8,"v":0,"y":6}' aria-pressed="false">La economía absorbe el dinero</button>
+      <button class="chip" data-p='{"m":300,"v":50,"y":-5}' aria-pressed="false">Hiperinflación</button>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="qM">Crecimiento del dinero (M)</label><output id="qM-o"></output></div>
+          <input type="range" id="qM" min="0" max="300" step="1" value="60">
+          <p class="hint">Emisión anual. Es la palanca del Banco Central.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="qV">Cambio en la velocidad (V)</label><output id="qV-o"></output></div>
+          <input type="range" id="qV" min="-20" max="60" step="1" value="0">
+          <p class="hint">Positivo: la gente se saca los pesos de encima más rápido (cae la demanda de dinero).</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="qY">Crecimiento real del PBI (Y)</label><output id="qY-o"></output></div>
+          <input type="range" id="qY" min="-8" max="8" step="0.5" value="1">
+          <p class="hint">Más producción absorbe más dinero sin que suban los precios.</p>
+        </div>
+      </div>
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab">Inflación anual (P)</p>
+            <p class="big" id="q-big">59%</p>
+          </div>
+          <p class="delta" id="q-month"></p>
+        </div>
+        <p class="chart-title">De dónde sale la inflación (aproximación: π ≈ m + v − y)</p>
+        <div class="decomp" id="q-decomp"></div>
+        <p class="chart-title">Cinco años con estos números (índices, 100 = hoy, escala logarítmica)</p>
+        <div class="legend"><span><i></i>Precios (P)</span><span><i class="ss"></i>Dinero (M)</span><span><i class="base"></i>Producción real (Y)</span></div>
+        <svg class="chart" id="q-chart" role="img" aria-label="Evolución de dinero, precios y producción"></svg>
+        <div class="insight" id="q-insight"></div>
+      </div>
+    </div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>M · V = P · Y</code>
+      <code>(1 + π) = (1 + m) · (1 + v) / (1 + y)        π ≈ m + v − y</code>
+      <p>m, v e y son las tasas de crecimiento de M, V e Y. La fórmula exacta y la aproximación coinciden cuando las tasas son chicas; con inflaciones altas la aproximación se queda corta, y el simulador muestra las dos. La teoría supone que, en el largo plazo, el dinero no cambia la producción real: solo cambia los precios.</p>
+    </div>
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>Si en el pueblo hay los mismos kilos de pan y de golpe todos tienen el doble de billetes, el panadero va a cobrar el doble. Si además todos corren a gastar la plata apenas la cobran porque temen que mañana valga menos, los precios suben todavía más rápido. Solo si el pueblo produce más pan, los billetes nuevos no se van a precios.</p>
+    </div>
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>Si la economía crece 3% por año, ¿cuánto puede crecer el dinero sin generar inflación?</li>
+        <li>Compará “Emisión para el déficit” con “Huida del peso”. Con la misma emisión, ¿por qué la inflación es tanto más alta?</li>
+        <li>En la hiperinflación, ¿cuánto se equivoca la aproximación m + v − y? ¿Por qué?</li>
+        <li>¿Cómo se conecta este modelo con el de crisis del Encuentro 6, donde el déficit se financiaba con emisión?</li>
+      </ol>
+    </details>
+  </article>
+
+  <!-- Juego 8: multiplicador monetario -->
+  <article class="game" id="g8">
+    <h3>Multiplicador monetario: de la base al dinero</h3>
+    <p class="lead">El Banco Central emite la base monetaria, pero la cantidad de dinero la terminan de crear los bancos. Cuando alguien deposita, el banco guarda una parte como encaje y presta el resto; ese préstamo vuelve a depositarse en otro banco, que vuelve a prestar. Cuánto se multiplica depende de cuánto efectivo quiere tener la gente y de cuánto guardan los bancos.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"b":100,"c":0.4,"r":20}' aria-pressed="true">Sistema típico</button>
+      <button class="chip" data-p='{"b":100,"c":0.1,"r":10}' aria-pressed="false">Alta bancarización</button>
+      <button class="chip" data-p='{"b":100,"c":1.5,"r":30}' aria-pressed="false">Desconfianza en los bancos</button>
+      <button class="chip" data-p='{"b":100,"c":0.4,"r":100}' aria-pressed="false">Encaje del 100%</button>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="mB">Base monetaria (B)</label><output id="mB-o"></output></div>
+          <input type="range" id="mB" min="10" max="500" step="10" value="100">
+          <p class="hint">Lo que emite el Banco Central: efectivo en manos del público más reservas de los bancos.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="mC">Preferencia por el efectivo (c)</label><output id="mC-o"></output></div>
+          <input type="range" id="mC" min="0" max="3" step="0.05" value="0.4">
+          <p class="hint">Efectivo que la gente guarda por cada peso depositado (c = C / D).</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="mR">Encaje (r)</label><output id="mR-o"></output></div>
+          <input type="range" id="mR" min="1" max="100" step="1" value="20">
+          <p class="hint">Parte de los depósitos que los bancos no prestan: el encaje exigido más la liquidez que guardan por las dudas.</p>
+        </div>
+      </div>
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab">Multiplicador m = (1 + c) / (c + r)</p>
+            <p class="big" id="m-big">2,3</p>
+          </div>
+          <p class="delta" id="m-M"></p>
+        </div>
+        <p class="chart-title">Cómo se reparte</p>
+        <div class="stack" id="m-stack"></div>
+        <p class="chart-title">Vuelta a vuelta: el dinero que se va creando</p>
+        <div class="legend"><span><i></i>Dinero acumulado</span><span><i class="ss"></i>Total al que converge (m · B)</span></div>
+        <svg class="chart" id="m-chart" role="img" aria-label="Creación de dinero en rondas de depósito y préstamo"></svg>
+        <div class="insight" id="m-insight"></div>
+      </div>
+    </div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>B = C + R        M = C + D        C = c · D        R = r · D</code>
+      <code>m = M / B = (1 + c) / (c + r)</code>
+      <code>Vuelta k:  depósitos nuevos = B/(1 + c) · q^k,   q = (1 − r)/(1 + c)</code>
+      <p>En cada vuelta, del dinero que circula la gente se queda una parte en efectivo y deposita el resto; el banco encaja r y presta (1 − r). Por eso cada vuelta agrega menos que la anterior y el total converge a m · B.</p>
+    </div>
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>Depositás 100 en el banco. El banco guarda 20 y le presta 80 a un vecino, que los deposita en otro banco, que guarda 16 y presta 64. Ese mismo billete aparece varias veces como depósito de distintas personas. Si la gente prefiere guardar la plata bajo el colchón, o si los bancos prestan poco, la cadena se corta rápido y se crea menos dinero.</p>
+    </div>
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>¿Qué pasa con el multiplicador en una corrida bancaria, cuando todos quieren efectivo? ¿Qué tendría que hacer el BC con la base para que no caiga la cantidad de dinero?</li>
+        <li>Con encaje del 100%, ¿cuánto vale m? ¿Qué significa que los bancos no creen dinero?</li>
+        <li>Si el BC sube el encaje exigido, ¿qué efecto tiene sobre el dinero sin tocar la base?</li>
+      </ol>
+    </details>
+  </article>
+
+  <!-- Juego 9: inflación por canasta -->
+  <article class="game" id="g9">
+    <h3>¿Por qué siento una inflación distinta a la del INDEC?</h3>
+    <p class="lead">El IPC es un promedio ponderado: cada rubro pesa según cuánto gasta en él un hogar promedio. Pero nadie es promedio. Si en tu presupuesto pesan más los rubros que más subieron, tu inflación es más alta que la oficial, aunque el índice esté bien medido.</p>
+
+    <div class="presets" id="ip-prof" role="group" aria-label="Perfiles de consumo">
+      <span>Tu perfil:</span>
+      <button class="chip" data-k="indec" aria-pressed="false">Igual al INDEC</button>
+      <button class="chip" data-k="est" aria-pressed="true">Estudiante que alquila</button>
+      <button class="chip" data-k="jub" aria-pressed="false">Jubilada o jubilado</button>
+      <button class="chip" data-k="fam" aria-pressed="false">Familia con chicos</button>
+      <button class="chip" data-k="pro" aria-pressed="false">Profesional joven</button>
+    </div>
+    <div class="presets" id="ip-mes" role="group" aria-label="Meses de ejemplo" style="margin-top:-10px">
+      <span>El mes:</span>
+      <button class="chip" data-k="base" aria-pressed="true">Mes de ejemplo</button>
+      <button class="chip" data-k="tar" aria-pressed="false">Suben las tarifas</button>
+      <button class="chip" data-k="ali" aria-pressed="false">Saltan los alimentos</button>
+      <button class="chip" data-k="par" aria-pressed="false">Todo sube parejo</button>
+    </div>
+
+    <div class="trio">
+      <div class="stat"><span>Inflación INDEC (canasta promedio)</span><b id="ip-i"></b><small id="ip-i-a"></small></div>
+      <div class="stat you"><span>Tu inflación (tu canasta)</span><b id="ip-u"></b><small id="ip-u-a"></small></div>
+      <div class="stat"><span>La que “se siente” (por frecuencia de compra)</span><b id="ip-f"></b><small id="ip-f-a"></small></div>
+    </div>
+
+    <div class="two" style="margin-top:22px;align-items:start">
+      <div>
+        <p class="chart-title" style="margin-top:0">Tu canasta y los aumentos del mes</p>
+        <div class="basket" id="ip-basket"></div>
+        <p class="caption">Ponderaciones del INDEC: IPC nacional, divisiones COICOP, con base en la ENGHo 2004/05. Los aumentos por rubro son de ejemplo: cargá los del último informe del INDEC para usarlo en clase. Los pesos de tu canasta se normalizan para sumar 100%.</p>
+      </div>
+      <div>
+        <p class="chart-title" style="margin-top:0">¿Qué explica la diferencia con el INDEC?</p>
+        <div class="decomp" id="ip-decomp"></div>
+        <p class="caption">Cada barra es (tu peso − peso INDEC) × (aumento del rubro − inflación INDEC). Suman exactamente la diferencia entre tu inflación y la oficial.</p>
+        <div class="insight" id="ip-insight"></div>
+        <div class="formula" style="margin-top:18px">
+          <p><strong>Otras razones por las que se siente distinta</strong></p>
+          <p>Frecuencia: los precios que mirás todas las semanas (comida, colectivo, nafta) pesan más en la memoria que los que pagás una vez al año, aunque en tu gasto pesen menos. Asimetría: los aumentos se recuerdan más que las bajas o los precios quietos. Canasta desactualizada: el IPC vigente usa los hábitos de consumo relevados en 2004/05; la actualización con la ENGHo 2017/18, que da más peso a servicios, tarifas, transporte y comunicaciones, se postergó en febrero de 2026. Región: el INDEC publica índices regionales, y los precios no suben igual en todo el país.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>π = Σ wᵢ · πᵢ        (promedio ponderado de los aumentos de cada rubro)</code>
+      <code>π tuya − π INDEC = Σ (wᵢ tuyo − wᵢ INDEC) · (πᵢ − π INDEC)</code>
+      <code>Inflación anualizada = (1 + π mensual)^12 − 1</code>
+      <p>La inflación “que se siente” pondera cada rubro por cuántas veces por mes comprás algo de ese rubro, no por cuánto gastás. Esas frecuencias son ilustrativas.</p>
+    </div>
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>El INDEC mide cuánto sube el changuito de una familia promedio. Pero tu changuito no es ese: si alquilás, si tenés que comprar remedios o si viajás todos los días en colectivo, tus precios importantes son otros. Además, el pan lo comprás todos los días y cada aumento lo ves; el televisor lo comprás cada tantos años. Por eso la inflación que sentís puede ser distinta de la que se publica sin que nadie esté mintiendo.</p>
+    </div>
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>Armá la canasta de tu hogar. ¿Tu inflación del mes está por encima o por debajo de la oficial? ¿Qué rubro lo explica?</li>
+        <li>Elegí “Suben las tarifas”. ¿Quiénes sufren más la inflación ese mes? ¿Y con “Saltan los alimentos”?</li>
+        <li>Con “Todo sube parejo”, ¿por qué da lo mismo la canasta? ¿Qué nos dice eso de cuándo importan las ponderaciones?</li>
+        <li>Si el IPC usa ponderaciones de 2004/05 y desde entonces los hogares gastan más en servicios, ¿en qué meses el índice vigente queda por debajo de uno actualizado?</li>
+      </ol>
+    </details>
+  </article>
+</section>
+<section id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <div class="intro">
+    <h2>Encuentro 6: déficit, inflación y crisis</h2>
+    <p>Un simulador del modelo de crisis de primera generación (Krugman, 1979): un Banco Central que sostiene un tipo de cambio fijo mientras financia el déficit con crédito interno. Movés el respaldo inicial y el ritmo de emisión, y ves cómo se drenan las reservas y cuándo llega el ataque.</p>
+  </div>
+
+  <article class="game" id="g5">
+    <h3>¿Cuánto aguantan las reservas?</h3>
+    <p class="lead">Con el tipo de cambio fijo, la base monetaria no puede cambiar. Si el Banco Central le presta al Tesoro, esos pesos vuelven a su ventanilla a cambio de dólares: lo que crece el crédito interno lo pierden las reservas. Y como cada período queda menos respaldo, la misma emisión se come una porción cada vez mayor de lo que queda.</p>
+
+    <div class="presets" role="group" aria-label="Escenarios predefinidos">
+      <span>Probá un escenario:</span>
+      <button class="chip" data-p='{"w":66,"g":10,"a":2}' aria-pressed="true">Clase: ω 66%, γ 10%</button>
+      <button class="chip" data-p='{"w":33,"g":10,"a":2}' aria-pressed="false">Pocas reservas: ω 33%</button>
+      <button class="chip" data-p='{"w":66,"g":2,"a":2}' aria-pressed="false">Emisión moderada</button>
+      <button class="chip" data-p='{"w":66,"g":30,"a":2}' aria-pressed="false">Déficit desbocado</button>
+      <button class="chip" data-p='{"w":66,"g":10,"a":0}' aria-pressed="false">Sin huida del peso (α = 0)</button>
+    </div>
+
+    <div class="player" id="k-player">
+      <button class="play-btn" id="k-play" type="button"></button>
+      <button class="ghost" id="k-reset" type="button">Reiniciar</button>
+      <div class="speed" id="k-speed" role="group" aria-label="Velocidad">
+        <button type="button" class="chip" data-s="0.5" aria-pressed="false">0,5×</button>
+        <button type="button" class="chip" data-s="1" aria-pressed="true">1×</button>
+        <button type="button" class="chip" data-s="2" aria-pressed="false">2×</button>
+        <button type="button" class="chip" data-s="4" aria-pressed="false">4×</button>
+      </div>
+      <p class="live-msg" id="k-live"></p>
+    </div>
+
+    <div class="g1-grid">
+      <div class="panel-controls">
+        <div class="ctl">
+          <div class="ctl-head"><label for="kW">Respaldo inicial (ω)</label><output id="kW-o"></output></div>
+          <input type="range" id="kW" min="5" max="95" step="1" value="66">
+          <p class="hint">Qué parte de la base monetaria está respaldada por reservas al arrancar: ω = Ē·f / M.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="kG">Crecimiento del crédito interno (γ)</label><output id="kG-o"></output></div>
+          <input type="range" id="kG" min="0" max="40" step="1" value="10">
+          <p class="hint">Por período. Es el déficit financiado con emisión: cuánto le presta el BC al Tesoro. En 0, no se emite.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="kA">Huida del peso (α)</label><output id="kA-o"></output></div>
+          <input type="range" id="kA" min="0" max="5" step="0.25" value="2">
+          <p class="hint">Cuánto cae la demanda de pesos cuando se espera devaluación (sube la velocidad). Con α = 0 el ataque llega recién cuando se acaban las reservas.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-head"><label for="kT">Mirar el período</label><output id="kT-o"></output></div>
+          <input type="range" id="kT" min="0" max="30" step="0.1" value="0">
+          <p class="hint">Recorré el tiempo y mirá ω y la caída de reservas en cada momento.</p>
+        </div>
+        <div class="policy">
+          <p class="policy-h">Medidas de política</p>
+          <p class="hint" id="k-pol-hint">Se habilitan mientras corre la simulación.</p>
+          <div class="ctl">
+            <div class="ctl-head"><label for="kK">Efectividad del cepo (κ)</label><output id="kK-o"></output></div>
+            <input type="range" id="kK" min="20" max="90" step="5" value="60">
+            <p class="hint">Qué parte de la demanda de dólares logra frenar el control de capitales.</p>
+          </div>
+          <button type="button" class="pol-btn" id="k-cepo" aria-pressed="false" disabled>Poner control de capitales</button>
+          <div class="ctl" style="margin-top:16px">
+            <div class="ctl-head"><label for="kF">Monto del rescate</label><output id="kF-o"></output></div>
+            <input type="range" id="kF" min="5" max="50" step="5" value="25">
+            <p class="hint">En % de la base monetaria inicial. Entran como reservas.</p>
+          </div>
+          <button type="button" class="pol-btn imf" id="k-imf" disabled>Pedir rescate al FMI</button>
+          <p class="pol-status" id="k-pol-status"></p>
+        </div>
+      </div>
+
+      <div>
+        <div class="result-top">
+          <div>
+            <p class="big-lab" id="k-big-l">El ataque especulativo llega en el</p>
+            <p class="big" id="k-big">período 9</p>
+          </div>
+          <p class="delta" id="k-tstar"></p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="k-first"></b><span id="k-first-l">Caída de reservas en el primer período</span></div>
+          <div class="stat"><b id="k-now"></b><span id="k-now-l">Respaldo ω en el período elegido</span></div>
+          <div class="stat"><b id="k-lost"></b><span id="k-lost-l">Reservas que se pierden de golpe en el ataque</span></div>
+        </div>
+
+        <p class="chart-title">Base monetaria, crédito interno y reservas</p>
+        <div class="legend"><span><i class="base"></i>Base monetaria M (fija)</span><span><i class="bend"></i>Crédito interno</span><span><i></i>Reservas</span></div>
+        <svg class="chart" id="k-stock" role="img" aria-label="Crédito interno y reservas en el tiempo"></svg>
+
+        <div class="insight" id="k-insight"></div>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:8px">
+      <div>
+        <p class="chart-title">La caída se acelera: pérdida de reservas en cada período</p>
+        <div class="legend"><span><i></i>Δf/f del período</span><span><i class="ss"></i>Con ω fijo en el valor inicial</span></div>
+        <svg class="chart" id="k-rate" role="img" aria-label="Tasa de caída de reservas por período"></svg>
+        <p class="caption">Si ω no cambiara, cada período se perdería lo mismo (línea punteada). Pero ω baja, 1/ω sube y la caída se agranda sola.</p>
+      </div>
+      <div>
+        <p class="chart-title">Tipo de cambio fijo y tipo de cambio sombra</p>
+        <div class="legend"><span><i class="base"></i>Paridad fija Ē</span><span><i class="ss"></i>TC sombra</span><span><i></i>TC efectivo</span><span id="k-par-leg"><i class="bad"></i>Dólar paralelo (con cepo)</span></div>
+        <svg class="chart" id="k-fx" role="img" aria-label="Tipo de cambio sombra y efectivo"></svg>
+        <p class="caption">El ataque estalla cuando el TC sombra alcanza la paridad (T₂), antes de que las reservas lleguen solas a cero (T*). Por eso el tipo de cambio no salta: pasa de plano a subir.</p>
+      </div>
+    </div>
+
+    <p class="chart-title">La tabla de la clase: caída de reservas en un período, −(1/ω − 1)·γ</p>
+    <div style="overflow-x:auto"><table class="tbl" id="k-table"></table></div>
+
+    <div class="formula">
+      <p>Cómo está armado el modelo:</p>
+      <code>M = Ē·f + CI        con TC fijo, ΔM = 0  ⇒  Ē·Δf = −ΔCI</code>
+      <code>ΔCI = γ·CI   y   ω = Ē·f / M   ⇒   Δf/f = −(1/ω − 1)·γ</code>
+      <code>TC sombra:  Ê = Ē · (CI / M) · (1 + α·γ)        ataque (T₂) cuando Ê = Ē</code>
+      <p>El TC sombra es el que equilibraría el mercado sin reservas. El factor (1 + α·γ) es una aproximación didáctica de la huida del peso: cuando se espera que el peso se deprecie al ritmo γ, sube la velocidad y cae la demanda de saldos reales, así que el sombra queda más arriba y el ataque se adelanta.</p>
+      <p><strong>Control de capitales:</strong> frena una fracción κ de la demanda de dólares, así que las reservas caen (1 − κ)·ΔCI en lugar de ΔCI y no puede haber ataque. Los pesos que no pueden salir se acumulan y el dólar paralelo sigue al TC sombra; la diferencia con el oficial es la brecha. Si las reservas se agotan con cepo, el oficial salta de golpe al paralelo. <strong>Rescate del FMI:</strong> entran reservas y el Tesoro cancela deuda con el BC por el mismo monto (sube ω, baja CI); si γ no cambia, solo corre la fecha.</p>
+    </div>
+
+    <div class="marta">
+      <h4>Para la tía Marta</h4>
+      <p>El Banco Central tiene una torta de tamaño fijo con dos porciones: dólares (reservas) y pesos que le prestó al Tesoro. Cada vez que emite para el Tesoro agranda la porción de pesos y achica la de dólares. Como la porción de dólares es cada vez más chica, el mismo mordisco se lleva una parte cada vez mayor de lo que queda. Y los que la ven venir no esperan a que se termine: corren a llevarse los últimos dólares antes que nadie.</p>
+    </div>
+
+    <details class="q">
+      <summary>Para pensar en clase</summary>
+      <ol>
+        <li>Con γ = 10%, compará ω = 66% y ω = 33%. ¿Cuántos períodos más compran las reservas altas?</li>
+        <li>¿Por qué la caída de reservas se acelera aunque γ se mantenga constante?</li>
+        <li>Poné α = 0 y después subilo. ¿Por qué el ataque se adelanta cuando la gente huye del peso?</li>
+        <li>¿Qué tendría que pasar con el déficit para que, en este modelo, el tipo de cambio fijo no colapse nunca?</li>
+        <li>Poné el cepo y dejá correr unos períodos. ¿Qué pasa si después lo levantás? ¿Por qué salir del cepo con brecha es tan difícil?</li>
+        <li>Pedí un rescate del FMI sin tocar γ, y después repetí bajando γ al mismo tiempo. ¿En cuál de los dos casos el rescate sirve?</li>
+      </ol>
+    </details>
+  </article>
+</section>
+
+<section id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <div class="intro">
+    <h2>Fuentes económicas y financieras</h2>
+    <p>Dónde buscar datos oficiales, cotizaciones, balances de empresas, calificaciones de riesgo y dónde operar. Escribí qué necesitás y te decimos en qué fuente y en qué parte está.</p>
+  </div>
+  <div class="src-search">
+    <label for="src-q">¿Qué estás buscando?</label>
+    <input type="search" id="src-q" placeholder="Por ejemplo: inflación de agosto, balance de YPF, calificación de una ON, dólar oficial" autocomplete="off">
+    <div class="presets" id="src-sugg" style="margin:12px 0 0"></div>
+    <div id="src-res" aria-live="polite"></div>
+  </div>
+  <div id="src-list"></div>
+  <p class="caption" style="margin-top:22px">Los brokers figuran como referencia de dónde operar y encontrar información; no es una recomendación. Antes de abrir una cuenta, verificá en la CNV que el agente esté registrado.</p>
+</section>
+
+</main>
+
+<footer><div class="wrap">Simuladores didácticos con parámetros ilustrativos. Sirven para entender relaciones, no para pronosticar ni para tomar decisiones de inversión.</div></footer>
+</div>
+</div>
+
+<script>
+(function(){
+const $ = id => document.getElementById(id);
+const nf = (v,d=0) => Number(v).toLocaleString('es-AR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct = (v,d=1) => nf(v,d)+'%';
+const mult = v => '×'+nf(v,2);
+const usdM = v => isFinite(v) ? 'USD '+nf(v, v<100?1:0)+' M' : 'no definido';
+
+/* ---------- sliders ---------- */
+const R = {};
+function setupRange(id, fmt, cb){
+  const el=$(id), out=$(id+'-o');
+  const upd=()=>{const v=+el.value; if(out) out.textContent=fmt(v); el.style.setProperty('--p',((v-el.min)/(el.max-el.min)*100)+'%');};
+  el.addEventListener('input',()=>{upd(); cb();});
+  R[id]={el,upd}; upd();
+}
+function setVal(id,v){R[id].el.value=v; R[id].upd();}
+const val = id => +$(id).value;
+
+/* ---------- gráfico SVG liviano ---------- */
+function niceStep(span,n){
+  if(!(span>0)) return 1;
+  const raw=span/n, mag=Math.pow(10,Math.floor(Math.log10(raw))), e=raw/mag;
+  return (e>=7.5?10:e>=3.5?5:e>=1.5?2:1)*mag;
+}
+function chart(svg,o){
+  const W = svg.clientWidth>60 ? svg.clientWidth : 560;
+  const H = W<460 ? 220 : 260;
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.setAttribute('height',H);
+  const m={l:o.ml||54,r:14,t:16,b:38}, iw=W-m.l-m.r, ih=H-m.t-m.b;
+  let yMin,yMax,ticks=[];
+  if(o.yTicks){ yMin=o.yMin; yMax=o.yMax; ticks=o.yTicks; }
+  else{
+    const st=niceStep(o.yMax-o.yMin,5);
+    yMin=Math.floor(o.yMin/st)*st; yMax=Math.ceil(o.yMax/st)*st; if(yMax<=yMin) yMax=yMin+st;
+    for(let v=yMin; v<=yMax+st*1e-6; v+=st) ticks.push(v);
+  }
+  const X=x=>m.l+(x-o.xMin)/(o.xMax-o.xMin)*iw, Y=y=>m.t+(1-(y-yMin)/(yMax-yMin))*ih;
+  const tol=(yMax-yMin)*1e-6;
+  let s='';
+  ticks.forEach(v=>{
+    const y=Y(v).toFixed(1);
+    s+=`<line class="grid" x1="${m.l}" x2="${W-m.r}" y1="${y}" y2="${y}"/><text class="tk" x="${m.l-8}" y="${+y+4}" text-anchor="end">${o.fy(v)}</text>`;
+  });
+  o.xTicks.forEach(v=>{ s+=`<text class="tk" x="${X(v).toFixed(1)}" y="${m.t+ih+18}" text-anchor="middle">${o.fx(v)}</text>`; });
+  s+=`<line class="axis" x1="${m.l}" x2="${W-m.r}" y1="${m.t+ih}" y2="${m.t+ih}"/>`;
+  if(o.xLabel) s+=`<text class="tk" x="${W-m.r}" y="${H-3}" text-anchor="end">${o.xLabel}</text>`;
+  if(o.yLabel) s+=`<text class="tk" x="${m.l}" y="${m.t-4}" text-anchor="start">${o.yLabel}</text>`;
+  (o.vLines||[]).forEach(v=>{ if(!isFinite(v.x)||v.x<o.xMin||v.x>o.xMax) return; const x=X(v.x); s+=`<line class="${v.cls}" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${m.t}" y2="${m.t+ih}"/>`; if(v.label){ const right=x>m.l+iw*0.7; s+=`<text class="vl-t" x="${(right?x-4:x+4).toFixed(1)}" y="${m.t+11}" text-anchor="${right?'end':'start'}">${v.label}</text>`; } });
+  (o.hLines||[]).forEach(h=>{
+    if(h.y<yMin||h.y>yMax) return; const y=Y(h.y).toFixed(1);
+    s+=`<line class="${h.cls}" x1="${m.l}" x2="${W-m.r}" y1="${y}" y2="${y}"/>`;
+    if(h.label) s+=`<text class="${h.cls}-t" x="${m.l+6}" y="${+y-6}">${h.label}</text>`;
+  });
+  o.series.forEach(se=>{
+    let d='', pen=false;
+    se.pts.forEach(([x,y])=>{
+      if(!isFinite(y)||!isFinite(x)||y>yMax+tol||y<yMin-tol||x<o.xMin||x>o.xMax){pen=false;return;}
+      d+=(pen?'L':'M')+X(x).toFixed(1)+' '+Y(y).toFixed(1); pen=true;
+    });
+    if(d) s+=`<path class="${se.cls}" d="${d}"/>`;
+  });
+  (o.points||[]).forEach(p=>{
+    if(!(isFinite(p.y)&&p.y<=yMax+tol&&p.y>=yMin-tol)) return;
+    const cx=X(p.x), cy=Y(p.y);
+    s+=`<circle class="pt" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${p.r||6}"/>`;
+    if(p.label) s+=`<text class="ptl" x="${(cx+(p.dx||9)).toFixed(1)}" y="${(cy+(p.dy||-9)).toFixed(1)}">${p.label}</text>`;
+  });
+  svg.innerHTML=s;
+}
+function bars(el,rows,fmt,maxAbs){
+  el.innerHTML=rows.map(([lab,c])=>{
+    const w=Math.min(Math.abs(c)/maxAbs*50,50);
+    const style=c>=0?`left:50%;width:${w}%`:`left:${50-w}%;width:${w}%`;
+    return `<div class="drow"><span class="lab">${lab}</span><div class="dtrack"><div class="dbar ${c>=0?'pos':'neg'}" style="${style}"></div></div><span class="v">${fmt(c)}</span></div>`;
+  }).join('');
+}
+
+/* =========================================================
+   JUEGO 1: producto de un país
+   ========================================================= */
+const B={I:5,T:5,S:10,K:15}, DN=0.06, AL=1/3, Y_BASE_USD=30000;
+const th = I => 0.6+0.08*I;                        // la tecnología rinde más con buenas instituciones
+const lnA = (I,T) => 0.11*T*th(I) + 0.06*I;         // productividad total
+const eta = I => 0.55+0.045*I;                      // eficiencia de la inversión
+const lnh = s => 0.134*Math.min(s,4) + 0.101*Math.min(Math.max(s-4,0),4) + 0.068*Math.max(s-8,0); // retornos de Mincer decrecientes
+const yss = p => Math.exp(1.5*lnA(p.I,p.T)) * Math.sqrt(eta(p.I)*p.K/100/DN) * Math.exp(lnh(p.S));
+const kss = p => Math.pow(eta(p.I)*(p.K/100)*Math.exp(lnA(p.I,p.T))/DN,1.5) * Math.exp(lnh(p.S));
+const g1p = () => ({I:val('gI'),T:val('gT'),S:val('gS'),K:val('gK')});
+
+function g1path(p){
+  const A=Math.exp(lnA(p.I,p.T)), e=eta(p.I), s=p.K/100, h0=lnh(B.S), h1=lnh(p.S), y0=yss(B);
+  let k=kss(B); const out=[];
+  for(let t=0;t<=40;t++){
+    const h=Math.exp(h0+(h1-h0)*Math.min(t/20,1));
+    const y=A*Math.pow(k,AL)*Math.pow(h,1-AL);
+    out.push([t,y/y0*100]);
+    k=(1-DN)*k+e*s*y;
+  }
+  return out;
+}
+function g1decomp(p){
+  const tA=0.11*(p.T-B.T)*(th(p.I)+th(B.I))/2;
+  const iA=0.06*(p.I-B.I)+0.11*(th(p.I)-th(B.I))*(p.T+B.T)/2;
+  return [
+    ['Instituciones', 1.5*iA + 0.5*Math.log(eta(p.I)/eta(B.I))],
+    ['Tecnología', 1.5*tA],
+    ['Capital humano', lnh(p.S)-lnh(B.S)],
+    ['Capital físico', 0.5*Math.log(p.K/B.K)]
+  ];
+}
+function g1insight(p,dec,ratio,path){
+  const msgs=[];
+  const same = Math.abs(p.I-B.I)<1e-9 && Math.abs(p.T-B.T)<1e-9 && Math.abs(p.S-B.S)<1e-9 && Math.abs(p.K-B.K)<1e-9;
+  if(same) return '<p>Estás en el escenario base. Mové cualquier palanca y mirá tres cosas: cuánto cambia el destino de largo plazo, qué tan rápido se llega y qué palanca explica la diferencia.</p>';
+  const top=[...dec].sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]))[0];
+  msgs.push(`En este escenario el país termina produciendo <strong>${mult(ratio)}</strong> lo del escenario base, y la palanca que más pesa es <strong>${top[0].toLowerCase()}</strong> (${mult(Math.exp(top[1]))}).`);
+  if(p.K>B.K+4 && p.I<=3.5) msgs.push('Se invierte mucho, pero con instituciones débiles buena parte de esa inversión no termina en capital productivo (obras que no se terminan, sobreprecios, proyectos elegidos por motivos políticos). Por eso el esfuerzo rinde menos de lo que promete.');
+  else if(p.K!==B.K){
+    const kOnly=Math.sqrt(p.K/B.K);
+    msgs.push(`Rendimientos decrecientes: pasar la inversión de ${B.K}% a ${p.K}% del PIB (${mult(p.K/B.K)}) mueve el producto de largo plazo solo ${mult(kOnly)}. Cada máquina extra aporta menos que la anterior.`);
+  }
+  if(p.T>=B.T+2 && p.I<=3) msgs.push('La tecnología está disponible, pero con reglas de juego débiles se adopta a medias: nadie trae la mejor máquina si no sabe si mañana le cambian las condiciones.');
+  if(p.S!==B.S) msgs.push('La educación tarda: los nuevos egresados reemplazan de a poco a la fuerza laboral, así que el efecto completo llega recién a los 20 años.');
+  if(p.I!==B.I || p.T!==B.T){
+    const jump=path[0][1]/100;
+    if(Math.abs(jump-1)>0.02) msgs.push(`Instituciones y tecnología actúan sobre la productividad: el primer año ya se ve un ${jump>1?'salto':'retroceso'} de ${mult(jump)}, y después el capital se acomoda al nuevo nivel.`);
+  }
+  return msgs.map(m=>`<p>${m}</p>`).join('');
+}
+function renderG1(){
+  const p=g1p(), ratio=yss(p)/yss(B), path=g1path(p), dec=g1decomp(p);
+  $('g1-big').textContent='USD '+nf(Math.round(Y_BASE_USD*ratio/100)*100);
+  const d=$('g1-delta'); d.textContent=mult(ratio)+' vs. base';
+  d.className='delta'+(ratio>1.005?' up':ratio<0.995?' down':'');
+  $('g1-y1').textContent=mult(path[1][1]/100);
+  $('g1-y10').textContent=mult(path[10][1]/100);
+  $('g1-yss').textContent=mult(ratio);
+  const ys=path.map(q=>q[1]).concat([100,ratio*100]);
+  chart($('g1-chart'),{
+    xMin:0,xMax:40,yMin:Math.min(...ys)*0.95,yMax:Math.max(...ys)*1.05,
+    xTicks:[0,10,20,30,40],fx:v=>'Año '+v,fy:v=>nf(v),
+    hLines:[{y:ratio*100,cls:'ss'}],
+    series:[{cls:'base',pts:[[0,100],[40,100]]},{cls:'main',pts:path}]
+  });
+  const maxAbs=Math.max(Math.log(2),...dec.map(x=>Math.abs(x[1])));
+  $('g1-decomp').innerHTML=dec.map(([lab,c])=>{
+    const w=Math.abs(c)/maxAbs*50;
+    const style=c>=0?`left:50%;width:${w}%`:`left:${50-w}%;width:${w}%`;
+    return `<div class="drow"><span class="lab">${lab}</span><div class="dtrack"><div class="dbar ${c>=0?'pos':'neg'}" style="${style}"></div></div><span class="v">${mult(Math.exp(c))}</span></div>`;
+  }).join('');
+  $('g1-insight').innerHTML=g1insight(p,dec,ratio,path);
+}
+function clearPresets(){document.querySelectorAll('#g1 .chip').forEach(c=>c.setAttribute('aria-pressed','false'));}
+setupRange('gI',v=>nf(v,1)+' / 10',()=>{clearPresets();renderG1();});
+setupRange('gT',v=>nf(v,1)+' / 10',()=>{clearPresets();renderG1();});
+setupRange('gS',v=>nf(v,1)+' años',()=>{clearPresets();renderG1();});
+setupRange('gK',v=>v+'% del PIB',()=>{clearPresets();renderG1();});
+document.querySelectorAll('#g1 .chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const p=JSON.parse(btn.dataset.p);
+    setVal('gI',p.I); setVal('gT',p.T); setVal('gS',p.S); setVal('gK',p.K);
+    clearPresets(); btn.setAttribute('aria-pressed','true'); renderG1();
+  });
+});
+
+/* =========================================================
+   JUEGO 2: riesgo país, financiamiento y valor
+   ========================================================= */
+const ERP=5, TAX=0.35;
+const cuota=(M,r,n)=> r===0 ? M/n : M*r/(1-Math.pow(1+r,-n));
+// Estructura temporal: devuelve componentes en % para un plazo n (años)
+function termRate(RP,rf10,sp,n){
+  const rfN=rf10-0.06*(10-n);                    // curva del Tesoro levemente positiva
+  const k=0.04-RP/30000;                          // pendiente del riesgo país: positiva con riesgo bajo, invertida con riesgo alto
+  const rpN=RP*(1+k*(n-5));
+  const spN=sp*(1+0.06*(n-5));                    // el riesgo propio crece con el plazo
+  return {rf:rfN, rp:rpN/100, sp:spN/100, total:rfN+rpN/100+spN/100};
+}
+let PLAZO=5;
+function rateAt(RP,rf,sp){return termRate(RP,rf,sp,PLAZO).total;}  // en %, al plazo elegido
+function evAt(RP,q){
+  const ke=q.rf+q.beta*ERP+q.lam*RP/100;
+  const kd=rateAt(RP,q.rf,q.sp);
+  const w=(1-q.dw)*ke+q.dw*kd*(1-TAX);
+  const den=(w-q.g)/100;
+  return {ev: den>0.005 ? q.fcf/den : NaN, ke, kd, w};
+}
+function renderG2(){
+  const RP=val('rp'), rf=val('rf'), M=val('monto'), n=val('plazo'), sp=val('spread'), tir=val('tir');
+  PLAZO=n;
+  $('rp-num').innerHTML=nf(RP)+'<small>puntos básicos</small>';
+  const z=$('rp-zone');
+  if(RP<500){z.className='rp-zone ok';z.textContent='Mercado abierto';}
+  else if(RP<1000){z.className='rp-zone warn';z.textContent='Mercado selectivo';}
+  else {z.className='rp-zone bad';z.textContent='Mercado cerrado de hecho';}
+
+  // Financiamiento
+  const tr=termRate(RP,rf,sp,n), r=tr.total, r0=tr.rf+tr.sp;
+  const c=cuota(M,r/100,n), c0=cuota(M,r0/100,n);
+  const intT=c*n-M, int0=c0*n-M;
+  $('f-rate').textContent=pct(r);
+  $('f-compose').textContent=`A ${n} ${n===1?'año':'años'}: ${pct(tr.rf,2)} Tesoro EE.UU. + ${pct(tr.rp,2)} riesgo país + ${pct(tr.sp,2)} empresa`;
+  const cv=[],us=[]; for(let k=1;k<=10;k+=0.25){const t=termRate(RP,rf,sp,k); cv.push([k,t.total]); us.push([k,t.rf]);}
+  chart($('f-curve'),{
+    xMin:1,xMax:10,yMin:0,yMax:Math.max(...cv.map(p=>p[1]))*1.1,
+    xTicks:[1,2,4,6,8,10],fx:v=>v+(v===1?' año':' años'),fy:v=>nf(v)+'%',
+    series:[{cls:'base',pts:us},{cls:'main',pts:cv}],points:[{x:n,y:r}]
+  });
+  const r1=termRate(RP,rf,sp,1).total, r10=termRate(RP,rf,sp,10).total, sl=r10-r1;
+  $('f-curve-cap').innerHTML = sl>0.25
+    ? `Curva positiva: a 10 años se paga ${pct(r10)} y a 1 año ${pct(r1)}. Prestar a más tiempo implica más incertidumbre, y el prestamista pide una prima por eso.`
+    : sl<-0.25
+    ? `Curva invertida: a 1 año se paga ${pct(r1)} y a 10 años ${pct(r10)}. Con riesgo país muy alto el mercado teme un default cercano; si ocurre, cortos y largos cobran lo mismo, así que el corto rinde más.`
+    : `Curva casi plana: el plazo cambia poco la tasa (${pct(r1)} a 1 año, ${pct(r10)} a 10). Es la zona de transición entre la curva normal y la invertida.`;
+  $('f-cuota').textContent=usdM(c);
+  $('f-int').textContent=usdM(intT);
+  $('f-extra').textContent=usdM(intT-int0)+' ('+nf((intT-int0)/intT*100,0)+'%)';
+  let rpMax=0; for(let x=0;x<=6000;x+=5){ if(termRate(x,rf,sp,n).total<=tir) rpMax=x; else break; }
+  $('f-max').textContent= termRate(0,rf,sp,n).total>tir ? 'ninguno' : (rpMax>=6000?'más de 6.000 pb':nf(Math.floor(rpMax/25)*25)+' pb');
+  const mk=$('f-market');
+  if(RP<500){mk.className='pill ok';mk.innerHTML='Mercado abierto<small>Con este riesgo país suele haber ventana para emitir deuda a tasas razonables.</small>';}
+  else if(RP<1000){mk.className='pill warn';mk.innerHTML='Mercado selectivo<small>Solo emiten las empresas más sólidas, a tasas altas y plazos cortos.</small>';}
+  else {mk.className='pill bad';mk.innerHTML='Mercado cerrado de hecho<small>A estas tasas casi nadie emite: se financian con bancos, proveedores o no invierten.</small>';}
+  const vd=$('f-verdict'), margin=tir-r;
+  if(margin>=2){vd.className='pill ok';vd.innerHTML=`El proyecto cierra con holgura<small>Rinde ${pct(tir)} y la deuda cuesta ${pct(r)}: sobran ${nf(margin,1)} puntos.</small>`;}
+  else if(margin>=0){vd.className='pill warn';vd.innerHTML=`El proyecto cierra muy justo<small>Solo ${nf(margin,1)} puntos de margen: cualquier imprevisto lo da vuelta.</small>`;}
+  else {vd.className='pill bad';vd.innerHTML=`El proyecto no cierra<small>Rinde ${pct(tir)} pero la deuda cuesta ${pct(r)}. Esta inversión no se hace.</small>`;}
+  const fpts=[]; for(let x=0;x<=3000;x+=50) fpts.push([x,rateAt(x,rf,sp)]);
+  chart($('f-chart'),{
+    xMin:0,xMax:3000,yMin:0,yMax:Math.max(rateAt(3000,rf,sp),tir)*1.05,
+    xTicks:[0,500,1000,1500,2000,2500,3000],fx:v=>nf(v),fy:v=>nf(v)+'%',xLabel:'riesgo país (pb)',
+    vLines:[{x:500,cls:'zone'},{x:1000,cls:'zone'},{x:RP,cls:'now'}],
+    hLines:[{y:tir,cls:'tir',label:'TIR del proyecto '+pct(tir)}],
+    series:[{cls:'main',pts:fpts}], points:[{x:RP,y:r}]
+  });
+
+  // Valor
+  const q={rf,sp,fcf:val('fcf'),g:val('g'),beta:val('beta'),lam:val('lam'),dw:val('dw')/100};
+  const cur=evAt(RP,q);
+  $('v-ev').textContent=isFinite(cur.ev)?'USD '+nf(cur.ev,0)+' M':'Sin valor definido (WACC ≤ g)';
+  $('v-ke').textContent=pct(cur.ke);
+  $('v-wacc').textContent=pct(cur.w);
+  $('v-eq').textContent=usdM(cur.ev*(1-q.dw));
+  const e100=evAt(RP+100,q).ev;
+  $('v-100').textContent=isFinite(cur.ev)&&isFinite(e100)?usdM(cur.ev-e100):'no definido';
+  const rpDn=Math.max(0,RP-300), rpUp=RP+300;
+  $('v-dn-l').textContent=`Si el riesgo país baja a ${nf(rpDn)} pb`;
+  $('v-up-l').textContent=`Si el riesgo país sube a ${nf(rpUp)} pb`;
+  const eDn=evAt(rpDn,q).ev, eUp=evAt(rpUp,q).ev;
+  $('v-dn').textContent=isFinite(eDn)&&isFinite(cur.ev)?'+'+nf((eDn/cur.ev-1)*100,0)+'%':'no definido';
+  $('v-up').textContent=isFinite(eUp)&&isFinite(cur.ev)?nf((eUp/cur.ev-1)*100,0)+'%':'no definido';
+  const vpts=[]; for(let x=0;x<=3000;x+=25) vpts.push([x,evAt(x,q).ev]);
+  const fin=vpts.map(p=>p[1]).filter(isFinite);
+  const cap=isFinite(cur.ev)?Math.min(Math.max(...fin),cur.ev*3.5):Math.max(...fin);
+  chart($('v-chart'),{
+    xMin:0,xMax:3000,yMin:0,yMax:cap*1.02,
+    xTicks:[0,500,1000,1500,2000,2500,3000],fx:v=>nf(v),fy:v=>nf(v),xLabel:'riesgo país (pb) · valor en USD M',
+    vLines:[{x:RP,cls:'now'}],
+    series:[{cls:'main',pts:vpts}], points:[{x:RP,y:cur.ev}]
+  });
+}
+setupRange('rp',v=>nf(v/100,2)+' p.p.',renderG2);
+setupRange('rf',v=>pct(v),renderG2);
+setupRange('monto',v=>'USD '+v+' M',renderG2);
+setupRange('plazo',v=>v+(v===1?' año':' años'),renderG2);
+setupRange('spread',v=>nf(v)+' pb',renderG2);
+setupRange('tir',v=>pct(v),renderG2);
+setupRange('fcf',v=>'USD '+v+' M',renderG2);
+setupRange('g',v=>pct(v),renderG2);
+setupRange('beta',v=>nf(v,2),renderG2);
+setupRange('lam',v=>nf(v,2),renderG2);
+setupRange('dw',v=>v+'%',renderG2);
+
+/* =========================================================
+   JUEGO 3: oferta de trabajo, efecto sustitución vs. ingreso
+   ========================================================= */
+const LT=80, PHI=0.01, EPS=0.6, RENT=0.04, WMAX=250;
+const wOf = v => Math.pow(WMAX, v/1000);
+const vOfW = w => Math.round(Math.log(w)/Math.log(WMAX)*1000);
+const POf = v => 20e6*Math.pow(v/1000,2);
+const vOfP = P => Math.round(Math.sqrt(P/20e6)*1000);
+const rentOf = P => P*RENT/52;
+const uC = (c,ct) => ct*(1-Math.exp(-c/ct));
+const uInv = (y,ct) => y<ct ? -ct*Math.log(1-y/ct) : Infinity;
+const dis = h => PHI*Math.pow(h,1+1/EPS)/(1+1/EPS);
+function hoursOpt(w,V,ct){
+  const f=h=> w*Math.exp(-(w*h+V)/ct) - PHI*Math.pow(h,1/EPS);
+  if(f(LT)>0) return LT;
+  let lo=0,hi=LT; for(let i=0;i<60;i++){const m=(lo+hi)/2; if(f(m)>0) lo=m; else hi=m;}
+  return lo;
+}
+function hicks(w2,U0,ct){
+  const cOf=h=> -ct*Math.log(PHI*Math.pow(h,1/EPS)/w2);
+  const g=h=> uC(cOf(h),ct)-dis(h)-U0;
+  if(g(LT)>0) return {h:LT,c:cOf(LT)};
+  let lo=1e-9,hi=LT; for(let i=0;i<70;i++){const m=(lo+hi)/2; if(g(m)>0) lo=m; else hi=m;}
+  return {h:lo,c:cOf(lo)};
+}
+const usd = v => 'USD '+nf(v, v<10?2:0);
+const usdBig = P => P>=1e6 ? 'USD '+nf(P/1e6, P<1e7?2:1)+' M' : 'USD '+nf(Math.round(P/1000)*1000);
+const hrs = v => nf(v,1)+' h';
+
+function renderG3(){
+  const w=wOf(val('lsW')), P=POf(val('lsP')), raise=val('lsR')/100, ct=val('lsC');
+  const V=rentOf(P), w2=w*(1+raise);
+  const H0=hoursOpt(w,V,ct), c0=w*H0+V, U0=uC(c0,ct)-dis(H0);
+  const H1=hoursOpt(w2,V,ct), c1=w2*H1+V, U1=uC(c1,ct)-dis(H1);
+  const B=hicks(w2,U0,ct);
+  const ES=B.h-H0, EI=H1-B.h, TOT=H1-H0;
+
+  $('ls-big').textContent = H0<0.5 ? '0 horas' : nf(H0,1)+' horas';
+  const ph=$('ls-phase');
+  if(H0<0.5){ph.textContent='Vive de rentas'; ph.className='delta down';}
+  else if(TOT>=0){ph.textContent='Ante una suba, trabaja más'; ph.className='delta up';}
+  else {ph.textContent='Ante una suba, trabaja menos'; ph.className='delta down';}
+  $('ls-lab').textContent=usd(w*H0);
+  $('ls-rent').textContent=usd(V);
+
+  // curva de oferta
+  const N=160, pts=[], ghost=[]; let peak=0;
+  for(let i=0;i<=N;i++){
+    const wi=Math.pow(WMAX,i/N), hi=hoursOpt(wi,V,ct);
+    pts.push([hi,Math.log10(wi),wi]);
+    if(P>0) ghost.push([hoursOpt(wi,0,ct),Math.log10(wi)]);
+    if(hi>pts[peak][0]) peak=i;
+  }
+  const wPeak=pts[peak][2];
+  const hasPeak = peak>0 && peak<N;
+  $('ls-peak').textContent = hasPeak ? usd(wPeak)+'/h' : (peak===0?'ya se dio vuelta':'fuera de rango');
+  $('ls-peak-l').textContent = hasPeak ? `Salario donde la curva se da vuelta (máx. ${nf(pts[peak][0],0)} h)` : 'Salario donde la curva se da vuelta';
+  $('ls-ghost-leg').style.display = P>0 ? '' : 'none';
+  const yT=[1,2,5,10,20,50,100,200];
+  const series=[];
+  if(P>0) series.push({cls:'base',pts:ghost});
+  series.push({cls:'main',pts:pts.slice(0,peak+1).map(p=>[p[0],p[1]])});
+  series.push({cls:'bend',pts:pts.slice(peak).map(p=>[p[0],p[1]])});
+  chart($('ls-supply'),{
+    xMin:0,xMax:LT,yMin:0,yMax:Math.log10(WMAX),yTicks:yT.map(Math.log10),
+    xTicks:[0,20,40,60,80],fx:v=>v+' h',fy:v=>nf(Math.round(Math.pow(10,v))),
+    xLabel:'horas por semana',yLabel:'USD por hora',
+    series, points:[{x:H0,y:Math.log10(w)}]
+  });
+
+  // descomposición
+  $('ls-dec-t').textContent=`Si te suben el sueldo un ${nf(raise*100)}% (a ${usd(w2)}/h), ¿qué pasa con tus horas?`;
+  bars($('ls-decomp'),[['Efecto sustitución',ES],['Efecto ingreso',EI],['Efecto total',TOT]],
+    c=>(c>=0?'+':'')+nf(c,1)+' h', Math.max(2,Math.abs(ES),Math.abs(EI),Math.abs(TOT)));
+
+  // texto
+  const msgs=[];
+  if(H0<0.5) msgs.push(`Con una renta de ${usd(V)} por semana, a este salario no conviene trabajar ni una hora. El patrimonio es ingreso puro: no abarata ni encarece el ocio, solo te hace más rico, así que empuja todo hacia el ocio.`);
+  else if(TOT>=0) msgs.push(`Con ${usd(w)}/h, la suba te lleva a trabajar <strong>${nf(TOT,1)} horas más</strong>. El efecto sustitución (+${nf(ES,1)} h) le gana al efecto ingreso (${nf(EI,1)} h): el ocio se encareció y todavía te falta consumo.`);
+  else msgs.push(`Con ${usd(w)}/h, la suba te lleva a trabajar <strong>${nf(-TOT,1)} horas menos</strong>. El efecto ingreso (${nf(EI,1)} h) ya pesa más que el sustitución (+${nf(ES,1)} h): con lo que ganás, preferís comprar tiempo libre.`);
+  if(hasPeak && H0>=0.5) msgs.push(`En esta persona la curva se da vuelta cerca de ${usd(wPeak)}/h. ${w<wPeak?'Todavía estás en el tramo donde un aumento suma horas.':'Ya pasaste ese punto: cada aumento te acerca a trabajar menos.'}`);
+  if(P>0 && H0>=0.5){
+    const Hn=hoursOpt(w,0,ct);
+    msgs.push(`El patrimonio rinde ${usd(V)} por semana. Con el mismo salario, alguien sin patrimonio trabajaría ${nf(Hn,1)} h: la renta te hace ofrecer ${nf(Hn-H0,1)} h menos.`);
+  }
+  $('ls-insight').innerHTML=msgs.map(m=>`<p>${m}</p>`).join('');
+
+  // gráfico consumo-ocio
+  const lA=LT-H0, lB=LT-B.h, lC=LT-H1, VB=B.c-w2*B.h;
+  const top=Math.max(c0,B.c,c1,V+10)*1.7;
+  const L1=[],L2=[],L3=[],I0=[],I1=[];
+  for(let l=0;l<=LT;l+=0.5){
+    L1.push([l,w*(LT-l)+V]); L2.push([l,w2*(LT-l)+V]); L3.push([l,w2*(LT-l)+VB]);
+    I0.push([l,uInv(U0+dis(LT-l),ct)]); I1.push([l,uInv(U1+dis(LT-l),ct)]);
+  }
+  chart($('ls-budget'),{
+    xMin:0,xMax:LT,yMin:0,yMax:top,ml:62,
+    xTicks:[0,20,40,60,80],fx:v=>v+' h',fy:v=>nf(v),
+    xLabel:'horas de ocio por semana',yLabel:'consumo semanal (USD)',
+    series:[{cls:'ic2',pts:I1},{cls:'ic',pts:I0},{cls:'base',pts:L1},{cls:'ss',pts:L3},{cls:'main',pts:L2}],
+    points:[{x:lA,y:c0,label:'A'},{x:lB,y:B.c,label:'B',dx:-20},{x:lC,y:c1,label:'C'}]
+  });
+}
+function clearP(sel){document.querySelectorAll(sel+' .presets .chip').forEach(c=>c.setAttribute('aria-pressed','false'));}
+setupRange('lsW',v=>usd(wOf(v))+'/h',()=>{clearP('#g3');renderG3();});
+setupRange('lsP',v=>usdBig(POf(v)),()=>{clearP('#g3');renderG3();});
+setupRange('lsR',v=>'+'+v+'%',renderG3);
+setupRange('lsC',v=>'USD '+nf(v)+'/sem.',()=>{clearP('#g3');renderG3();});
+document.querySelectorAll('#g3 .presets .chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const p=JSON.parse(btn.dataset.p);
+    setVal('lsW',vOfW(p.w)); setVal('lsP',vOfP(p.P));
+    clearP('#g3'); btn.setAttribute('aria-pressed','true'); renderG3();
+  });
+});
+
+/* =========================================================
+   REPRODUCTOR: utilidades comunes
+   ========================================================= */
+const ICON_PLAY='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>';
+const ICON_PAUSE='<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="1.5" width="3.2" height="11" rx="1" fill="currentColor"/><rect x="8.3" y="1.5" width="3.2" height="11" rx="1" fill="currentColor"/></svg>';
+function makePlayer(pre,L,cfg){
+  const btn=$(pre+'-play'), rst=$(pre+'-reset'), msg=$(pre+'-live');
+  const sp=[...document.querySelectorAll('#'+pre+'-speed button')];
+  function paint(){
+    if(L.playing){btn.innerHTML=ICON_PAUSE+'Pausar';}
+    else if(L.on && !L.ended){btn.innerHTML=ICON_PLAY+'Seguir';}
+    else {btn.innerHTML=ICON_PLAY+'Reproducir';}
+    btn.disabled=!!L.ended;
+    rst.disabled=!L.on;
+    cfg.locked.forEach(id=>{const e=$(id); e.disabled=L.on; e.closest('.ctl').classList.toggle('locked',L.on);});
+    cfg.hidden.forEach(id=>{$(id).closest('.ctl').style.display=L.on?'none':'';});
+    msg.innerHTML=cfg.msg();
+  }
+  function tick(){ cfg.step(); if(L.ended) pause(); cfg.render(); paint(); }
+  function schedule(){ clearInterval(L.timer); L.timer=setInterval(tick,cfg.ms/L.speed); }
+  function play(){ if(!L.on){cfg.init(); L.on=true;} L.playing=true; schedule(); paint(); cfg.render(); }
+  function pause(){ L.playing=false; clearInterval(L.timer); paint(); }
+  function reset(){ pause(); L.on=false; L.ended=false; L.marks=[]; paint(); cfg.render(); }
+  btn.addEventListener('click',()=>{ L.playing?pause():play(); });
+  rst.addEventListener('click',reset);
+  sp.forEach(b=>b.addEventListener('click',()=>{
+    L.speed=+b.dataset.s; sp.forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+    if(L.playing) schedule();
+  }));
+  cfg.live.forEach(([id,name,fmt])=>{
+    $(id).addEventListener('change',()=>{
+      if(!L.on) return;
+      const t=cfg.now(), last=L.marks[L.marks.length-1];
+      let m = last && !last.pol && (t-last.t)<=(cfg.merge||0)+1e-9 ? last : null;
+      if(!m){m={t,parts:{}}; L.marks.push(m);}
+      m.parts[name]=name+' '+fmt(val(id));
+      m.label=Object.values(m.parts).join(', ');
+      cfg.render(); paint();
+    });
+  });
+  paint();
+  return {reset,paint};
+}
+
+/* =========================================================
+   JUEGO 4: desempleo estacionario
+   ========================================================= */
+const UN=60, L0=10000;
+const L4={on:false,playing:false,ended:false,timer:null,speed:1,t:0,E:0,U:0,hist:[],marks:[]};
+const params4=()=>({s:val('uS')/100,h:val('uH')/100,g:val('uG')/100,u0:val('uU0')/100});
+function step4(E,U,p){ return [(E*(1-p.s)+U*p.h)*(1+p.g),(U*(1-p.h)+E*p.s)*(1+p.g)]; }
+function rec4(t,E,U,p){ const L=E+U; return {t,u:U/L,inR:p.s*E/L,outR:p.h*U/L,inN:p.s*E,outN:p.h*U,L,us:p.s/(p.s+p.h)}; }
+function unempPath(p){
+  let E=L0*(1-p.u0), U=L0*p.u0; const out=[];
+  for(let t=0;t<=UN;t++){ out.push(rec4(t,E,U,p)); [E,U]=step4(E,U,p); }
+  return out;
+}
+function personPath(p,start){
+  let q=start; const out=[];
+  for(let t=0;t<=UN;t++){ out.push([t,q*100]); q=q*(1-p.h)+(1-q)*p.s; }
+  return out;
+}
+function drawTank(svg,d,uStar,uMax,fMax,t){
+  const tx=60,ty=48,tw=170,th=150, lvl=Math.min(d.u/uMax,1)*(th-2), ls=Math.min(uStar/uMax,1)*(th-2);
+  const wIn=Math.max(2,d.inR/fMax*34), wOut=Math.max(2,d.outR/fMax*34);
+  let s='';
+  s+=`<rect class="tank" x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="6"/>`;
+  s+=`<rect class="water" x="${tx+1}" y="${ty+th-1-lvl}" width="${tw-2}" height="${lvl}" rx="4"/>`;
+  s+=`<rect class="flow-in" x="${100-wIn/2}" y="18" width="${wIn}" height="${ty-18+th-1-lvl}" opacity=".85"/>`;
+  s+=`<line x1="${tx}" x2="${tx+tw}" y1="${ty+th-1-ls}" y2="${ty+th-1-ls}" stroke="var(--sky)" stroke-width="2" stroke-dasharray="4 4"/>`;
+  s+=`<text class="tank-t" x="${tx+tw+6}" y="${ty+th-1-ls+4}">u*</text>`;
+  s+=`<rect class="flow-out" x="${200-wOut/2}" y="${ty+th}" width="${wOut}" height="34"/>`;
+  s+=`<text class="tank-in" x="${100+wIn/2+8}" y="30">Pierden el empleo: ${pct(d.inR*100)}</text>`;
+  s+=`<text class="tank-out" x="${200-wOut/2-8}" y="${ty+th+26}" text-anchor="end">Consiguen empleo: ${pct(d.outR*100)}</text>`;
+  s+=`<text class="tank-b" x="${tx+12}" y="${ty+22}">Desempleo ${pct(d.u*100)}</text>`;
+  s+=`<text class="tank-t" x="${tx+12}" y="${ty+40}">Período ${t}</text>`;
+  svg.innerHTML=s;
+}
+function tankStatus(now){
+  const st=$('u-status'), diff=now.inR-now.outR;
+  if(Math.abs(diff)<0.0005) st.innerHTML='Entran y salen lo mismo: <strong>el desempleo se queda quieto</strong>.';
+  else if(diff>0) st.innerHTML=`Entran más de los que salen (${nf(Math.round(now.inN))} contra ${nf(Math.round(now.outN))} personas): <strong>el desempleo sube</strong>.`;
+  else st.innerHTML=`Salen más de los que entran (${nf(Math.round(now.outN))} contra ${nf(Math.round(now.inN))} personas): <strong>el desempleo baja</strong>.`;
+}
+function stats4(p,us){
+  $('u-big').textContent=pct(us*100);
+  $('u-dU').textContent=nf(1/p.h,1)+' períodos';
+  $('u-dE').textContent=nf(1/p.s,1)+' períodos';
+  const f=1-p.s-p.h;
+  $('u-half').textContent = f<=0 ? 'menos de 1 período' : nf(Math.log(0.5)/Math.log(f),1)+' períodos';
+  chart($('u-person'),{
+    xMin:0,xMax:UN,yMin:0,yMax:100,
+    xTicks:[0,10,20,30,40,50,60],fx:v=>v,fy:v=>nf(v)+'%',xLabel:'período',
+    hLines:[{y:us*100,cls:'ss'}],
+    series:[{cls:'main',pts:personPath(p,0)},{cls:'bend',pts:personPath(p,1)}]
+  });
+}
+function nowChip4(t,u,us){
+  const nw=$('u-now'); nw.textContent=`Período ${t}: ${pct(u*100)}`;
+  nw.className='delta'+(u>us+0.001?' down':u<us-0.001?' up':'');
+}
+function renderG4(){
+  if(L4.on) return renderG4Live();
+  const p=params4(), t=val('uT');
+  const us=p.s/(p.s+p.h), path=unempPath(p), now=path[t];
+  stats4(p,us); nowChip4(t,now.u,us);
+  $('u-proj-leg').style.display='none';
+  const uArr=path.map(d=>d.u*100), uMax=Math.max(...uArr,us*100);
+  chart($('u-chart'),{
+    xMin:0,xMax:UN,yMin:0,yMax:Math.max(uMax*1.1,1),
+    xTicks:[0,10,20,30,40,50,60],fx:v=>v,fy:v=>nf(v)+'%',xLabel:'período',
+    hLines:[{y:us*100,cls:'ss'}],vLines:[{x:t,cls:'now'}],
+    series:[{cls:'main',pts:uArr.map((u,i)=>[i,u])}],points:[{x:t,y:now.u*100,r:5}]
+  });
+  const fMax=Math.max(...path.flatMap(d=>[d.inR,d.outR]));
+  chart($('u-flows'),{
+    xMin:0,xMax:UN,yMin:0,yMax:fMax*100*1.1,
+    xTicks:[0,10,20,30,40,50,60],fx:v=>v,fy:v=>nf(v,v<10&&v%1?1:0)+'%',xLabel:'período',
+    vLines:[{x:t,cls:'now'}],
+    series:[{cls:'bad',pts:path.map((d,i)=>[i,d.inR*100])},{cls:'good',pts:path.map((d,i)=>[i,d.outR*100])}]
+  });
+  drawTank($('u-tank'),now,us,Math.min(1,Math.max(uMax/100,us)*1.2),fMax,t);
+  tankStatus(now);
+  const msgs=[];
+  msgs.push(`Con s = ${pct(p.s*100)} y h = ${pct(p.h*100)}, el desempleo va hacia <strong>${pct(us*100)}</strong> sin importar desde dónde arranque. Arrancó en ${pct(p.u0*100)} y en el período 10 ya está en ${pct(path[10].u*100)}.`);
+  const sHalf=(p.s/2)/(p.s/2+p.h), hDbl=p.s/(p.s+Math.min(1,p.h*2));
+  msgs.push(`Para comparar: si se despidiera la mitad (s = ${pct(p.s*50)}), u* bajaría a ${pct(sHalf*100)}; si se contratara el doble de rápido (h = ${pct(Math.min(100,p.h*200))}), bajaría a ${pct(hDbl*100)}.`);
+  if(p.g>0){ const last=path[UN]; msgs.push(`La población activa crece ${pct(p.g*100)} por período y pasa de ${nf(L0)} a ${nf(Math.round(last.L))} personas, pero la tasa no cambia: el crecimiento agranda por igual a ocupados y desocupados.`); }
+  msgs.push('Tocá <strong>Reproducir</strong> para verlo en vivo y cambiar s, h o g mientras corre.');
+  $('u-insight').innerHTML=msgs.map(m=>`<p>${m}</p>`).join('');
+}
+function renderG4Live(){
+  const p=params4(), us=p.s/(p.s+p.h), t=L4.t, H=L4.hist, cur=H[H.length-1];
+  stats4(p,us); nowChip4(t,cur.u,us);
+  $('u-proj-leg').style.display='';
+  const xMax=Math.max(UN,t+10);
+  // proyección con los parámetros actuales
+  let E=L4.E,U=L4.U; const proj=[[t,cur.u*100]];
+  for(let k=1;k<=25;k++){ [E,U]=step4(E,U,p); proj.push([t+k,U/(E+U)*100]); }
+  const star=[]; H.forEach(r=>{star.push([r.t,r.us*100]); star.push([r.t+1,r.us*100]);});
+  star.push([t,us*100]); star.push([xMax,us*100]);
+  const all=H.map(r=>r.u*100).concat(proj.map(q=>q[1]),H.map(r=>r.us*100),[us*100]);
+  const ticks=niceTicksX(xMax);
+  const marks=L4.marks.map(m=>({x:m.t,cls:'mark'}));
+  chart($('u-chart'),{
+    xMin:0,xMax,yMin:0,yMax:Math.max(Math.max(...all)*1.1,1),
+    xTicks:ticks,fx:v=>v,fy:v=>nf(v)+'%',xLabel:'período',
+    vLines:marks,
+    series:[{cls:'ss',pts:star},{cls:'base',pts:proj},{cls:'main',pts:H.map(r=>[r.t,r.u*100])}],
+    points:[{x:t,y:cur.u*100,r:5}]
+  });
+  const fMax=Math.max(...H.flatMap(d=>[d.inR,d.outR]),p.s*(1-cur.u),p.h*cur.u,0.001);
+  chart($('u-flows'),{
+    xMin:0,xMax,yMin:0,yMax:fMax*100*1.1,
+    xTicks:ticks,fx:v=>v,fy:v=>nf(v,v<10&&v%1?1:0)+'%',xLabel:'período',
+    vLines:marks,
+    series:[{cls:'bad',pts:H.map(d=>[d.t,d.inR*100])},{cls:'good',pts:H.map(d=>[d.t,d.outR*100])}]
+  });
+  const now=rec4(t,L4.E,L4.U,p);
+  const uMax=Math.max(...H.map(r=>r.u),us,...proj.map(q=>q[1]/100));
+  drawTank($('u-tank'),now,us,Math.min(1,uMax*1.2),fMax,t);
+  tankStatus(now);
+  const msgs=[];
+  const dir = now.u>us+0.0005?'sube hacia':now.u<us-0.0005?'baja hacia':'ya está en';
+  msgs.push(`Período ${t}. El desempleo está en <strong>${pct(now.u*100)}</strong> y ${dir} <strong>${pct(us*100)}</strong>, el u* que corresponde a s = ${pct(p.s*100)} y h = ${pct(p.h*100)}. La línea punteada gris muestra hacia dónde va si no tocás nada.`);
+  if(L4.marks.length){
+    const last=L4.marks[L4.marks.length-1];
+    msgs.push(`Último cambio en el período ${last.t} (${last.label}). El desempleo no salta: se mueve de a poco porque depende de cuánta gente está hoy en cada lado.`);
+  } else msgs.push('Probá subir s (una ola de despidos) y, unos períodos después, volver a bajarla. Mirá cuánto tarda en recuperarse.');
+  $('u-insight').innerHTML=msgs.map(m=>`<p>${m}</p>`).join('');
+}
+setupRange('uS',v=>pct(v),()=>{clearP('#g4');renderG4();});
+setupRange('uH',v=>pct(v,0),()=>{clearP('#g4');renderG4();});
+setupRange('uG',v=>pct(v),()=>{clearP('#g4');renderG4();});
+setupRange('uU0',v=>pct(v,0),()=>{clearP('#g4');renderG4();});
+setupRange('uT',v=>String(v),renderG4);
+const P4=makePlayer('u',L4,{
+  ms:450,
+  locked:['uU0'], hidden:['uT'],
+  live:[['uS','s',v=>pct(v)],['uH','h',v=>pct(v,0)],['uG','g',v=>pct(v)]],
+  now:()=>L4.t,
+  init(){ const p=params4(); L4.E=L0*(1-p.u0); L4.U=L0*p.u0; L4.t=0; L4.hist=[rec4(0,L4.E,L4.U,p)]; L4.marks=[]; L4.ended=false; },
+  step(){ const p=params4(); [L4.E,L4.U]=step4(L4.E,L4.U,p); L4.t++; L4.hist.push(rec4(L4.t,L4.E,L4.U,p)); if(L4.t>=240) L4.ended=true; },
+  render:renderG4,
+  msg:()=> L4.on ? `<strong>En vivo, período ${L4.t}.</strong> Lo que cambies se aplica desde ahora; lo anterior queda como está.` : 'Reproducí para ver el mercado laboral período a período y cambiar las tasas mientras corre.'
+});
+document.querySelectorAll('#g4 .presets .chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(L4.on) P4.reset();
+    const p=JSON.parse(btn.dataset.p);
+    setVal('uS',p.s); setVal('uH',p.h); setVal('uG',p.g); setVal('uU0',p.u0); setVal('uT',0);
+    clearP('#g4'); btn.setAttribute('aria-pressed','true'); renderG4();
+  });
+});
+
+/* =========================================================
+   JUEGO 5: Krugman, primera generación
+   ========================================================= */
+const KM=100, KDT=0.1;
+const L5={on:false,playing:false,ended:false,timer:null,speed:1,t:0,CI:0,R:0,R0:0,attacked:false,T2:null,lost:0,wAtk:0,how:null,jump:0,cepo:false,imf:0,hist:[],per:[],Rint:0,marks:[]};
+function kModel(){
+  const w0=val('kW')/100, g=val('kG')/100, a=val('kA');
+  const CI0=KM*(1-w0);
+  if(g<=0) return {w0,g,a,CI0,Tstar:Infinity,T2:Infinity,CIatk:KM/(1+a*g)};
+  const lg=Math.log(1+g);
+  const Tstar=Math.log(KM/CI0)/lg;
+  const CIatk=KM/(1+a*g);
+  const T2=Math.max(0,Math.log(CIatk/CI0)/lg);
+  return {w0,g,a,CI0,Tstar,T2,CIatk};
+}
+const kCI=(m,t)=>m.CI0*Math.pow(1+m.g,t);
+const kR=(m,t)=> t<m.T2 ? KM-kCI(m,t) : 0;
+const kLoss=(w,g)=> w>0 ? -(1/w-1)*g : -1;
+function niceTicksX(H){ const st=niceStep(H,5); const out=[]; for(let v=0;v<=H+1e-9;v+=st) out.push(+v.toFixed(6)); return out; }
+function kTable(w0,g){
+  const gs=[2,5,10,15,30], ws=[0.33,0.66];
+  const incl = w0>0 && !ws.some(w=>Math.abs(w-w0)<0.005);
+  let tb='<thead><tr><th>Crece el crédito interno (γ)</th>'+ws.map(w=>`<th>ω = ${nf(w*100)}%</th>`).join('')+(incl?`<th class="you">Tu ω = ${nf(w0*100,w0*100%1?1:0)}%</th>`:'')+'</tr></thead><tbody>';
+  const gi=Math.round(g*100);
+  const rows=gs.includes(gi)||gi===0?gs:[...gs,gi].sort((a,b)=>a-b);
+  rows.forEach(gg=>{
+    tb+=`<tr class="${gi===gg?'hit':''}"><td>${gg}%</td>`+ws.map(w=>`<td>${pct(kLoss(w,gg/100)*100,2)}</td>`).join('')+(incl?`<td class="you">${pct(kLoss(w0,gg/100)*100,2)}</td>`:'')+'</tr>';
+  });
+  $('k-table').innerHTML=tb+'</tbody>';
+}
+function renderG5(){
+  if(L5.on) return renderG5Live();
+  paintPolicy(); $('k-par-leg').style.display='none';
+  $('k-big-l').textContent='El ataque especulativo llega en el'; $('k-lost-l').textContent='Reservas que se pierden de golpe en el ataque';
+  const m=kModel(), fin=isFinite(m.T2);
+  $('k-first-l').textContent='Caída de reservas en el primer período';
+  const H=fin?Math.max(8,Math.ceil(Math.max(m.T2,1)*1.5)+2):20;
+  const tEl=$('kT'); tEl.max=H.toFixed(1); if(+tEl.value>H) tEl.value=H; R.kT.upd();
+  const tv=+tEl.value;
+
+  $('k-big').textContent = !fin ? 'nunca' : m.T2<0.05 ? 'período 0' : 'período '+nf(m.T2,1);
+  $('k-tstar').textContent = fin ? `Sin ataque, las reservas llegarían a cero en el período ${nf(m.Tstar,1)}` : 'Con γ = 0 las reservas no se mueven';
+  $('k-tstar').className='delta';
+  $('k-first').textContent=pct(kLoss(m.w0,m.g)*100);
+  $('k-now-l').textContent=`Respaldo ω en el período ${nf(tv,1)}`;
+  $('k-now').textContent = tv>=m.T2 ? '0% (ya colapsó)' : pct(kR(m,tv)/KM*100);
+  $('k-lost').textContent= fin ? pct(Math.max(0,Math.min(KM-m.CIatk, KM-m.CI0))/(KM*m.w0)*100,0)+' de las iniciales' : 'no hay ataque';
+
+  const ciP=[], rP=[];
+  for(let i=0;i<=400;i++){ const t=H*i/400; ciP.push([t,kCI(m,t)]); rP.push([t,kR(m,t)]); }
+  const rWithJump=[]; let jumped=!fin;
+  rP.forEach(p=>{ if(!jumped && p[0]>=m.T2){ rWithJump.push([m.T2,KM-m.CIatk]); rWithJump.push([m.T2,0]); jumped=true; } rWithJump.push(p); });
+  const vl=[{x:tv,cls:'now'}]; if(fin) vl.push({x:m.T2,cls:'zone'});
+  chart($('k-stock'),{
+    xMin:0,xMax:H,yMin:0,yMax:KM*1.08,
+    xTicks:niceTicksX(H),fx:v=>nf(v),fy:v=>nf(v),xLabel:'período',yLabel:'% de la base monetaria inicial',
+    vLines:vl,
+    series:[{cls:'base',pts:[[0,KM],[fin?m.T2:H,KM]]},{cls:'bend',pts:ciP},{cls:'main',pts:rWithJump}],
+    points: tv<m.T2?[{x:tv,y:kR(m,tv),r:5}]:[]
+  });
+
+  const rate=[], flat=[]; let CI=m.CI0;
+  const lastT=fin?Math.floor(m.T2):H;
+  for(let t=0;t<=lastT;t++){
+    const Rt=KM-CI; if(Rt<=0) break;
+    rate.push([t,-Math.max(-100,kLoss(Rt/KM,m.g)*100)]); flat.push([t,-kLoss(m.w0,m.g)*100]);
+    CI*=1+m.g;
+  }
+  const xr=Math.max(1,rate.length-1);
+  chart($('k-rate'),{
+    xMin:0,xMax:xr,yMin:0,yMax:Math.min(100,Math.max(...rate.map(p=>p[1]),1))*1.1,
+    xTicks:niceTicksX(xr),fx:v=>nf(v),fy:v=>'−'+nf(v)+'%',xLabel:'período',
+    series:[{cls:'ss',pts:flat},{cls:'main',pts:rate}],
+    points:rate.map(p=>({x:p[0],y:p[1],r:3.5}))
+  });
+
+  const sh=[], ef=[];
+  for(let i=0;i<=400;i++){ const t=H*i/400, s=(kCI(m,t)/KM)*(1+m.a*m.g)*100; sh.push([t,s]); ef.push([t, t<m.T2?100:s]); }
+  const fxMax=Math.max(...sh.map(p=>p[1]));
+  chart($('k-fx'),{
+    xMin:0,xMax:H,yMin:Math.min(sh[0][1],100)*0.9,yMax:Math.max(fxMax,110)*1.02,
+    xTicks:niceTicksX(H),fx:v=>nf(v),fy:v=>nf(v),xLabel:'período',yLabel:'Ē = 100',
+    vLines:fin?[{x:m.T2,cls:'zone'}]:[],
+    series:[{cls:'base',pts:[[0,100],[H,100]]},{cls:'ss',pts:sh},{cls:'main',pts:ef}],
+    points:fin?[{x:m.T2,y:100,label:'T₂',dy:-12}]:[]
+  });
+  kTable(m.w0,m.g);
+
+  const msgs=[];
+  if(!fin) msgs.push('Con γ = 0 el Banco Central no le presta al Tesoro: el crédito interno no crece, las reservas no se tocan y el tipo de cambio fijo se sostiene indefinidamente.');
+  else if(m.T2<0.05) msgs.push('Con este respaldo y esta emisión, el TC sombra ya está por encima de la paridad: el ataque es inmediato.');
+  else msgs.push(`Con ω = ${pct(m.w0*100,0)} y el crédito interno creciendo ${pct(m.g*100,0)} por período, el primer período se pierde ${pct(-kLoss(m.w0,m.g)*100)} de las reservas. El ataque llega en el período ${nf(m.T2,1)}, ${m.a>0?`${nf(m.Tstar-m.T2,1)} períodos antes de que las reservas se agotaran solas`:'justo cuando se agotan las reservas'}.`);
+  if(fin && rate.length>=3) msgs.push(`Fijate la aceleración: se arranca perdiendo ${pct(rate[0][1])} por período y el último período antes del ataque ya se pierde ${pct(rate[rate.length-1][1])}. γ no cambió; lo que cambió es que ω se achicó.`);
+  if(fin && m.a>0 && m.T2>0.05) msgs.push(`La huida del peso (α = ${nf(m.a,2)}) hace que el mercado ataque cuando todavía queda ${pct((KM-m.CIatk)/KM*100)} de la base en reservas: vender dólares a la paridad fija es una ganancia segura, así que nadie espera a los últimos.`);
+  msgs.push('Tocá <strong>Reproducir</strong> para jugar de ministro: bajá γ mientras corre y fijate si llegás a tiempo.');
+  $('k-insight').innerHTML=msgs.map(x=>`<p>${x}</p>`).join('');
+}
+function proj5(g,a,kap){
+  if(L5.attacked) return null;
+  if(g<=0) return null;
+  const lg=Math.log(1+g);
+  if(L5.cepo){ return L5.t+Math.log(1+L5.R/((1-kap)*L5.CI))/lg; }
+  const target=Math.min(KM/(1+a*g), L5.R+L5.CI);
+  if(L5.CI>=target) return L5.t;
+  return L5.t+Math.log(target/L5.CI)/lg;
+}
+function paintPolicy(){
+  const live=L5.on && !L5.attacked;
+  const cb=$('k-cepo'), ib=$('k-imf');
+  cb.disabled=!live; ib.disabled=!live;
+  const cOn=L5.on&&L5.cepo&&!L5.attacked;
+  cb.setAttribute('aria-pressed', cOn?'true':'false');
+  cb.textContent = cOn ? 'Levantar el control de capitales' : 'Poner control de capitales';
+  $('k-pol-hint').textContent = !L5.on ? 'Se habilitan mientras corre la simulación.' : L5.attacked ? 'Ya no hay reservas que defender.' : 'Aplicalas en el momento que elijas.';
+  const st=[];
+  if(L5.on){
+    if(L5.cepo && !L5.attacked){ const last=L5.hist[L5.hist.length-1]; const br=last&&last.par?last.par-100:0; st.push(`Cepo activo. Brecha con el paralelo: <strong>${pct(Math.max(0,br),0)}</strong>`); }
+    if(L5.imf>0) st.push(`Deuda con el FMI: <strong>${pct(L5.imf,0)} de la base inicial</strong>`);
+  }
+  $('k-pol-status').innerHTML=st.join('<br>');
+}
+function renderG5Live(){
+  const g=val('kG')/100, a=val('kA'), kap=val('kK')/100, t=L5.t, Hs=L5.hist;
+  const M=L5.attacked?L5.CI:L5.R+L5.CI, w=L5.attacked?0:L5.R/M;
+  const xMax=Math.max(12,Math.ceil(t)+4);
+  const ticks=niceTicksX(xMax);
+  const marks=L5.marks.map(m=>({x:m.t,cls:m.pol?'pmark':'mark'}));
+  const proj=proj5(g,a,kap);
+  const lossNow=kLoss(w,g)*(L5.cepo?1-kap:1);
+  $('k-big').textContent = L5.attacked ? 'período '+nf(L5.T2,1) : 'todavía no';
+  $('k-big-l').textContent = L5.attacked && L5.how==='cepo' ? 'El tipo de cambio fijo se cayó en el' : 'El ataque especulativo llega en el';
+  $('k-tstar').textContent = L5.attacked ? (L5.how==='cepo' ? `Salto del tipo de cambio: +${pct(L5.jump,0)}` : `Colapsó con ω = ${pct(L5.wAtk*100)}`)
+    : proj===null ? 'Con γ = 0 las reservas quedan quietas' : L5.cepo ? `Con cepo, las reservas se agotarían en el período ${nf(proj,1)}` : `A este ritmo, el ataque llegaría en el período ${nf(proj,1)}`;
+  $('k-tstar').className='delta'+(L5.attacked?' down':'');
+  $('k-first-l').textContent='Pérdida de reservas por período, al ritmo actual';
+  $('k-first').textContent = L5.attacked ? '—' : pct(lossNow*100);
+  $('k-now-l').textContent=`Respaldo ω ahora (período ${nf(t,1)})`;
+  $('k-now').textContent = L5.attacked ? '0% (ya colapsó)' : pct(w*100);
+  $('k-lost-l').textContent = L5.attacked && L5.how==='cepo' ? 'Reservas al caer el cepo' : 'Reservas que se pierden de golpe en el ataque';
+  $('k-lost').textContent = L5.attacked ? (L5.how==='cepo' ? 'se agotaron' : pct(L5.lost/L5.R0*100,0)+' de las iniciales') : 'todavía nada';
+
+  const vl=marks.slice(); if(L5.attacked) vl.push({x:L5.T2,cls:'zone'});
+  const mAll=Hs.map(h=>h.M);
+  chart($('k-stock'),{
+    xMin:0,xMax,yMin:0,yMax:Math.max(KM,...mAll)*1.08,
+    xTicks:ticks,fx:v=>nf(v),fy:v=>nf(v),xLabel:'período',yLabel:'% de la base monetaria inicial',
+    vLines:vl,
+    series:[{cls:'base',pts:Hs.filter(h=>!h.post).map(h=>[h.t,h.M])},{cls:'bend',pts:Hs.map(h=>[h.t,h.CI])},{cls:'main',pts:Hs.map(h=>[h.t,h.R])}],
+    points: L5.attacked?[]:[{x:t,y:L5.R,r:5}]
+  });
+  chart($('k-rate'),{
+    xMin:0,xMax,yMin:0,yMax:Math.min(100,Math.max(...L5.per.map(p=>p[1]),-lossNow*100,1))*1.1,
+    xTicks:ticks,fx:v=>nf(v),fy:v=>'−'+nf(v)+'%',xLabel:'período',
+    vLines:marks,
+    series:[{cls:'main',pts:L5.per}],
+    points:L5.per.map(p=>({x:p[0],y:p[1],r:3.5}))
+  });
+  const ys=Hs.flatMap(h=>[h.sh,h.E,h.par||100]);
+  $('k-par-leg').style.display = Hs.some(h=>h.par) ? '' : 'none';
+  chart($('k-fx'),{
+    xMin:0,xMax,yMin:Math.min(...ys,100)*0.9,yMax:Math.max(...ys,110)*1.02,
+    xTicks:ticks,fx:v=>nf(v),fy:v=>nf(v),xLabel:'período',yLabel:'Ē = 100',
+    vLines:vl,
+    series:[{cls:'base',pts:[[0,100],[xMax,100]]},{cls:'ss',pts:Hs.map(h=>[h.t,h.sh])},{cls:'bad',pts:Hs.map(h=>[h.t,h.par==null?NaN:h.par])},{cls:'main',pts:Hs.map(h=>[h.t,h.E])}]
+  });
+  kTable(Math.max(w,0),g);
+  paintPolicy();
+
+  const msgs=[];
+  if(L5.attacked){
+    if(L5.how==='cepo') msgs.push(`Las reservas se agotaron con el cepo puesto en el período ${nf(L5.T2,1)}. El tipo de cambio oficial saltó <strong>${pct(L5.jump,0)}</strong> de golpe hasta el nivel del paralelo. A diferencia del ataque sin cepo, acá hay salto: la brecha que se fue acumulando se descarga de una vez.`);
+    else msgs.push(`El ataque llegó en el período ${nf(L5.T2,1)}: cuando el TC sombra alcanzó la paridad, el mercado se llevó de golpe todas las reservas que quedaban (el ${pct(L5.lost/L5.R0*100,0)} de las iniciales). Desde ahí el tipo de cambio flota y sube al ritmo del crédito interno.`);
+    if(L5.imf>0) msgs.push(`El rescate del FMI (${pct(L5.imf,0)} de la base) postergó el final, pero sin bajar γ solo compró tiempo. Y la deuda queda.`);
+    else if(L5.marks.length) msgs.push('Las medidas que tomaste movieron la fecha, pero no alcanzaron. Reiniciá y probá otra combinación.');
+  } else {
+    msgs.push(`Período ${nf(t,1)}. Queda un respaldo de <strong>${pct(w*100)}</strong>. Con γ = ${pct(g*100,0)}, cada período se pierde ${pct(-lossNow*100)} de lo que queda${proj!==null?(L5.cepo?`, y con cepo las reservas se agotarían en el período ${nf(proj,1)}`:`, y el ataque llegaría en el período ${nf(proj,1)}`):''}.`);
+    if(L5.cepo){
+      const last=Hs[Hs.length-1], br=last.par?last.par-100:0;
+      msgs.push(`El control de capitales frena el ${pct(kap*100,0)} de la demanda de dólares: las reservas caen menos (${pct(-lossNow*100)} en lugar de ${pct(-kLoss(w,g)*100)}) y no hay ataque. Pero los pesos que no pueden salir se acumulan. `+(br>=1?`El paralelo ya se despegó: la brecha es de <strong>${pct(br,0)}</strong>. Si levantás el cepo con brecha, el ataque es inmediato.`:'Todavía no hay brecha, pero cuando el TC sombra supere la paridad, el paralelo se va a despegar del oficial.'));
+    }
+    if(L5.imf>0) msgs.push(`El FMI aportó ${pct(L5.imf,0)} de la base en reservas: subió ω y se corrió la fecha. Si γ sigue igual, el drenaje continúa desde un punto más alto.`);
+    if(L5.marks.length){ const lm=L5.marks[L5.marks.length-1]; msgs.push(`Último cambio en el período ${nf(lm.t,1)}: ${lm.label}.`); }
+    if(!L5.cepo && !L5.imf) msgs.push(g===0 ? 'Cortaste la emisión: las reservas dejan de caer. Pero quedaron en el nivel al que llegaron; si volvés a emitir, arrancás desde un respaldo más bajo.' : 'Probá las medidas del panel: control de capitales, rescate del FMI o bajar γ. Fijate cuál frena el drenaje y cuál solo lo posterga.');
+  }
+  $('k-insight').innerHTML=msgs.map(x=>`<p>${x}</p>`).join('');
+}
+setupRange('kW',v=>v+'%',()=>{clearP('#g5');renderG5();});
+setupRange('kG',v=>v+'%',()=>{clearP('#g5');renderG5();});
+setupRange('kA',v=>nf(v,2),()=>{clearP('#g5');renderG5();});
+setupRange('kT',v=>nf(v,1),renderG5);
+setupRange('kK',v=>v+'%',renderG5);
+setupRange('kF',v=>v+'%',()=>{});
+function k5record(extra){
+  const g=val('kG')/100, a=val('kA');
+  const sh=(L5.CI/KM)*(1+a*g)*100;
+  const M=L5.attacked?L5.CI:L5.R+L5.CI;
+  L5.hist.push(Object.assign({t:L5.t,CI:L5.CI,R:L5.R,M,sh,E:L5.attacked?sh:100,par:(L5.cepo&&!L5.attacked)?Math.max(100,sh):null,post:L5.attacked},extra||{}));
+}
+const P5=makePlayer('k',L5,{
+  ms:100,
+  locked:['kW'], hidden:['kT'], merge:1,
+  live:[['kG','γ',v=>v+'%'],['kA','α',v=>nf(v,2)],['kK','κ',v=>v+'%']],
+  now:()=>Math.round(L5.t*10)/10,
+  init(){
+    const w0=val('kW')/100;
+    Object.assign(L5,{t:0,CI:KM*(1-w0),R:KM*w0,R0:KM*w0,attacked:false,T2:null,lost:0,wAtk:0,how:null,jump:0,cepo:false,imf:0,hist:[],per:[],marks:[],ended:false});
+    L5.Rint=L5.R; k5record();
+  },
+  step(){
+    const g=val('kG')/100, a=val('kA'), kap=val('kK')/100;
+    const tPrev=L5.t;
+    L5.t=Math.round((L5.t+KDT)*10)/10;
+    const dCI=L5.CI*(Math.pow(1+g,KDT)-1);
+    L5.CI+=dCI;
+    if(!L5.attacked){
+      L5.R-= L5.cepo ? (1-kap)*dCI : dCI;
+      const sh=(L5.CI/KM)*(1+a*g);
+      if(!L5.cepo && (sh>=1 || L5.R<=0)){
+        const M=Math.max(0,L5.R)+L5.CI;
+        L5.hist.push({t:L5.t,CI:L5.CI,R:Math.max(0,L5.R),M,sh:sh*100,E:100,par:null,post:false});
+        L5.attacked=true; L5.how='ataque'; L5.T2=L5.t; L5.lost=Math.max(0,L5.R); L5.wAtk=Math.max(0,L5.R)/M; L5.R=0;
+      } else if(L5.cepo && L5.R<=0){
+        L5.hist.push({t:L5.t,CI:L5.CI,R:0,M:L5.CI,sh:sh*100,E:100,par:Math.max(100,sh*100),post:false});
+        L5.attacked=true; L5.how='cepo'; L5.T2=L5.t; L5.lost=0; L5.wAtk=0; L5.R=0; L5.jump=Math.max(0,sh*100-100);
+      }
+    }
+    if(Math.floor(L5.t+1e-9)>Math.floor(tPrev+1e-9) && L5.Rint>0){
+      const loss=(L5.Rint-L5.R)/L5.Rint*100;
+      L5.per.push([Math.floor(L5.t+1e-9)-1,Math.max(0,Math.min(100,loss))]);
+      L5.Rint=L5.R;
+    }
+    k5record();
+    if((L5.attacked && L5.t>=L5.T2+6) || L5.t>=150) L5.ended=true;
+  },
+  render:renderG5,
+  msg:()=> L5.ended ? '<strong>Terminó la simulación.</strong> Reiniciá para volver a jugar.' : L5.on ? `<strong>En vivo, período ${nf(L5.t,1)}.</strong> Cambiá γ o α, o usá las medidas de política: se aplican desde ahora.` : 'Reproducí para ver el drenaje en vivo y jugar de ministro de Economía: emisión, control de capitales y rescate del FMI.'
+});
+$('k-cepo').addEventListener('click',()=>{
+  if(!L5.on||L5.attacked) return;
+  L5.cepo=!L5.cepo;
+  L5.marks.push({t:P5now(),pol:true,label:L5.cepo?'control de capitales':'se levanta el cepo'});
+  renderG5(); P5.paint();
+});
+$('k-imf').addEventListener('click',()=>{
+  if(!L5.on||L5.attacked) return;
+  const X=Math.min(val('kF'),L5.CI);
+  L5.R+=X; L5.CI-=X; L5.imf+=X; L5.Rint+=X;
+  L5.marks.push({t:P5now(),pol:true,label:`rescate del FMI por ${pct(X,0)} de la base`});
+  const last=L5.hist[L5.hist.length-1]; if(last){ last.R=L5.R; last.CI=L5.CI; }
+  renderG5(); P5.paint();
+});
+function P5now(){ return Math.round(L5.t*10)/10; }
+document.querySelectorAll('#g5 .presets .chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(L5.on) P5.reset();
+    const p=JSON.parse(btn.dataset.p);
+    setVal('kW',p.w); setVal('kG',p.g); setVal('kA',p.a); setVal('kT',0);
+    clearP('#g5'); btn.setAttribute('aria-pressed','true'); renderG5();
+  });
+});
+// pausar si se cambia de encuentro
+document.querySelectorAll('[role=tab]').forEach(t=>t.addEventListener('click',()=>{ if(L4.playing) $('u-play').click(); if(L5.playing) $('k-play').click(); }));
+
+/* =========================================================
+   JUEGO 6: sostenibilidad de la deuda pública
+   ========================================================= */
+const DY=30, DCAP=300;
+const L6={on:false,playing:false,ended:false,timer:null,speed:1,t:0,d:0,hist:[],marks:[]};
+const params6=()=>({d0:val('dD0'),r:val('dR'),g:val('dG'),sp:val('dSP')});
+const stepD=(d,p)=> Math.max(-50,d+(p.r-p.g)/100*d-p.sp);
+function pathD(d0,p,n){ const out=[[0,d0]]; let d=d0; for(let t=1;t<=n;t++){ d=stepD(d,p); out.push([t,d]); } return out; }
+const pp = v => { const r=Math.round(v*10)/10; return (r>0?'+':r<0?'−':'')+nf(Math.abs(r),1)+' p.p.'; };
+const spTxt = v => Math.abs(v)<0.05 ? 'equilibrio (0%)' : (v>0?'superávit de ':'déficit de ')+pctPBI(Math.abs(v));
+const pctPBI = v => pct(v)+' del PBI';
+function evalD(d,p,tag){
+  const rg=p.r-p.g, need=rg*d/100;
+  $('d-big').textContent=pctPBI(Math.abs(need));
+  if(!tag) $('d-big-l').textContent = need<-0.05 ? 'Déficit primario que se puede tolerar sin que la deuda/PBI suba' : 'Superávit primario necesario para que la deuda/PBI no se mueva';
+  const dd=rg/100*d-p.sp;
+  const chip=$('d-chip');
+  if(Math.abs(dd)<0.05){chip.textContent='La deuda/PBI se mantiene';chip.className='delta';}
+  else if(dd>0){chip.textContent=`La deuda/PBI sube ${nf(dd,1)} p.p. por año`;chip.className='delta down';}
+  else {chip.textContent=`La deuda/PBI baja ${nf(-dd,1)} p.p. por año`;chip.className='delta up';}
+  $('d-fin').textContent=pctPBI(p.r/100*d-p.sp);
+  // solvencia
+  const so=$('d-solv');
+  if(p.sp>0){so.className='pill ok';so.innerHTML=`Solvencia: no hay Ponzi<small>El superávit primario paga parte de los intereses: la deuda crece más despacio que la tasa r.</small>`;}
+  else if(rg<0){so.className='pill warn';so.innerHTML=`Solvencia: técnicamente Ponzi, pero tolerable<small>Todos los intereses se pagan con deuda nueva, aunque como la economía crece más rápido que la tasa (r &lt; g), la deuda pesa cada vez menos.</small>`;}
+  else {so.className='pill bad';so.innerHTML=`Solvencia: esquema Ponzi<small>Todos los intereses${p.sp<0?' y el déficit primario':''} se pagan con deuda nueva: la deuda crece al ritmo de r o más rápido.</small>`;}
+  // sostenibilidad
+  const su=$('d-sost'), gap=p.sp-need;
+  if(gap>=-0.05){
+    su.className='pill ok';
+    su.innerHTML = gap<0.05 ? 'Sostenible: la deuda/PBI queda quieta<small>El superávit alcanza justo para compensar (r − g)·d.</small>'
+      : `Sostenible: la deuda/PBI baja<small>El resultado primario supera en ${nf(gap,1)} p.p. del PBI al que la estabiliza.</small>`;
+  } else if(rg<0){
+    const ds=p.sp/(rg/100);
+    su.className = ds<=100 ? 'pill warn' : 'pill bad';
+    su.innerHTML=`La deuda/PBI sube, pero se frena<small>Con r &lt; g converge a ${pct(ds,0)} del PBI: ahí el crecimiento compensa el déficit.</small>`;
+  } else if(rg===0){
+    su.className='pill bad'; su.innerHTML=`No sostenible: la deuda/PBI sube sin freno<small>Con r = g, el déficit primario se suma a la deuda año tras año.</small>`;
+  } else {
+    su.className='pill bad'; su.innerHTML=`No sostenible: bola de nieve<small>Faltan ${nf(-gap,1)} p.p. de superávit. Con r &gt; g, cada año que pasa la deuda es más alta y el ajuste necesario, más grande.</small>`;
+  }
+  // descomposición
+  $('d-dec-t').textContent = tag ? `¿Qué mueve la deuda ${tag}?` : '¿Qué mueve la deuda este año?';
+  const rows=[['Intereses (r·d)',p.r/100*d],['Crecimiento (−g·d)',-p.g/100*d],['Resultado primario (−SP/Q)',-p.sp],['Cambio de la deuda/PBI',dd]];
+  bars($('d-decomp'),rows,pp,Math.max(1,...rows.map(x=>Math.abs(x[1]))));
+  // gráfico de necesidad
+  const xm=Math.max(150,Math.ceil(d/25)*25);
+  const line=[[0,0],[xm,rg*xm/100]];
+  const ymin=Math.min(0,rg*xm/100,p.sp,-1), ymax=Math.max(0,rg*xm/100,p.sp,1);
+  chart($('d-need'),{
+    xMin:0,xMax:xm,yMin:ymin*1.1,yMax:ymax*1.1,
+    xTicks:niceTicksX(xm),fx:v=>nf(v)+'%',fy:v=>nf(v,Math.abs(v)<10&&v%1?1:0)+'%',xLabel:'deuda/PBI',yLabel:'resultado primario (% del PBI)',
+    hLines:[{y:p.sp,cls:'ss'}],
+    series:[{cls:'main',pts:line}],
+    points:[{x:Math.min(d,xm),y:p.sp,label:'hoy'}]
+  });
+  $('d-need-cap').innerHTML = gap>=0.05 ? `Tu punto está <strong>por encima</strong> de la línea: el resultado primario supera lo necesario y la deuda/PBI baja.`
+    : gap<=-0.05 ? `Tu punto está <strong>por debajo</strong> de la línea: el resultado primario no alcanza y la deuda/PBI sube.${rg>0?' Como la línea tiene pendiente positiva (r > g), cuanto más sube la deuda, más lejos queda.':''}`
+    : 'Tu punto está sobre la línea: la deuda/PBI queda quieta.';
+  return {need,gap,rg,dd};
+}
+function renderG6(){
+  if(L6.on) return renderG6Live();
+  const p=params6(), path=pathD(p.d0,p,DY), e=evalD(p.d0,p,'');
+  $('d-big-l').textContent='Superávit primario necesario para que la deuda/PBI no se mueva';
+  $('d-proj-leg').style.display='none';
+  $('d-10-l').textContent='Deuda/PBI en 10 años'; $('d-30-l').textContent='Deuda/PBI en 30 años';
+  $('d-10').textContent=path[10][1]>DCAP?'más de 300%':pct(path[10][1],0);
+  $('d-30').textContent=path[30][1]>DCAP?'más de 300%':pct(path[30][1],0);
+  const ys=path.map(q=>q[1]).concat([p.d0]);
+  chart($('d-chart'),{
+    xMin:0,xMax:DY,yMin:Math.min(0,...ys),yMax:Math.min(DCAP,Math.max(...ys,10)*1.08),
+    xTicks:[0,5,10,15,20,25,30],fx:v=>'año '+v,fy:v=>nf(v)+'%',
+    series:[{cls:'ss',pts:[[0,p.d0],[DY,p.d0]]},{cls:'main',pts:path}],
+    points:[{x:0,y:p.d0,r:5}]
+  });
+  const msgs=[];
+  const cross=path.find(q=>q[1]>=100);
+  msgs.push(`Con r = ${pct(p.r)} y g = ${pct(p.g)}, la brecha r − g es de ${pp(e.rg)}, y con una deuda de ${pct(p.d0,0)} del PBI `+(e.need>=0?`hace falta un superávit primario de <strong>${pctPBI(e.need)}</strong> todos los años para que no crezca.`:`se puede tener un déficit primario de hasta <strong>${pctPBI(-e.need)}</strong> y la deuda/PBI igual no crece.`)+` Hoy hay ${spTxt(p.sp)}.`);
+  if(e.gap<-0.05 && e.rg>0) msgs.push(`Es la bola de nieve: en 30 años la deuda pasa de ${pct(p.d0,0)} a ${path[30][1]>DCAP?'más de 300%':pct(path[30][1],0)} del PBI${cross&&p.d0<100?`, y supera el 100% en el año ${cross[0]}`:''}. Cuanto más se tarde en ajustar, más grande tiene que ser el superávit.`);
+  else if(e.rg<0 && p.sp<0) msgs.push('Con r < g el crecimiento trabaja a favor: aun con déficit primario, la deuda/PBI no se dispara, porque la economía crece más rápido de lo que se acumulan los intereses.');
+  msgs.push('Tocá <strong>Reproducir</strong> para verla año a año y hacer el ajuste (o no) mientras corre.');
+  $('d-insight').innerHTML=msgs.map(m=>`<p>${m}</p>`).join('');
+}
+function renderG6Live(){
+  const p=params6(), t=L6.t, H=L6.hist, d=L6.d;
+  const e=evalD(d,p,`en el año ${t}`);
+  $('d-big-l').textContent= e.need<-0.05 ? `Déficit primario tolerable hoy (año ${t}) sin que la deuda/PBI suba` : `Superávit primario necesario hoy (año ${t}) para frenar la deuda`;
+  $('d-proj-leg').style.display='';
+  const proj=pathD(d,p,Math.max(10,DY-t)).map(q=>[q[0]+t,q[1]]);
+  const p10=proj.find(q=>q[0]===t+10);
+  $('d-10-l').textContent=`Deuda/PBI hoy (año ${t})`; $('d-10').textContent=pct(d,0);
+  $('d-30-l').textContent=`En 10 años, si no tocás nada`; $('d-30').textContent=p10[1]>DCAP?'más de 300%':pct(p10[1],0);
+  const xMax=Math.max(DY,t+10);
+  const ys=H.map(q=>q.d).concat(proj.map(q=>q[1]));
+  chart($('d-chart'),{
+    xMin:0,xMax,yMin:Math.min(0,...ys),yMax:Math.min(DCAP,Math.max(...ys,10)*1.08),
+    xTicks:niceTicksX(xMax),fx:v=>'año '+v,fy:v=>nf(v)+'%',
+    vLines:L6.marks.map(m=>({x:m.t,cls:'mark'})),
+    series:[{cls:'ss',pts:[[t,d],[xMax,d]]},{cls:'base',pts:proj},{cls:'main',pts:H.map(q=>[q.t,q.d])}],
+    points:[{x:t,y:d,r:5}]
+  });
+  const d0=H[0].d, msgs=[];
+  msgs.push(`Año ${t}. La deuda está en <strong>${pct(d,0)} del PBI</strong> (arrancó en ${pct(d0,0)}). `+(e.need>=0?`Para frenarla hoy hace falta un superávit de ${pctPBI(e.need)}`:`Hoy se tolera un déficit de hasta ${pctPBI(-e.need)}`)+`; ahora hay ${spTxt(p.sp)}.`);
+  if(e.rg>0 && d>d0+1) msgs.push(`Fijate que al arrancar alcanzaba con un superávit de ${pctPBI(e.rg*d0/100)}: la demora encareció el ajuste en ${nf(e.rg*(d-d0)/100,1)} p.p. del PBI por año.`);
+  if(L6.marks.length){ const lm=L6.marks[L6.marks.length-1]; msgs.push(`Último cambio en el año ${lm.t}: ${lm.label}.`); }
+  $('d-insight').innerHTML=msgs.map(m=>`<p>${m}</p>`).join('');
+}
+setupRange('dD0',v=>pct(v,0)+' del PBI',()=>{clearP('#g6');renderG6();});
+setupRange('dR',v=>pct(v),()=>{clearP('#g6');renderG6();});
+setupRange('dG',v=>pct(v),()=>{clearP('#g6');renderG6();});
+setupRange('dSP',v=>(v>0?'superávit ':v<0?'déficit ':'')+pct(Math.abs(v)),()=>{clearP('#g6');renderG6();});
+const P6=makePlayer('d',L6,{
+  ms:600,
+  locked:['dD0'], hidden:[],
+  live:[['dR','r',v=>pct(v)],['dG','g',v=>pct(v)],['dSP','SP/Q',v=>pct(v)]],
+  now:()=>L6.t,
+  init(){ const p=params6(); Object.assign(L6,{t:0,d:p.d0,hist:[{t:0,d:p.d0}],marks:[],ended:false}); },
+  step(){ const p=params6(); L6.d=stepD(L6.d,p); L6.t++; L6.hist.push({t:L6.t,d:L6.d}); if(L6.t>=100||L6.d>DCAP) L6.ended=true; },
+  render:renderG6,
+  msg:()=> L6.ended ? '<strong>Terminó la simulación.</strong> Reiniciá para volver a jugar.' : L6.on ? `<strong>En vivo, año ${L6.t}.</strong> Cambiá r, g o el resultado primario: se aplican desde este año.` : 'Reproducí para ver la deuda año a año y decidir cuándo ajustar.'
+});
+document.querySelectorAll('#g6 .presets .chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(L6.on) P6.reset();
+    const p=JSON.parse(btn.dataset.p);
+    setVal('dD0',p.d); setVal('dR',p.r); setVal('dG',p.g); setVal('dSP',p.sp);
+    clearP('#g6'); btn.setAttribute('aria-pressed','true'); renderG6();
+  });
+});
+document.querySelectorAll('[role=tab]').forEach(t=>t.addEventListener('click',()=>{ if(L6.playing) $('d-play').click(); }));
+
+/* =========================================================
+   JUEGO 7: teoría cuantitativa del dinero
+   ========================================================= */
+function renderG7(){
+  const m=val('qM')/100, v=val('qV')/100, y=val('qY')/100;
+  const pi=(1+m)*(1+v)/(1+y)-1, approx=m+v-y;
+  $('q-big').textContent=pct(pi*100, Math.abs(pi)<0.1?1:0);
+  $('q-month').textContent = pi>-1 ? `Equivale a ${pct((Math.pow(1+pi,1/12)-1)*100,1)} por mes` : '';
+  $('q-month').className='delta'+(pi>0.5?' down':pi<=0.05?' up':'');
+  bars($('q-decomp'),[['Emisión (+m)',m*100],['Velocidad (+v)',v*100],['Crecimiento (−y)',-y*100],['Inflación aproximada',approx*100],['Inflación exacta',pi*100]],
+    c=>(c>0?'+':c<0?'−':'')+nf(Math.abs(c),Math.abs(c)<10?1:0)+'%', Math.max(10,Math.abs(m*100),Math.abs(v*100),Math.abs(y*100),Math.abs(pi*100)));
+  const P=[],Mm=[],Y=[];
+  for(let t=0;t<=5;t+=0.1){ P.push([t,Math.log10(100*Math.pow(1+pi,t))]); Mm.push([t,Math.log10(100*Math.pow(1+m,t))]); Y.push([t,Math.log10(100*Math.pow(1+y,t))]); }
+  const all=[...P,...Mm,...Y].map(q=>q[1]);
+  const lo=Math.floor(Math.min(...all)*2)/2, hi=Math.max(Math.ceil(Math.max(...all)*2)/2,lo+0.5);
+  const cand=[10,20,50,100,200,500,1000,2000,5000,1e4,2e4,5e4,1e5,2e5,5e5,1e6,2e6,5e6,1e7,1e8,1e9];
+  let ticks=cand.map(Math.log10).filter(t=>t>=lo-1e-9&&t<=hi+1e-9);
+  if(ticks.length>7) ticks=ticks.filter(t=>Math.abs(t-Math.round(t))<1e-9);
+  chart($('q-chart'),{
+    xMin:0,xMax:5,yMin:lo,yMax:hi,yTicks:ticks,ml:64,
+    xTicks:[0,1,2,3,4,5],fx:v=>'año '+v,fy:v=>nf(Math.round(Math.pow(10,v))),
+    series:[{cls:'base',pts:Y},{cls:'ss',pts:Mm},{cls:'main',pts:P}]
+  });
+  const msgs=[];
+  const P5=Math.pow(1+pi,5);
+  msgs.push(`Con el dinero creciendo ${pct(m*100,0)} por año, ${Math.abs(v)<0.005?'la velocidad estable':`la velocidad ${v>0?'subiendo':'bajando'} ${pct(Math.abs(v)*100,0)}`} y la economía ${y>=0?'creciendo':'cayendo'} ${pct(Math.abs(y)*100,1)}, los precios suben ${pct(pi*100,Math.abs(pi)<0.1?1:0)} por año. En cinco años, lo que hoy cuesta 100 va a costar ${nf(Math.round(100*P5))}.`);
+  if(Math.abs(pi-approx)>0.05) msgs.push(`La aproximación m + v − y da ${pct(approx*100,0)}, pero la exacta es ${pct(pi*100,0)}: con tasas altas los efectos se multiplican, no se suman.`);
+  if(v>0.05) msgs.push('La suba de la velocidad es la huida del peso: nadie quiere quedarse con dinero que pierde valor, y ese apuro agrega inflación sin que se emita un peso más.');
+  if(Math.abs(pi)<0.02) msgs.push('Precios casi estables: el dinero crece más o menos lo mismo que la producción, y la economía lo absorbe.');
+  $('q-insight').innerHTML=msgs.map(x=>`<p>${x}</p>`).join('');
+}
+setupRange('qM',v=>v+'% anual',()=>{clearP('#g7');renderG7();});
+setupRange('qV',v=>(v>0?'+':'')+v+'%',()=>{clearP('#g7');renderG7();});
+setupRange('qY',v=>(v>0?'+':'')+nf(v,1)+'%',()=>{clearP('#g7');renderG7();});
+document.querySelectorAll('#g7 .presets .chip').forEach(btn=>btn.addEventListener('click',()=>{
+  const p=JSON.parse(btn.dataset.p); setVal('qM',p.m); setVal('qV',p.v); setVal('qY',p.y);
+  clearP('#g7'); btn.setAttribute('aria-pressed','true'); renderG7();
+}));
+
+/* =========================================================
+   JUEGO 8: multiplicador monetario
+   ========================================================= */
+function renderG8(){
+  const B=val('mB'), c=val('mC'), r=val('mR')/100;
+  const mult=(1+c)/(c+r), M=mult*B, D=M/(1+c), C=c*D, Rv=r*D, Lo=D-Rv;
+  $('m-big').textContent=nf(mult,2);
+  $('m-M').textContent=`Dinero total: ${nf(M,0)} (con una base de ${nf(B)})`;
+  const seg=(parts,tot)=>parts.map(([lab,val,cls])=>`<span class="${cls}" style="flex:${Math.max(val,0.0001)} 1 0" title="${lab}: ${nf(val,0)}">${val/tot>0.12?`${lab} ${nf(val,0)}`:''}</span>`).join('');
+  $('m-stack').innerHTML=`
+    <div class="srow"><span class="sl">Base (B)</span><div class="sbar" style="width:${B/M*100}%">${seg([['Efectivo',C,'s1'],['Reservas',Rv,'s2']],B)}</div><span class="sv">${nf(B,0)}</span></div>
+    <div class="srow"><span class="sl">Dinero (M)</span><div class="sbar" style="width:100%">${seg([['Efectivo',C,'s1'],['Depósitos',D,'s3']],M)}</div><span class="sv">${nf(M,0)}</span></div>
+    <div class="srow"><span class="sl">Depósitos</span><div class="sbar" style="width:${D/M*100}%">${seg([['Reservas',Rv,'s2'],['Préstamos',Lo,'s4']],D)}</div><span class="sv">${nf(D,0)}</span></div>
+    <div class="slegend"><span><i class="s1"></i>Efectivo en manos del público</span><span><i class="s2"></i>Reservas de los bancos (encaje)</span><span><i class="s3"></i>Depósitos</span><span><i class="s4"></i>Préstamos</span></div>`;
+  const q=(1-r)/(1+c), N=Math.min(40,Math.max(8,Math.ceil(Math.log(0.01)/Math.log(Math.max(q,1e-6)))));
+  const pts=[]; for(let k=0;k<=N;k++) pts.push([k+1,B*(1-Math.pow(q,k+1))/(1-q)]);
+  chart($('m-chart'),{
+    xMin:1,xMax:N+1,yMin:0,yMax:M*1.08,
+    xTicks:niceTicksX(N+1).filter(v=>v>=1),fx:v=>nf(v),fy:v=>nf(v),xLabel:'vuelta',
+    hLines:[{y:M,cls:'ss'}],
+    series:[{cls:'main',pts}],points:pts.slice(0,Math.min(pts.length,12)).map(p=>({x:p[0],y:p[1],r:3.5}))
+  });
+  const k90=pts.findIndex(p=>p[1]>=0.9*M)+1;
+  const msgs=[];
+  msgs.push(`Cada peso de base termina convertido en <strong>${nf(mult,2)} pesos de dinero</strong>. Con una base de ${nf(B)}, hay ${nf(C,0)} de efectivo y ${nf(D,0)} de depósitos; los bancos prestan ${nf(Lo,0)} y guardan ${nf(Rv,0)} como encaje. A la vuelta ${k90} ya se creó el 90% del total.`);
+  if(c>=1) msgs.push('La gente prefiere el efectivo: gran parte de la base se queda fuera de los bancos y la cadena de préstamos se corta enseguida. Por eso, con desconfianza en el sistema, la misma emisión crea mucho menos dinero.');
+  if(r>=0.99) msgs.push('Con encaje del 100% los bancos no prestan nada: solo guardan. El dinero es igual a la base y el multiplicador vale 1.');
+  $('m-insight').innerHTML=msgs.map(x=>`<p>${x}</p>`).join('');
+}
+setupRange('mB',v=>nf(v),()=>{clearP('#g8');renderG8();});
+setupRange('mC',v=>nf(v,2),()=>{clearP('#g8');renderG8();});
+setupRange('mR',v=>v+'%',()=>{clearP('#g8');renderG8();});
+document.querySelectorAll('#g8 .presets .chip').forEach(btn=>btn.addEventListener('click',()=>{
+  const p=JSON.parse(btn.dataset.p); setVal('mB',p.b); setVal('mC',p.c); setVal('mR',p.r);
+  clearP('#g8'); btn.setAttribute('aria-pressed','true'); renderG8();
+}));
+
+/* =========================================================
+   JUEGO 9: inflación por canasta
+   ========================================================= */
+const RUBROS=[
+  ['Alimentos y bebidas no alcohólicas',26.9,30],
+  ['Bebidas alcohólicas y tabaco',3.5,6],
+  ['Prendas de vestir y calzado',9.9,1],
+  ['Vivienda, agua, electricidad y gas',9.4,2],
+  ['Equipamiento y mantenimiento del hogar',6.4,2],
+  ['Salud',8.0,2],
+  ['Transporte',11.0,25],
+  ['Comunicación',2.8,1],
+  ['Recreación y cultura',7.3,3],
+  ['Educación',2.3,1],
+  ['Restaurantes y hoteles',9.0,6],
+  ['Bienes y servicios varios',3.5,4]
+];
+const PERFILES={
+  indec:RUBROS.map(r=>r[1]),
+  est:[20,2,5,30,2,3,12,6,6,8,4,2],
+  jub:[32,2,4,18,5,20,5,4,4,0,3,3],
+  fam:[30,2,10,14,6,8,10,4,5,7,2,2],
+  pro:[15,4,7,20,3,7,14,5,10,2,11,2]
+};
+const MESES={
+  base:[2.0,1.8,1.5,3.5,1.6,2.4,2.2,2.5,1.6,2.0,2.6,2.0],
+  tar:[1.8,1.5,1.2,12.0,1.4,2.2,6.0,2.5,1.4,1.5,2.2,1.8],
+  ali:[6.0,2.5,1.2,2.0,1.4,2.0,1.8,1.5,1.4,1.5,3.5,1.8],
+  par:Array(12).fill(2.5)
+};
+(function buildBasket(){
+  let h='<div class="brow bhead"><span>Rubro</span><span>INDEC</span><span>Tu peso</span><span>Aumento del mes</span></div>';
+  RUBROS.forEach((r,i)=>{
+    h+=`<div class="brow"><span class="nm">${r[0]}</span><span class="iw">${nf(r[1],1)}%</span>
+      <span class="cell"><input type="range" id="ipw${i}" min="0" max="50" step="1" value="${PERFILES.est[i]}" aria-label="Tu peso en ${r[0]}"><output id="ipw${i}-o"></output></span>
+      <span class="cell"><input type="range" id="ipp${i}" min="-3" max="15" step="0.1" value="${MESES.base[i]}" aria-label="Aumento del mes en ${r[0]}"><output id="ipp${i}-o"></output></span></div>`;
+  });
+  $('ip-basket').innerHTML=h;
+})();
+function ipWeights(){ const raw=RUBROS.map((r,i)=>val('ipw'+i)); const s=raw.reduce((a,b)=>a+b,0)||1; return raw.map(x=>x/s*100); }
+function renderG9(){
+  const wu=ipWeights(), wi=RUBROS.map(r=>r[1]), fq=RUBROS.map(r=>r[2]);
+  const fs=fq.reduce((a,b)=>a+b,0);
+  const pr=RUBROS.map((r,i)=>val('ipp'+i));
+  RUBROS.forEach((r,i)=>{ $('ipw'+i+'-o').textContent=nf(wu[i],0)+'%'; });
+  const piI=wi.reduce((a,w,i)=>a+w*pr[i],0)/100, piU=wu.reduce((a,w,i)=>a+w*pr[i],0)/100, piF=fq.reduce((a,w,i)=>a+w*pr[i],0)/fs;
+  const ann=p=>'anualizada: '+pct((Math.pow(1+p/100,12)-1)*100,0);
+  $('ip-i').textContent=pct(piI,2); $('ip-i-a').textContent=ann(piI);
+  $('ip-u').textContent=pct(piU,2); $('ip-u-a').textContent=ann(piU);
+  $('ip-f').textContent=pct(piF,2); $('ip-f-a').textContent=ann(piF);
+  const contrib=RUBROS.map((r,i)=>[r[0],(wu[i]-wi[i])/100*(pr[i]-piI)]);
+  const sorted=[...contrib].sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]));
+  const top=sorted.slice(0,5), rest=sorted.slice(5).reduce((a,b)=>a+b[1],0);
+  const rows=top.map(x=>[x[0].split(',')[0].replace(' y bebidas no alcohólicas','').replace(' y mantenimiento del hogar',''),x[1]]);
+  rows.push(['Resto de los rubros',rest]); rows.push(['Diferencia total',piU-piI]);
+  bars($('ip-decomp'),rows,c=>{const r=Math.round(c*100)/100; return (r>0?'+':r<0?'−':'')+nf(Math.abs(r),2)+' p.p.';},Math.max(0.2,...rows.map(x=>Math.abs(x[1]))));
+  const d=piU-piI, msgs=[];
+  if(Math.abs(d)<0.01) msgs.push('Tu inflación coincide con la oficial: o tu canasta se parece a la promedio, o todos los rubros subieron parecido.');
+  else {
+    const k=sorted[0], i=RUBROS.findIndex(r=>r[0]===k[0]);
+    msgs.push(`Tu inflación del mes es <strong>${nf(Math.abs(d),2)} puntos ${d>0?'más alta':'más baja'}</strong> que la del INDEC. Lo que más pesa es ${k[0].toLowerCase()}: en tu canasta representa ${nf(wu[i],0)}% contra ${nf(wi[i],1)}% en la oficial, y este mes subió ${pct(pr[i],1)}, ${pr[i]>piI?'por encima':'por debajo'} del promedio.`);
+    const aI=(Math.pow(1+piI/100,12)-1)*100, aU=(Math.pow(1+piU/100,12)-1)*100;
+    msgs.push(`Si esa diferencia se repitiera todo el año, sería ${pct(aU,0)} contra ${pct(aI,0)}: ${nf(Math.abs(aU-aI),1)} puntos de brecha entre tu costo de vida y el índice que ajusta salarios, jubilaciones y alquileres.`);
+  }
+  if(Math.abs(piF-piI)>=0.1) msgs.push(`Y la que “se siente” da ${pct(piF,2)}: los rubros que se compran todos los días ${piF>piI?'subieron más que el promedio, así que la sensación es de más inflación':'subieron menos que el promedio, así que la sensación es de menos inflación'}.`);
+  $('ip-insight').innerHTML=msgs.map(x=>`<p>${x}</p>`).join('');
+}
+RUBROS.forEach((r,i)=>{
+  setupRange('ipw'+i,v=>v,()=>{document.querySelectorAll('#ip-prof .chip').forEach(c=>c.setAttribute('aria-pressed','false'));renderG9();});
+  setupRange('ipp'+i,v=>(v>0?'+':'')+nf(v,1)+'%',()=>{document.querySelectorAll('#ip-mes .chip').forEach(c=>c.setAttribute('aria-pressed','false'));renderG9();});
+});
+document.querySelectorAll('#ip-prof .chip').forEach(btn=>btn.addEventListener('click',()=>{
+  PERFILES[btn.dataset.k].forEach((w,i)=>setVal('ipw'+i,Math.round(w)));
+  document.querySelectorAll('#ip-prof .chip').forEach(c=>c.setAttribute('aria-pressed',c===btn?'true':'false')); renderG9();
+}));
+document.querySelectorAll('#ip-mes .chip').forEach(btn=>btn.addEventListener('click',()=>{
+  MESES[btn.dataset.k].forEach((p,i)=>setVal('ipp'+i,p));
+  document.querySelectorAll('#ip-mes .chip').forEach(c=>c.setAttribute('aria-pressed',c===btn?'true':'false')); renderG9();
+}));
+
+/* =========================================================
+   FUENTES: fichas y buscador
+   ========================================================= */
+const FUENTES=[
+ {id:'cnv',g:'Organismos oficiales',n:'CNV: buscador de empresas',u:'https://www.cnv.gov.ar/sitioweb/empresas?seccion=buscador',
+  para:'Es la Comisión Nacional de Valores, el regulador del mercado de capitales. En este buscador está toda la información que las empresas que cotizan están obligadas a presentar.',
+  hay:'Estados contables trimestrales y anuales, memorias, hechos relevantes, prospectos y suplementos de obligaciones negociables, asambleas y cambios en el directorio. En el sitio de la CNV también podés verificar que un agente o broker esté registrado.',
+  tags:['balances','estados contables','hechos relevantes','prospectos','obligaciones negociables','emisoras','regulador']},
+ {id:'indec',g:'Organismos oficiales',n:'INDEC',u:'https://www.indec.gob.ar/',
+  para:'Es el instituto oficial de estadísticas. La fuente primaria de casi todos los datos macroeconómicos y sociales del país.',
+  hay:'Inflación (IPC por región y por división), canastas básicas y pobreza, desempleo y empleo (EPH), salarios, PBI y cuentas nacionales, actividad mensual (EMAE), comercio exterior, balanza de pagos, industria y construcción.',
+  tags:['inflación','ipc','pobreza','desempleo','pbi','emae','comercio exterior','salarios','estadísticas']},
+ {id:'bcra',g:'Organismos oficiales',n:'BCRA',u:'https://www.bcra.gob.ar/',
+  para:'Es el Banco Central. Publica los datos monetarios, cambiarios y financieros, y las normas que rigen a los bancos y al mercado de cambios.',
+  hay:'Tipo de cambio oficial de referencia, reservas internacionales, base monetaria y agregados, tasas de interés, expectativas del mercado (REM), informes de política monetaria y de estabilidad financiera, la Central de Deudores y series estadísticas descargables, también por API.',
+  tags:['dólar oficial','reservas','base monetaria','tasas','rem','expectativas','central de deudores','política monetaria']},
+ {id:'fix',g:'Calificaciones de riesgo',n:'FIX SCR: calificaciones',u:'https://www.fixscr.com/calificaciones',
+  para:'Es una calificadora de riesgo crediticio que opera en Argentina. Sirve para saber qué tan probable considera que un emisor pague su deuda.',
+  hay:'Calificaciones de empresas, bancos, provincias, obligaciones negociables y fideicomisos, con los informes que explican cada nota y sus cambios (suba, baja, perspectiva).',
+  tags:['calificación','rating','riesgo crediticio','obligaciones negociables','fideicomisos','bancos','provincias']},
+ {id:'yahoo',g:'Cotizaciones y datos de empresas',n:'Yahoo Finance',u:'https://finance.yahoo.com/',
+  para:'Portal de mercados global y gratuito. Muy útil para ver cotizaciones y bajar series históricas.',
+  hay:'Precios de acciones, índices, monedas y materias primas de todo el mundo (incluidos los ADR argentinos en Nueva York), históricos descargables, estados financieros resumidos, dividendos y noticias.',
+  tags:['cotizaciones','históricos','adr','acciones','índices','dividendos','internacional']},
+ {id:'google',g:'Cotizaciones y datos de empresas',n:'Google Finance',u:'https://www.google.com/finance/',
+  para:'La forma más rápida de consultar un precio o comparar activos sin registrarse.',
+  hay:'Cotizaciones y gráficos de acciones, índices y monedas, comparación entre activos, datos financieros básicos y noticias. Además, se integra con Google Sheets mediante la función GOOGLEFINANCE.',
+  tags:['cotizaciones','monedas','comparar','noticias','google sheets']},
+ {id:'data912',g:'Cotizaciones y datos de empresas',n:'data912: API de datos gratis',u:'https://data912.com/',
+  para:'Una API gratuita con datos del mercado argentino. Sirve para traer precios automáticamente a Excel, Python o una planilla, sin copiar a mano.',
+  hay:'Cotizaciones del mercado argentino (acciones, bonos, CEDEARs y otros instrumentos) en formato de datos, con documentación para usarla.',
+  tags:['api','python','excel','bonos','acciones','cedears','mercado argentino','automatizar']},
+ {id:'stockanalysis',g:'Cotizaciones y datos de empresas',n:'StockAnalysis',u:'https://stockanalysis.com/stocks/',
+  para:'Base de datos de empresas que cotizan, especialmente de Estados Unidos, muy ordenada y fácil de leer.',
+  hay:'Estados de resultados, balances y flujos de fondos de varios años, ratios y múltiplos de valuación, dividendos, filtro de acciones (screener) y estimaciones de analistas.',
+  tags:['estados financieros','ratios','múltiplos','dividendos','screener','estados unidos','valuación']},
+ {id:'fiscal',g:'Cotizaciones y datos de empresas',n:'Fiscal.ai',u:'https://fiscal.ai/',
+  para:'Plataforma de datos fundamentales de empresas con herramientas de inteligencia artificial para investigar.',
+  hay:'Estados financieros, métricas operativas y por segmento, transcripciones de las conferencias de resultados, gráficos comparativos y un asistente que responde preguntas sobre las empresas.',
+  tags:['fundamentales','segmentos','kpi','transcripciones','conferencias','inteligencia artificial','valuación']},
+ {id:'seeking',g:'Cotizaciones y datos de empresas',n:'Seeking Alpha',u:'https://seekingalpha.com/',
+  para:'Portal de análisis de inversiones: además de los datos de cada empresa, publica artículos de inversores y analistas con tesis a favor y en contra.',
+  hay:'Artículos de análisis, noticias, transcripciones de las conferencias de resultados, historial de dividendos, estados financieros y calificaciones cuantitativas. Buena parte del contenido requiere suscripción paga.',
+  tags:['analisis','tesis','opiniones','research','dividendos','transcripciones','noticias','estados unidos']},
+ {id:'balanz',g:'Brokers (agentes registrados en la CNV)',n:'Balanz',u:'https://balanz.com/',
+  para:'Broker para operar en el mercado argentino y en el exterior.',
+  hay:'Acciones, bonos, obligaciones negociables, CEDEARs, fondos comunes de inversión y dólar MEP; informes de research y contenidos educativos (Balanz Academy).',
+  tags:['operar','abrir cuenta','research','fci','cedears','bonos']},
+ {id:'bull',g:'Brokers (agentes registrados en la CNV)',n:'Bull Market Brokers',u:'https://www.bullmarketbrokers.com/',
+  para:'Broker para operar en el mercado argentino.',
+  hay:'Acciones, bonos, CEDEARs, fondos y dólar MEP; cotizaciones y contenidos de análisis.',
+  tags:['operar','abrir cuenta','cedears','bonos']},
+ {id:'iol',g:'Brokers (agentes registrados en la CNV)',n:'InvertirOnline (IOL)',u:'https://www.invertironline.com/',
+  para:'Uno de los brokers con más clientes del país, pensado para quien empieza.',
+  hay:'Acciones, bonos, CEDEARs, fondos y dólar MEP; cotizaciones, fichas de cada instrumento y contenidos educativos.',
+  tags:['operar','abrir cuenta','principiantes','cedears','educación']},
+ {id:'cocos',g:'Brokers (agentes registrados en la CNV)',n:'Cocos Capital',u:'https://cocos.capital/',
+  para:'Broker con una app simple y foco en costos bajos.',
+  hay:'Acciones, CEDEARs, bonos, fondos y dólar MEP desde el celular.',
+  tags:['operar','abrir cuenta','app','costos','cedears']},
+ {id:'tm',g:'Brokers (agentes registrados en la CNV)',n:'TM Inversiones',u:'https://tminversiones.com.ar/',
+  para:'Broker que se presenta como líder en volumen operado de opciones en BYMA.',
+  hay:'Acciones, bonos, obligaciones negociables, letras, opciones, fondos y dólar MEP; plataforma y app para operar.',
+  tags:['operar','opciones','abrir cuenta','bonos']},
+ {id:'eco',g:'Brokers (agentes registrados en la CNV)',n:'Eco Valores',u:'https://www.ecovalores.com.ar/',
+  para:'Broker orientado a operadores activos, conectado con TradingView.',
+  hay:'Acciones, bonos, CEDEARs, futuros y opciones del mercado argentino, con datos en tiempo real y operatoria desde TradingView.',
+  tags:['operar','futuros','opciones','tradingview','trading']}
+];
+const NECESIDADES=[
+ {l:'la inflación',k:['inflacion','ipc','precios','canasta','costo de vida','indice de precios'],h:[
+   ['indec','Índice de precios al consumidor (IPC): el informe mensual con la inflación general, por división (alimentos, vivienda, transporte…) y por región.'],
+   ['bcra','Relevamiento de Expectativas de Mercado (REM): la inflación que esperan los analistas para los próximos meses.']]},
+ {l:'la pobreza y las canastas básicas',k:['pobreza','indigencia','canasta basica','cba','cbt','linea de pobreza'],h:[
+   ['indec','Canasta básica alimentaria y total (mensual) e incidencia de la pobreza y la indigencia (semestral, a partir de la EPH).']]},
+ {l:'el empleo, el desempleo y los salarios',k:['desempleo','empleo','trabajo','desocupacion','eph','salarios','sueldos','mercado de trabajo'],h:[
+   ['indec','Encuesta Permanente de Hogares (EPH): tasas de actividad, empleo y desocupación; e índice de salarios.']]},
+ {l:'el PBI y la actividad',k:['pbi','producto','actividad','emae','crecimiento','cuentas nacionales','recesion'],h:[
+   ['indec','Cuentas nacionales (PBI trimestral) y el Estimador Mensual de Actividad Económica (EMAE), que adelanta cómo viene la economía mes a mes.']]},
+ {l:'el dólar y el tipo de cambio',k:['dolar','tipo de cambio','cambio','mep','ccl','contado con liqui','divisas','moneda'],h:[
+   ['bcra','Tipo de cambio mayorista de referencia (Comunicación A 3500) y series históricas.'],
+   ['google','Cotización rápida del dólar contra el peso y otras monedas.'],
+   ['data912','Precios de bonos y acciones en pesos y en dólares, con los que se calculan el dólar MEP y el contado con liquidación.']]},
+ {l:'reservas, dinero y tasas',k:['reservas','base monetaria','dinero','emision','tasa','tasas','politica monetaria','agregados','m2','encajes'],h:[
+   ['bcra','Series estadísticas y principales variables: reservas internacionales, base monetaria, agregados monetarios, depósitos, préstamos y tasas de interés.']]},
+ {l:'el balance de una empresa argentina',k:['balance','balances','estados contables','estados financieros','memoria','resultado','empresa argentina','emisora'],h:[
+   ['cnv','Buscá la empresa en el buscador y entrá a su información financiera: estados contables trimestrales y anuales, con notas y memoria.'],
+   ['stockanalysis','Si la empresa también cotiza en Nueva York (ADR), sus estados en formato resumido y comparable entre años.']]},
+ {l:'los números de una empresa del exterior',k:['estados unidos','empresa extranjera','ratios','multiplos','valuacion','fundamentales','per','ev ebitda','screener','dividendos'],h:[
+   ['stockanalysis','Estados financieros de varios años, ratios, múltiplos de valuación, dividendos y el screener para filtrar empresas.'],
+   ['fiscal','Métricas operativas y por segmento, y comparaciones entre empresas.'],
+   ['yahoo','Resumen de la empresa, estados financieros básicos y estimaciones de analistas.'],
+   ['seeking','Artículos de inversores con tesis a favor y en contra, además de dividendos y estados financieros.']]},
+ {l:'la cotización o el historial de precios',k:['cotizacion','precio','historico','historicos','grafico','accion','acciones','adr','indice','merval','s&p'],h:[
+   ['yahoo','Pestaña de datos históricos: precios diarios, semanales o mensuales descargables.'],
+   ['google','Gráfico y comparación rápida entre activos.'],
+   ['data912','Cotizaciones del mercado argentino para traer a una planilla o a un programa.']]},
+ {l:'obligaciones negociables y bonos',k:['obligaciones negociables','on','ons','bono','bonos','renta fija','prospecto','deuda corporativa','tir'],h:[
+   ['cnv','Prospectos y suplementos de cada emisión: tasa, plazo, amortización y garantías.'],
+   ['fix','La calificación de riesgo de la emisión y el informe que la justifica.'],
+   ['data912','Precios de bonos y obligaciones negociables para calcular la TIR.']]},
+ {l:'la calificación de riesgo',k:['calificacion','rating','riesgo crediticio','nota','calificadora','default'],h:[
+   ['fix','Buscá el emisor para ver su calificación vigente, la perspectiva y el informe con los fundamentos.']]},
+ {l:'novedades y hechos relevantes de una empresa',k:['hecho relevante','hechos relevantes','noticias','novedades','dividendo','asamblea','directorio'],h:[
+   ['cnv','Hechos relevantes, convocatorias a asamblea y pagos de dividendos que la empresa informa al regulador.'],
+   ['google','Noticias agrupadas por empresa.'],
+   ['seeking','Noticias y artículos de análisis sobre empresas del exterior.']]},
+ {l:'empezar a invertir',k:['invertir','abrir cuenta','broker','operar','comprar acciones','cedear','cedears','fci','fondos comunes','dolar mep'],h:[
+   ['iol','Broker con mucho contenido para quien empieza.'],
+   ['balanz','Broker con research y la escuela Balanz Academy.'],
+   ['cocos','App simple, orientada a costos bajos.'],
+   ['cnv','Antes de abrir una cuenta, verificá en el sitio de la CNV que el agente esté registrado.']]},
+ {l:'opciones y futuros',k:['opciones','futuros','derivados','trading','call','put'],h:[
+   ['tm','Broker que se presenta como líder en volumen operado de opciones en BYMA.'],
+   ['eco','Futuros y opciones del mercado argentino, con operatoria desde TradingView.']]},
+ {l:'datos para Excel, Python o una planilla',k:['api','python','excel','planilla','sheets','descargar','automatizar','programar','datos'],h:[
+   ['data912','API gratuita con cotizaciones del mercado argentino.'],
+   ['bcra','Series estadísticas descargables y APIs públicas con las principales variables.'],
+   ['google','Función GOOGLEFINANCE en Google Sheets para traer precios a una planilla.'],
+   ['yahoo','Descarga de precios históricos.']]},
+ {l:'conferencias de resultados',k:['conferencia','transcripcion','transcripciones','earnings','call de resultados','management'],h:[
+   ['fiscal','Transcripciones de las conferencias de resultados, con buscador y resúmenes.'],
+   ['seeking','Transcripciones de las conferencias y artículos que las comentan.']]},
+ {l:'análisis y opiniones sobre una inversión',k:['analisis','tesis','opinion','opiniones','research','recomendacion','conviene','analistas','informe de inversion'],h:[
+   ['seeking','Artículos de inversores y analistas con tesis a favor y en contra de cada empresa, y comentarios de los lectores.'],
+   ['balanz','Informes de research del broker sobre el mercado argentino.'],
+   ['fix','Si lo que te interesa es el riesgo de crédito, los informes de calificación explican la situación del emisor.']]},
+ {l:'la situación crediticia de una persona o empresa',k:['deudores','central de deudores','situacion crediticia','cuit','deuda bancaria','veraz'],h:[
+   ['bcra','Central de Deudores: con el CUIT se ve cómo figura una persona o empresa en el sistema financiero.']]},
+ {l:'el comercio exterior',k:['exportaciones','importaciones','comercio exterior','balanza comercial','balanza de pagos','sector externo'],h:[
+   ['indec','Intercambio comercial argentino (mensual) y balanza de pagos (trimestral).']]}
+];
+const BROKER_PASOS=[
+  'Abrí la cuenta online con tu DNI y tus datos. Es gratis y queda a tu nombre (cuenta comitente).',
+  'Completá el test de perfil de inversor: define qué instrumentos te ofrecen según el riesgo que aceptás.',
+  'Transferí pesos o dólares desde una cuenta bancaria a tu nombre a la cuenta del broker.',
+  'Buscá el instrumento por su ticker, elegí el plazo de liquidación (contado inmediato o 24 hs), cargá la cantidad y el precio, y confirmá la orden.'
+];
+const GUIAS={
+ cnv:['Entrá al buscador y escribí el nombre de la empresa o su CUIT.','Abrí la ficha de la emisora que corresponde (algunas empresas tienen varias sociedades en el grupo).','Para números, andá a la información financiera y elegí el período: los trimestrales salen cada tres meses y el anual trae la memoria. Para novedades, mirá los hechos relevantes.','Descargá el PDF. Un atajo: la reseña informativa resume en pocas páginas los resultados y los principales indicadores.'],
+ indec:['En la portada, el calendario de difusión te dice qué informe sale cada día.','Entrá por el tema: Economía (precios, cuentas nacionales, comercio exterior) o Sociedad (trabajo e ingresos, condiciones de vida).','Cada tema tiene el informe técnico en PDF para leer y los cuadros en Excel para trabajar los datos.','Para comparar meses o regiones, usá los cuadros en Excel: el PDF solo trae el último dato y algunos anteriores.'],
+ bcra:['En la sección de estadísticas buscá las principales variables: reservas, base monetaria, tipo de cambio y tasas, con series descargables.','El tipo de cambio oficial de referencia es la serie de la Comunicación A 3500.','En publicaciones está el REM, la encuesta mensual con lo que esperan los analistas para inflación, dólar, tasas y PBI.','Para la Central de Deudores ingresás un CUIT o CUIL y ves la situación de esa persona o empresa en el sistema financiero.'],
+ fix:['Entrá a calificaciones y buscá por nombre del emisor o por sector.','Mirá la nota vigente y la perspectiva (estable, positiva o negativa): la perspectiva anticipa hacia dónde podría moverse.','Abrí el informe para leer los fundamentos: deuda, flujo de fondos, liquidez y riesgos.','Las notas nacionales llevan el sufijo (arg): comparan emisores dentro de Argentina, no con el resto del mundo.'],
+ yahoo:['Buscá por ticker: por ejemplo YPF o GGAL para los ADR argentinos en Nueva York, ^MERV para el Merval o ARS=X para el dólar oficial.','En Historical Data elegí el período y la frecuencia (diaria, semanal, mensual) y descargá la serie.','En Financials están el estado de resultados, el balance y el flujo de fondos, anuales y trimestrales.','Para calcular rendimientos usá la columna Adj Close: el precio ajustado incluye los dividendos pagados.'],
+ google:['Buscá la empresa, el índice o la moneda por nombre o ticker.','Usá Comparar para superponer varios activos en el mismo gráfico.','En Google Sheets, =GOOGLEFINANCE("NASDAQ:AAPL";"price") trae el precio; agregando fechas trae la serie histórica.','La cobertura del mercado argentino es parcial: para bonos locales conviene usar un broker o data912.'],
+ data912:['Abrí la documentación del sitio: lista los endpoints, uno por tipo de instrumento.','Copiá la dirección de un endpoint y abrila en el navegador: devuelve los datos en formato JSON.','En Python, requests.get(url).json() y después pandas; en Excel o Google Sheets, importá los datos desde la web.','Son datos gratuitos y sin garantía: antes de usarlos en un informe, contrastalos con otra fuente.'],
+ stockanalysis:['Buscá la empresa por ticker o nombre.','En Financials alterná entre estado de resultados, balance, flujo de fondos y ratios, en versión anual o trimestral.','Usá el screener para filtrar empresas por sector, tamaño, múltiplos o dividendo.','Compará los ratios con empresas del mismo sector: un múltiplo aislado dice poco.'],
+ fiscal:['Buscá la empresa por ticker o nombre.','Revisá los estados financieros y las métricas por segmento para ver de qué negocio sale cada peso de ganancia.','Leé la transcripción de la última conferencia de resultados: ahí la gerencia explica los números y responde a los analistas.','Podés preguntarle al asistente en lenguaje natural, pero verificá cada dato en la fuente original.'],
+ seeking:['Buscá la empresa por ticker.','En la sección de análisis leé al menos un artículo alcista y uno bajista: la idea es entender los dos lados.','En la sección de resultados están las transcripciones de las conferencias y los números del trimestre.','Son opiniones de autores, no datos oficiales: fijate quién escribe y si declara tener posición en la acción.'],
+ balanz:[...BROKER_PASOS,'Balanz Academy tiene cursos y notas para aprender antes de operar.'],
+ bull:[...BROKER_PASOS],
+ iol:[...BROKER_PASOS,'Cada instrumento tiene su ficha con cotización, gráfico y datos básicos: revisala antes de comprar.'],
+ cocos:[...BROKER_PASOS,'Todo se hace desde la app del celular, incluida la compra de dólar MEP.'],
+ tm:[...BROKER_PASOS,'Si vas a operar opciones, entendé antes cómo funcionan las primas y los vencimientos: se puede perder todo lo invertido.'],
+ eco:[...BROKER_PASOS,'Podés vincular la cuenta con TradingView para ver gráficos y cargar órdenes desde ahí.']
+};
+const normTxt=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9&\s]/g,' ').replace(/\s+/g,' ').trim();
+const FUENTE=Object.fromEntries(FUENTES.map(f=>[f.id,f]));
+const escH=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function buildFuentes(){
+  const groups=[...new Set(FUENTES.map(f=>f.g))];
+  $('src-list').innerHTML=groups.map(g=>`<h3 class="src-gh">${g}</h3><div class="src-grid">`+FUENTES.filter(f=>f.g===g).map(f=>`
+    <article class="src-card" id="src-${f.id}">
+      <h4><a href="${f.u}" target="_blank" rel="noopener noreferrer">${f.n}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></h4>
+      <p class="src-url">${f.u.replace(/^https?:\/\//,'').replace(/\/$/,'')}</p>
+      <p><strong>Para qué sirve.</strong> ${f.para}</p>
+      <p><strong>Qué vas a encontrar.</strong> ${f.hay}</p>
+      ${GUIAS[f.id]?`<details class="guide"><summary>Guía rápida</summary><ol>${GUIAS[f.id].map(p=>`<li>${escH(p)}</li>`).join('')}</ol></details>`:''}
+    </article>`).join('')+'</div>').join('');
+  const sug=['inflación','dólar','balance de una empresa','calificación de una ON','desempleo','reservas','datos para Excel','empezar a invertir'];
+  $('src-sugg').innerHTML='<span>Probá con:</span>'+sug.map(s=>`<button type="button" class="chip" data-q="${s}">${s}</button>`).join('');
+  $('src-sugg').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{ $('src-q').value=b.dataset.q; searchFuentes(); $('src-q').focus(); }));
+  $('src-q').addEventListener('input',searchFuentes);
+  searchFuentes();
+}
+function searchFuentes(){
+  const raw=$('src-q').value, q=normTxt(raw), out=$('src-res');
+  if(!q){ out.innerHTML=''; return; }
+  const toks=q.split(' ').filter(t=>t.length>=2);
+  const scored=NECESIDADES.map(n=>{
+    let sc=0;
+    const pq=' '+q+' ';
+    n.k.forEach(k=>{ const kk=normTxt(k); if(pq.includes(' '+kk+' ')) sc+=3+kk.split(' ').length; else toks.forEach(t=>{ if(t.length>=4 && kk.split(' ').some(w=>w.startsWith(t)||(w.length>=4&&t.startsWith(w)))) sc+=1; }); });
+    return {n,sc};
+  }).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc);
+  const top=scored.length?scored[0].sc:0;
+  scored.splice(0,scored.length,...scored.filter(x=>x.sc>top*0.5).slice(0,4));
+  const also=FUENTES.filter(f=>toks.some(t=>t.length>=4&&(normTxt(f.n).split(' ').some(w=>w.startsWith(t))||f.tags.some(tg=>normTxt(tg).split(' ').some(w=>w.startsWith(t)))))).filter(f=>!scored.some(s=>s.n.h.some(h=>h[0]===f.id)));
+  if(!scored.length && !also.length){
+    out.innerHTML=`<p class="src-empty">No encontré fuentes para “${escH(raw)}”. Probá con otras palabras, por ejemplo: inflación, tipo de cambio, balance, bonos o desempleo.</p>`;
+    return;
+  }
+  let h=scored.map(({n})=>`<div class="rblock"><h4>Para ${n.l}</h4>`+n.h.map(([id,w])=>{const f=FUENTE[id]; return `<div class="ritem"><a href="${f.u}" target="_blank" rel="noopener noreferrer">${f.n}</a> <a class="guide-link" href="#src-${f.id}" data-g="${f.id}">Ver guía</a><p>${w}</p></div>`;}).join('')+'</div>').join('');
+  if(also.length) h+=`<div class="rblock"><h4>También puede servirte</h4>`+also.map(f=>`<div class="ritem"><a href="${f.u}" target="_blank" rel="noopener noreferrer">${f.n}</a><p>${f.para}</p></div>`).join('')+'</div>';
+  out.innerHTML=h;
+  out.querySelectorAll('.guide-link').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault();
+    const card=$('src-'+a.dataset.g); if(!card) return;
+    const d=card.querySelector('details'); if(d) d.open=true;
+    card.scrollIntoView({behavior:'smooth',block:'center'});
+    card.classList.add('flash'); setTimeout(()=>card.classList.remove('flash'),1600);
+  }));
+}
+buildFuentes();
+
+/* ---------- pestañas ---------- */
+const tabs=[...document.querySelectorAll('[role=tab]')];
+$('nSims').textContent=document.querySelectorAll('.game').length;
+tabs.forEach(t=>{ if($(t.getAttribute('aria-controls')).querySelector('.game')) t.classList.add('done'); });
+function renderAll(){ if(!$('p1').hidden){renderG1();renderG2();} if(!$('p2').hidden){renderG3();renderG4();} if(!$('p3').hidden){renderG6();} if(!$('p5').hidden){renderG7();renderG8();renderG9();} if(!$('p6').hidden){renderG5();} }
+function select(i,focus){
+  tabs.forEach((t,j)=>{
+    const on=j===i; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
+    $(t.getAttribute('aria-controls')).hidden=!on;
+  });
+  if(focus) tabs[i].focus();
+  try{localStorage.setItem('meg-tab',String(i));}catch(e){}
+  renderAll();
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener('click',()=>{select(i); window.scrollTo({top:0,behavior:'auto'}); if(window.matchMedia && window.matchMedia('(max-width:900px)').matches && t.scrollIntoView) t.scrollIntoView({block:'nearest',inline:'center'});});
+  t.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();select((i+1)%tabs.length,true);}
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();select((i+tabs.length-1)%tabs.length,true);}
+    if(e.key==='Home'){e.preventDefault();select(0,true);}
+    if(e.key==='End'){e.preventDefault();select(tabs.length-1,true);}
+  });
+});
+let start=0; try{const s=parseInt(localStorage.getItem('meg-tab'),10); if(s>=0&&s<tabs.length) start=s;}catch(e){}
+select(start,false);
+
+let rt; window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(renderAll,120);});
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(renderAll);
+})();
+</script>
+</body>
+</html>
